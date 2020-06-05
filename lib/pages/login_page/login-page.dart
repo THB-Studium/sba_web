@@ -7,6 +7,7 @@ class LogIn extends StatelessWidget {
     return Scaffold(
       body: Body(),
     );
+
   }
 
 }
