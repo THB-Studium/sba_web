@@ -1,239 +1,126 @@
-/**import 'package:flutter/material.dart';
-
-appBar: AppBar(
-title: Text('Details'),
-centerTitle: true,
-backgroundColor: Colors.red[600],
-elevation: 0.0,
-),
-body: Padding(
-padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
-child: Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-children: <Widget>[
-Text(
-'Verfasser',
-style: TextStyle(
-color: Colors.black,
-fontSize: 20.0,
-fontWeight: FontWeight.bold,
-letterSpacing: 1.0,
-),
-),
-SizedBox(height: 5.0),
-Text(
-'test',
-style: TextStyle(
-color: Colors.black,
-fontSize: 16.0,
-//fontWeight: FontWeight.bold,
-letterSpacing: 1.0,
-),
-),
-Text(
-'Titel',
-style: TextStyle(
-color: Colors.black,
-fontSize: 20.0,
-fontWeight: FontWeight.bold,
-letterSpacing: 1.0,
-),
-),
-SizedBox(height: 5.0),
-Text(
-'test',
-style: TextStyle(
-color: Colors.black,
-fontSize: 16.0,
-//fontWeight: FontWeight.bold,
-letterSpacing: 1.0,
-),
-),
-Text(
-'ISBN',
-style: TextStyle(
-color: Colors.black,
-fontSize: 20.0,
-fontWeight: FontWeight.bold,
-letterSpacing: 1.0,
-),
-),
-SizedBox(height: 5.0),
-Text(
-'test',
-style: TextStyle(
-color: Colors.black,
-fontSize: 16.0,
-//fontWeight: FontWeight.bold,
-letterSpacing: 1.0,
-),
-),
-Text(
-'Jahr',
-style: TextStyle(
-color: Colors.black,
-fontSize: 20.0,
-fontWeight: FontWeight.bold,
-letterSpacing: 1.0,
-),
-),
-SizedBox(height: 5.0),
-Text(
-'test',
-style: TextStyle(
-color: Colors.black,
-fontSize: 16.0,
-//fontWeight: FontWeight.bold,
-letterSpacing: 1.0,
-),
-),
-],
-),
-),
-
-
 import 'package:flutter/material.dart';
+import 'package:sba_web/search_pages/books_models/books_list.dart';
+//import 'package:sba_web/services/Services.dart';
+import 'package:http/http.dart' as http;
+import 'package:sba_web/search_pages/details_page.dart';
+import 'package:sba_web/services/Services.dart';
 
-class BookDetails extends StatefulWidget {
+class BuchKatalog extends StatefulWidget {
+
+  BuchKatalog({Key key}) : super(key: key);
+
+
   @override
-  _BookDetailsState createState() => _BookDetailsState();
+  _BuchKatalogState createState() => _BuchKatalogState();
 }
 
-class _BookDetailsState extends State<BookDetails> {
+class _BuchKatalogState extends State<BuchKatalog> {
 
-  String dropdownValue0 = 'Verfasser';
-  String dropdownValue1 = 'Title';
-  String dropdownValue2 = 'ISBN/ISSN';
+
+  final Services httpServices = Services();
+  static const String _title = 'Buchkatalog';
+
+  List<BooksDescription> booksList = [];
+  Future <List<BooksDescription>> getBookList;
+  //bool _loading;
+
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+
+    super.initState();
+    getBookList = Services.getBook();
+
+    //_loading = true;
+    //return the list of books
+    // Services.getBook().then((bookList) =>
+    //{
+      //return the list of books
+      //setState(() {
+        //this.booksList = bookList;
+        //_loading = false;
+      //})
+    //});
+  }
+
+
+  /** Widget _buildBookColumn() => Container (
+      decoration: BoxDecoration(
+      color: Colors.blue[50]
+      ),
+      margin: const EdgeInsets.all(8),
+      child: Column(
+      children: <Widget>[
+      ListTile()
+      ],
+      ),
+      );
+   */
+
+  Widget listViewBuilder(book) {
+    return ListView.builder(
+      itemCount: book == null ? 0 : book.length, itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          leading: Text(book[index].id),
+          title: Text(book[index].titel),
+          subtitle: Text(book[index].autor),
+          );
+        }
+    );
+  }
+
+  @override Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Details'),
+        title: Text(_title),
         centerTitle: true,
-        backgroundColor: Colors.red[600],
+        backgroundColor: Colors.blue[600],
         elevation: 0.0,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            DropdownButton<String>(
-              value: dropdownValue0,
-              icon: Icon(Icons.arrow_downward),
-              iconSize: 15.0,
-              elevation: 16,
-              style: TextStyle(color: Colors.black),
-              underline: Container(
-                height: 0.0,
-                color: Colors.black,
-              ),
-              onChanged: (String newValue) {
-                setState(() {
-                  dropdownValue0 = newValue;
-                });
-              },
-              items: <String>['Verfasser', 'Title', 'Signatur', 'ISBN/ISSN', 'Sprache', 'Titelanfang', 'Verlag', 'Jahr']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            TextFormField(
-              validator: (dropdownValue0) {
-                if (dropdownValue0.isEmpty) {
-                  return 'text eingeben';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 5.0),
-            DropdownButton<String>(
-              value: dropdownValue1,
-              icon: Icon(Icons.arrow_downward),
-              iconSize: 15.0,
-              elevation: 16,
-              style: TextStyle(color: Colors.black),
-              underline: Container(
-                height: 2,
-                color: Colors.black,
-              ),
-              onChanged: (String newValue) {
-                setState(() {
-                  dropdownValue1 = newValue;
-                });
-              },
-              items: <String>['Verfasser', 'Title', 'Signatur', 'ISBN/ISSN', 'Sprache', 'Titelanfang', 'Verlag', 'Jahr']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            TextFormField(
-              validator: (dropdownValue1) {
-                if (dropdownValue1.isEmpty) {
-                  return 'text eingeben';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 5.0),
-            DropdownButton<String>(
-              value: dropdownValue2,
-              icon: Icon(Icons.arrow_downward),
-              iconSize: 15.0,
-              elevation: 16,
-              style: TextStyle(color: Colors.black),
-              underline: Container(
-                height: 2,
-                color: Colors.black,
-              ),
-              onChanged: (String newValue) {
-                setState(() {
-                  dropdownValue2 = newValue;
-                });
-              },
-              items: <String>['Verfasser', 'Title', 'Signatur', 'ISBN/ISSN', 'Sprache', 'Titelanfang', 'Verlag', 'Jahr']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            TextFormField(
-              validator: (dropdownValue2) {
-                if (dropdownValue2.isEmpty) {
-                  return 'text eingeben';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 5.0),
-            FlatButton(
-              color: Colors.blue,
-              textColor: Colors.white,
-              disabledColor: Colors.grey,
-              disabledTextColor: Colors.black,
-              padding: EdgeInsets.all(8.0),
-              splashColor: Colors.blueAccent,
-              onPressed: () {
-                /*...*/
-              },
-              child: Text(
-                "Senden",
-                style: TextStyle(fontSize: 20.0),
-              ),
-            ),
-          ],
-        ),
+      body: FutureBuilder<List<BooksDescription>>(
+          future: getBookList,
+          builder: (BuildContext context, AsyncSnapshot<List<BooksDescription>> snapshot) {
+            if(snapshot.hasData) {
+              List<BooksDescription> book = snapshot.data;
+              return ListView(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                children: book
+                    .map(
+                      (BooksDescription bd) => Card(
+                        elevation: 8.0,
+                        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                        child: Container(
+                          decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                            leading: Container(
+                              padding: EdgeInsets.only(right: 12.0),
+                              decoration: new BoxDecoration(
+                                  border: new Border(
+                                      right: new BorderSide(width: 1.0, color: Colors.white24))),
+                              child: Icon(Icons.book, color: Colors.white),
+                            ),
+                  title: Text(bd.titel,
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(bd.autor, style: TextStyle(color: Colors.white)),
+                  trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => DetailPage(
+                          book: bd,
+                    )),
+                  ),
+                ),
+                        ),
+                      ),
+                ).toList(),
+              );
+            }
+            return Center(child: CircularProgressIndicator());
+          },
       ),
     );
   }
+
 }
-**/
