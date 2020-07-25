@@ -30,7 +30,6 @@ class _BuchKatalogState extends State<BuchKatalog> {
 
     super.initState();
     getBookList = Services.getBook();
-
     //_loading = true;
     //return the list of books
     // Services.getBook().then((bookList) =>
@@ -62,8 +61,8 @@ class _BuchKatalogState extends State<BuchKatalog> {
       itemCount: book == null ? 0 : book.length, itemBuilder: (BuildContext context, int index) {
         return ListTile(
           leading: Text(book[index].id),
-          title: Text(book[index].titel),
-          subtitle: Text(book[index].autor),
+          title: Text(book[index].title),
+          subtitle: Text(book[index].author),
           );
         }
     );
@@ -88,8 +87,6 @@ class _BuchKatalogState extends State<BuchKatalog> {
                 children: book
                     .map(
                       (BooksDescription bd) => Card(
-                        elevation: 8.0,
-                        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
                         child: Container(
                           decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
                           child: ListTile(
@@ -101,10 +98,10 @@ class _BuchKatalogState extends State<BuchKatalog> {
                                       right: new BorderSide(width: 1.0, color: Colors.white24))),
                               child: Icon(Icons.book, color: Colors.white),
                             ),
-                  title: Text(bd.titel,
+                  title: Text(bd.title,
                     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(bd.autor, style: TextStyle(color: Colors.white)),
+                  subtitle: Text(bd.author, style: TextStyle(color: Colors.white)),
                   trailing: Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => DetailPage(

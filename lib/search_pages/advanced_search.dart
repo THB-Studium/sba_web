@@ -1,17 +1,32 @@
 //import 'dart:convert';
 
-import 'package:flutter/material.dart';
-//import 'package:string_validator/string_validator.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:sba_web/search_pages/books_models/books_list.dart';
+import 'package:sba_web/services/Services.dart';
+//import 'package:string_validator/string_validator.dart';
 
 class AdvancedSearch extends StatefulWidget {
   @override
   _AdvancedSearchState createState() => _AdvancedSearchState();
 }
+class Debouncer {
+  final int milliseconds;
+  VoidCallback action;
+  Timer _timer;
 
+  Debouncer({this.milliseconds});
+
+  run(VoidCallback action) {
+    if (null != _timer) {
+      _timer.cancel();
+    }
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
+  }
+}
 class _AdvancedSearchState extends State<AdvancedSearch> {
-
-
+  BooksDescription bd = new BooksDescription();
   String _verfasser;
   String _titel;
   String _isbn;
@@ -24,16 +39,17 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
   DateTime _jahr;
 
   final _minimumPadding = 5.0;
+  Future <List<BooksDescription>> getBookList = Services.getBook();
+  BooksDescription book = new BooksDescription();
   final _formKey = GlobalKey<FormState>();
 
   //@override
   //void initState () {
-    //super.initState();
-    //getBook();
+  //super.initState();
+  //getBook();
   //}
 
-
-  Widget _buildVerfasser(){
+  Widget _buildVerfasser() {
     return Padding(
       padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
       child: TextFormField(
@@ -41,19 +57,20 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
           labelText: 'Verfasser',
           hintText: 'Verfasser eingeben',
           //border: OutlineInputBorder(
-            //borderRadius: BorderRadius.circular(5.0),
+          //borderRadius: BorderRadius.circular(5.0),
           //),
         ),
         style: TextStyle(
           fontSize: 12,
         ),
-        onSaved: (String value) {
-          _verfasser = value;
+        onSaved: (value) {
+          bd.author = value;
         },
       ),
     );
   }
-  Widget _buildTitel(){
+
+  Widget _buildTitel() {
     return Padding(
       padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
       child: TextFormField(
@@ -65,14 +82,15 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
           fontSize: 12,
         ),
         onSaved: (String value) {
-          _titel = value;
+          bd.title = value;
         },
       ),
     );
   }
 
-  static String validateIsbn (String value){
-    Pattern pattern = r'/((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])/';
+  static String validateIsbn(String value) {
+    Pattern pattern =
+        r'/((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])/';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value)) {
       return 'Bitte richtige ISBN / ISSN Nummer eingeben';
@@ -81,12 +99,13 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
     }
   }
 
-  Widget _buildIsbn(){
+  Widget _buildIsbn() {
     return Row(
       children: <Widget>[
         Flexible(
           child: Padding(
-            padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
+            padding:
+                EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
             child: TextFormField(
               decoration: InputDecoration(
                 labelText: 'ISBN / ISSN',
@@ -95,8 +114,13 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
               style: TextStyle(
                 fontSize: 12,
               ),
-              onSaved: (String value) {
-                _isbn = validateIsbn(value);
+              onSaved: (value) {
+                if (value.length == 13) {
+                  bd.isbn13 = validateIsbn(value) as int;
+                }
+                if (value.length <= 10) {
+                  bd.isbn10 = validateIsbn(value);
+                }
               },
             ),
           ),
@@ -109,7 +133,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
     );
   }
 
-  Widget _buildTitelanfang(){
+  Widget _buildTitelanfang() {
     return Padding(
       padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
       child: TextFormField(
@@ -122,12 +146,13 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
         ),
         keyboardType: TextInputType.text,
         onSaved: (String value) {
-          _titelanfang = value;
+          bd.titleSlug = value;
         },
       ),
     );
   }
-  Widget _buildVerlag(){
+
+  Widget _buildVerlag() {
     return Padding(
       padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
       child: TextFormField(
@@ -139,13 +164,13 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
           fontSize: 12,
         ),
         onSaved: (String value) {
-          _verlag = value;
+          bd.edition = value;
         },
       ),
     );
   }
 
-  Widget _buildSchlagwort(){
+  Widget _buildSchlagwort() {
     return Padding(
       padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
       child: TextFormField(
@@ -163,7 +188,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
     );
   }
 
-  Widget _buildNotation(){
+  Widget _buildNotation() {
     return Padding(
       padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
       child: TextFormField(
@@ -181,44 +206,79 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
     );
   }
 
-  Widget _buildSignatur(){
+  Widget _buildSignatur() {
     return Padding(
       padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
       child: TextFormField(
         decoration: InputDecoration(
-          labelText: 'Signatur',
+          labelText: 'Plublisher',
           hintText: 'Signatur eingeben',
         ),
         style: TextStyle(
           fontSize: 12,
         ),
         onSaved: (String value) {
-          _signatur = value;
+          bd.publisher = value;
         },
       ),
     );
   }
 
-  Widget _buildAnimatedOpacity(){
+  Widget _buildDate() {
+    return Padding(
+      padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
+      child: TextFormField(
+        keyboardType: TextInputType.datetime,
+        decoration: InputDecoration(
+          labelText: 'Veröffentlichungsdatum',
+          hintText: 'Datum eingeben',
+        ),
+        style: TextStyle(
+          fontSize: 12,
+        ),
+        onSaved: (String value) {
+          bd.pubdate = value;
+        },
+      ),
+    );
+  }
+
+  Widget _buildAnimatedOpacity() {
     return Container(
-      child: Visibility(
-        //child: Container(color: Colors.blue, width: 100, height: 100),
-        visible: _visible,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+        child: Visibility(
+      //child: Container(color: Colors.blue, width: 100, height: 100),
+      visible: _visible,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
             _buildTitelanfang(),
             _buildVerlag(),
             _buildSchlagwort(),
             _buildNotation(),
             _buildSignatur(),
-          ]
-        ),
-      )
-    );
+            _buildDate()
+          ]),
+    ));
   }
 
 
+  Widget _buildsearchTF() {
+    return TextField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(
+              5.0,
+            ),
+          ),
+        ),
+        filled: true,
+        fillColor: Colors.white60,
+        contentPadding: EdgeInsets.all(15.0),
+        hintText: 'Eingeben...',
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -246,9 +306,10 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                     GestureDetector(
                       child: Text(
                         'Weitere Optionen',
-                        style: TextStyle(color: Colors.blue[400], fontSize: 12,
-                            fontWeight: FontWeight.w700
-                        ),
+                        style: TextStyle(
+                            color: Colors.blue[400],
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700),
                       ),
                       onTap: () {
                         setState(() {
@@ -258,37 +319,42 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
                     ),
                   ],
                 ),
-              _buildAnimatedOpacity(),
+                _buildAnimatedOpacity(),
                 SizedBox(height: 25),
                 RaisedButton(
                   child: Text(
                     'Suchen',
-                    style: TextStyle(color: Colors.blue[400], fontSize: 16,
-                      fontWeight: FontWeight.w700
-                    ),
+                    style: TextStyle(
+                        color: Colors.blue[400],
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
                   ),
 
                   //Lorsqu'il faudra faire des requetes a la BD
                   //modifier ici
                   elevation: 6.0,
                   onPressed: () {
-                    if (!_formKey.currentState.validate()){
+                    final form = _formKey.currentState;
+                    if (!form.validate()) {
                       return;
                     }
-                    _formKey.currentState.save();
-                    Navigator.pushNamed(context, '/search_book');
-                   // print(_verfasser);
+                    form.save();
+                    //Navigator.pushNamed(context, '/search_book');
+                     Services.getBook().then((getBookList) {
+                       setState(() {
+                          //book = BooksDescription.filterList(getBookList);
+                       });
+                     });
                     //print(_titel);
-                   // print(_isbn);
-                   // print(_titelanfang);
-                   // print(_verlag);
-                   // print(_schlagwort);
-                   // print(_notation);
-                   // print(_signatur);
+                    // print(_isbn);
+                    // print(_titelanfang);
+                    // print(_verlag);
+                    // print(_schlagwort);
+                    // print(_notation);
+                    // print(_signatur);
                     //setState(() {
-                      //getBook();
-                   // });
-
+                    //getBook();
+                    // });
                   },
                 ),
               ],
