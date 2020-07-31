@@ -30,7 +30,7 @@ class DetailPage extends StatelessWidget {
                     subtitle: Text(book.overview, style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
                 ),
                   ListTile(
-                    title: Text("Overview",style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                    title: Text("ISBN",style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
                     subtitle: Text("ISBN 13: ${book.isbn13}  ISBN 10: ${book.isbn10}", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
                   ),
                   ListTile(
