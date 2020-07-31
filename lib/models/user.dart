@@ -3,7 +3,7 @@ class User {
   String vorname;
   String nachname;
   String email;
-  int benutzerNummer;
+  String benutzerNummer;
 
 
   User({

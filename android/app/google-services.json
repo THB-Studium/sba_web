@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "371085470995",
+    "firebase_url": "https://mux-sbapp.firebaseio.com",
+    "project_id": "mux-sbapp",
+    "storage_bucket": "mux-sbapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371085470995:android:d19a4284a337056465bee6",
+        "android_client_info": {
+          "package_name": "com.example.sba_web"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371085470995-canspa5336eka4jj41r2059c4m46n5i8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8wJqotEiRkcFhPi-LtKYaKCz_GzpauxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371085470995-canspa5336eka4jj41r2059c4m46n5i8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

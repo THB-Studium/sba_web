@@ -21,7 +21,20 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
+        validator: (val){
+          if (val.isEmpty) {
+            return hintText + " kann nicht leer sein!";
+          }
+          if (hintText == "Benutzernummer" && val.length != 11) {
+            return "bitte die Länge überprüfen!";
+          }
+          if (hintText == "Benutzernummer" && !RegExp(
+              "[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]").hasMatch(val)) {
+            return "nur Zahlen erlaubt im Benutzernummer!";
+          }
+          return null;
+        },
         obscureText: passwordInput,
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
