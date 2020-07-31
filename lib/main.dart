@@ -5,7 +5,6 @@ import 'package:sba_web/pages/login_page/login-page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,6 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: kPrimaryLightColor,
+        visualDensity: VisualDensity.adaptivePlatformDensity
       ),
       home: LogIn(),
     );
