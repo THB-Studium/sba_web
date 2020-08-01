@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/pages/login_page/components/text_field_container.dart';
-import 'package:sba_web/pages/login_page/widgets.dart';
 
 import '../../../constants.dart';
 
-class InputField extends StatelessWidget {
+class RoundedInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
-  final bool passwordInput;
   final ValueChanged<String> onChanged;
-
-  const InputField({
+  const RoundedInputField({
     Key key,
     this.hintText,
-    this.icon,
-    this.passwordInput,
+    this.icon = Icons.person,
     this.onChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFieldContainer(
+<<<<<<< HEAD:lib/pages/login_page/components/input_field.dart
       child: TextFormField(
         validator: (val){
           if (val.isEmpty) {
@@ -36,12 +33,17 @@ class InputField extends StatelessWidget {
           return null;
         },
         obscureText: passwordInput,
+=======
+      child: TextField(
+>>>>>>> parent of b0c8ee1... wip:lib/pages/login_page/components/rounded_input_field.dart
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
+          icon: Icon(
+            icon,
+            color: kPrimaryColor,
+          ),
           hintText: hintText,
-          icon: Icon(icon, color: kPrimaryColor),
-          suffixIcon: suffixIconIfPassword(passwordInput),
         ),
       ),
     );
