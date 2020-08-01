@@ -28,10 +28,10 @@ class _PageStarterState extends State<PageStarter>
 
     final _widgetOptions =
         [
-          HistoryPage(title: 'History',),
-          MahnungenPage(title: 'Mahnungen',),
-          NachrichtenPage(title: 'Nachrichten',),
-          FavoritenPage(title: 'Favoriten',),
+          HistoryPage(title: 'THB sb App',),
+          MahnungenPage(title: 'THB sb App',),
+          NachrichtenPage(title: 'THB sb App',),
+          FavoritenPage(title: 'THB sb App',),
         ];
 
     return MaterialApp(
@@ -56,7 +56,7 @@ class _PageStarterState extends State<PageStarter>
             child: BottomNavigationBar(
               type: BottomNavigationBarType.shifting,
               items: [
-                BottomNavigationBarItem(title: Text("historiy"), icon: Icon(Icons.history),),
+                BottomNavigationBarItem(title: Text("history"), icon: Icon(Icons.history),),
                 BottomNavigationBarItem(title: Text("Mahnungen"), icon: Icon(Icons.monetization_on),),
                 BottomNavigationBarItem(title: Text("Nachrichten"), icon: Icon(Icons.mail_outline),),
                 BottomNavigationBarItem(title: Text("Favorite"), icon: Icon(Icons.star),),
