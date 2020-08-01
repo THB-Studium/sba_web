@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import '../menu/drawer_menu.dart';
 
 class FavoritenPage extends StatefulWidget {
-  String title;
-
-  FavoritenPage({Key key, this.title}) : super(key: key);
-
   @override
   _FavoritenPageState createState() => _FavoritenPageState();
 }
@@ -14,10 +10,9 @@ class FavoritenPage extends StatefulWidget {
 class _FavoritenPageState extends State<FavoritenPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Favoriten'),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 20.0),

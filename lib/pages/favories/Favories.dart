@@ -4,6 +4,8 @@ import 'package:sba_web/models/items.dart';
 import 'FavoriesBody.dart';
 
 class Favories extends StatelessWidget {
+  // constructor:
+  Favories();
 
   Future<List<Items>> fetchItems (BuildContext context) async{
   final jsonstring = await DefaultAssetBundle.of(context).loadString('assets/Items.json');

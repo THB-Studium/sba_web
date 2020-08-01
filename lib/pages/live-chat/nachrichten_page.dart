@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import '../menu/drawer_menu.dart';
 
 class NachrichtenPage extends StatefulWidget {
-  String title;
-
-  NachrichtenPage({Key key, this.title}) : super(key: key);
-
   @override
   _NachrichtenPageState createState() => _NachrichtenPageState();
 }
@@ -14,10 +10,9 @@ class NachrichtenPage extends StatefulWidget {
 class _NachrichtenPageState extends State<NachrichtenPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Nachrichten'),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 20.0),

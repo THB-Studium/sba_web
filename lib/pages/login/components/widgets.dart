@@ -36,5 +36,5 @@ Widget suffixIconIfPassword(bool passwort) {
       Icons.visibility,
       color: kPrimaryColor,
     );
-  }
+  } return null;
 }

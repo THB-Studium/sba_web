@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:sba_web/models/buecher_list.dart';
-import 'package:sba_web/pages/search_book/service/buchServices.dart';
+import 'package:sba_web/pages/search-book/service/buchServices.dart';
 
-import 'details_page.dart';
+import 'search-book-result/details-page.dart';
 
 class BuchKatalog extends StatefulWidget {
 
@@ -43,18 +42,17 @@ class _BuchKatalogState extends State<BuchKatalog> {
   }
 
 
-  /** Widget _buildBookColumn() => Container (
-      decoration: BoxDecoration(
-      color: Colors.blue[50]
-      ),
-      margin: const EdgeInsets.all(8),
-      child: Column(
-      children: <Widget>[
-      ListTile()
-      ],
-      ),
-      );
-   */
+//  Widget _buildBookColumn() => Container (
+//      decoration: BoxDecoration(
+//      color: Colors.blue[50]
+//      ),
+//      margin: const EdgeInsets.all(8),
+//      child: Column(
+//      children: <Widget>[
+//      ListTile()
+//      ],
+//      ),
+//      );
 
   Widget listViewBuilder(book) {
     return ListView.builder(
