@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../drawer_menu.dart';
+import '../menu/drawer_menu.dart';
 
-class NachrichtenPage extends StatefulWidget {
+class MahnungenPage extends StatefulWidget {
   String title;
 
-  NachrichtenPage({Key key, this.title}) : super(key: key);
+  MahnungenPage({Key key, this.title}) : super(key: key);
 
   @override
-  _NachrichtenPageState createState() => _NachrichtenPageState();
+  _MahnungenState createState() => _MahnungenState();
 }
 
-class _NachrichtenPageState extends State<NachrichtenPage> {
+class _MahnungenState extends State<MahnungenPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -34,11 +34,12 @@ class _NachrichtenPageState extends State<NachrichtenPage> {
             ),
           ),
         ],
+
       ),
 
       body: SafeArea(
         child: Container(
-          color: Colors.yellow,
+          color: Colors.red,
         ),
       ),
       drawer: Drawer(child: sbaDrawer),

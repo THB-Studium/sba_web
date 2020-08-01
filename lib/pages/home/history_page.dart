@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../drawer_menu.dart';
+import '../menu/drawer_menu.dart';
 
 class HistoryPage extends StatefulWidget {
   String title;
@@ -14,7 +14,6 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),

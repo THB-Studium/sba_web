@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sba_web/pages/footer/page_starter.dart';
+import 'package:sba_web/pages/footer/navbar-footer.dart';
 import 'package:sba_web/pages/home/myHomePage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -126,7 +126,7 @@ class _LoginBodyState extends State<LoginBody> {
 //          .then((value) => print(value));
         
         Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context) => PageStarter(),
+          builder: (context) => NavbarFooter(),
         ));
     }
   }

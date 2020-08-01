@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:sba_web/pages/footer/pages/favoriten_page.dart';
-import 'package:sba_web/pages/footer/pages/history_page.dart';
-import 'package:sba_web/pages/footer/pages/mahnungen_page.dart';
-import 'package:sba_web/pages/footer/pages/nachrichten_page.dart';
+import 'package:sba_web/pages/favories/favoriten_page.dart';
+import 'package:sba_web/pages/home/history_page.dart';
+import 'package:sba_web/pages/live-chat/nachrichten_page.dart';
+import 'package:sba_web/pages/mahnungen/mahnungen_page.dart';
 
-class PageStarter extends StatefulWidget
+class NavbarFooter extends StatefulWidget
 {
 
-  PageStarter({
+  NavbarFooter({
     Key key
 }) : super(key: key);
 
   @override
-  _PageStarterState createState() => _PageStarterState();
+  _NavbarFooterState createState() => _NavbarFooterState();
 
 
 }
 
 
-class _PageStarterState extends State<PageStarter>
+class _NavbarFooterState extends State<NavbarFooter>
 {
   int _selectedIndex = 0;
 

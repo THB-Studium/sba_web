@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../drawer_menu.dart';
+import '../menu/drawer_menu.dart';
 
-class FavoritenPage extends StatefulWidget {
+class NachrichtenPage extends StatefulWidget {
   String title;
 
-  FavoritenPage({Key key, this.title}) : super(key: key);
+  NachrichtenPage({Key key, this.title}) : super(key: key);
 
   @override
-  _FavoritenPageState createState() => _FavoritenPageState();
+  _NachrichtenPageState createState() => _NachrichtenPageState();
 }
 
-class _FavoritenPageState extends State<FavoritenPage> {
+class _NachrichtenPageState extends State<NachrichtenPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -34,12 +34,11 @@ class _FavoritenPageState extends State<FavoritenPage> {
             ),
           ),
         ],
-
       ),
 
       body: SafeArea(
         child: Container(
-          color: Colors.purpleAccent,
+          color: Colors.yellow,
         ),
       ),
       drawer: Drawer(child: sbaDrawer),
