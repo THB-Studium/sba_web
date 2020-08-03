@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///G:/Mes%20Cours/TH%20Brandenburg/Workspace/master/mux/sba_web/lib/pages/components/constants.dart';
+import 'package:sba_web/pages/components/menu/drawer_menu.dart';
 import 'package:sba_web/pages/favories/favories-body.dart';
 
 class FavoritenPage extends StatefulWidget {
@@ -11,8 +11,8 @@ class _FavoritenPageState extends State<FavoritenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(child: sbaDrawer),
       appBar: AppBar(
-        leading: zurrueckButton(context),
         title: Text('Favoriten'),
         centerTitle: true
       ),

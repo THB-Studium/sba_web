@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:sba_web/pages/components/constants.dart';
 
 import '../../models/buch-for-histories.dart';
 
@@ -10,7 +10,7 @@ Widget buildOneReservierung(Reservierung reservierung) {
       SizedBox(height: 5),
       Container(
         decoration: BoxDecoration(
-          border: borderItem(2, reservierung.bis, "Reservierung"),
+          border: _borderItem(2, reservierung.bis, "Reservierung"),
           borderRadius: BorderRadius.circular(13.0),
           color: Colors.white24
         ),
@@ -25,7 +25,7 @@ Widget buildOneReservierung(Reservierung reservierung) {
           trailing: Wrap(
             spacing: 5, // space between two icons
             children: <Widget>[
-              Text(_dateformat(reservierung.bis)), // icon-1
+              Text(dateformat(reservierung.bis)), // icon-1
               Icon(Icons.arrow_forward_ios), // icon-2
             ],
           ),
@@ -42,7 +42,7 @@ Widget buildOneAusleihe(Ausleihe ausleihe) {
       SizedBox(height: 5),
       Container(
         decoration: BoxDecoration(
-          border: borderItem(2, ausleihe.bis, "Ausleihe"),
+          border: _borderItem(2, ausleihe.bis, "Ausleihe"),
           borderRadius: BorderRadius.circular(13.0),
           color: Colors.white24
         ),
@@ -57,7 +57,7 @@ Widget buildOneAusleihe(Ausleihe ausleihe) {
           trailing: Wrap(
             spacing: 5, // space between two icons
             children: <Widget>[
-              Text(_dateformat(ausleihe.bis)), // icon-1
+              Text(dateformat(ausleihe.bis)), // icon-1
               Icon(Icons.arrow_forward_ios), // icon-2
             ],
           ),
@@ -68,31 +68,17 @@ Widget buildOneAusleihe(Ausleihe ausleihe) {
 }
 
 // to set the border of each item:
-Border borderItem (double width, DateTime date, String listClass) {
+Border _borderItem (double width, DateTime date, String listClass) {
   if (listClass == "Reservierung") {
     return date.isBefore(new DateTime.now()) ?
-    _borderColor(width, Colors.red) : _borderColor(width, Colors.amberAccent);
+    borderColor(width, Colors.red) : borderColor(width, Colors.amberAccent);
   }
   if (listClass == "Ausleihe") {
     return date.isBefore(new DateTime.now()) ?
-    _borderColor(width, Colors.red) : _borderColor(width, Colors.green);
+    borderColor(width, Colors.red) : borderColor(width, Colors.green);
   }
 }
 
-// to set the color border of each item:
-Border _borderColor (double width, Color color) {
-  return Border(
-    top: BorderSide(width: width, color: color),
-    bottom: BorderSide(width: width, color: color),
-    right: BorderSide(width: width, color: color),
-    left: BorderSide(width: width, color: color),
-  );
-}
 
 
-// to format date:
-String _dateformat(DateTime date){
-  final DateFormat formatter = DateFormat('dd-MM-yyyy');
-  return formatter.format(date);
-}
 

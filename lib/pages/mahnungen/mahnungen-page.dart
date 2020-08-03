@@ -14,7 +14,10 @@ class _MahnungenState extends State<MahnungenPage> {
     return Scaffold(
       drawer: Drawer(child: sbaDrawer),
       appBar: AppBar(
-        title: Text('Mahnungen')
+        title: Text('Mahnungen'),
+        actions: <Widget>[
+//          actionButton(1, Icons.search, context)
+        ]
       ),
 
       body: MahnungenBody()

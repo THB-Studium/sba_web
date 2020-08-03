@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sba_web/pages/components/constants.dart';
+import 'package:sba_web/pages/components/menu/drawer_menu.dart';
 import 'package:sba_web/pages/live-chat/nachrichten-body.dart';
 
 class NachrichtenPage extends StatefulWidget {
@@ -10,24 +12,12 @@ class _NachrichtenPageState extends State<NachrichtenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(child: sbaDrawer),
       appBar: AppBar(
         title: Text('Nachrichten'),
         actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(Icons.search),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: Icon(Icons.more_vert),
-            ),
-          ),
-        ],
+//          actionButton(1, Icons.search, context)
+        ]
       ),
 
       body: NachrichtenBody(),

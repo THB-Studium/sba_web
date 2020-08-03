@@ -11,9 +11,7 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
 //  final int searchIndex = historyOptions.indexOf(AdvancedSearch());
-//  final int favoriesIndex = historyOptions.indexOf(FavoritenPage());
   final int searchIndex = 1;
-  final int favoriesIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +23,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
         actions: <Widget>[
           actionButton(searchIndex, Icons.search, context),
-          actionButton(favoriesIndex, Icons.star_half, context),
-          actionButton(favoriesIndex, Icons.more_vert, context)
+          actionButton(searchIndex, Icons.more_vert, context)
         ],
         //actionsIconTheme: IconThemeData(color: Colors.black, size: 30.0),
       ),

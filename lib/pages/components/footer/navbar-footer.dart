@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'file:///G:/Mes%20Cours/TH%20Brandenburg/Workspace/master/mux/sba_web/lib/pages/components/constants.dart';
+import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/menu/drawer_menu.dart';
 
 // ignore: must_be_immutable
@@ -37,7 +37,8 @@ class _NavbarFooterState extends State<NavbarFooter> {
               items: [
                 BottomNavigationBarItem(title: Text("History"), icon: Icon(Icons.history),),
                 BottomNavigationBarItem(title: Text("Mahnungen"), icon: Icon(Icons.monetization_on),),
-                BottomNavigationBarItem(title: Text("Nachrichten"), icon: Icon(Icons.mail_outline),)
+                BottomNavigationBarItem(title: Text("Nachrichten"), icon: Icon(Icons.mail_outline),),
+                BottomNavigationBarItem(title: Text("Favoriten"), icon: Icon(Icons.star_half),)
               ],
 
               currentIndex: _selectedNavIndex,
@@ -71,6 +72,9 @@ class _NavbarFooterState extends State<NavbarFooter> {
     }
     if (pageIndex == 2) {
       return nachrichtenOptions.elementAt(childIndex);
+    }
+    if (pageIndex == 3) {
+      return favoritenOptions.elementAt(childIndex);
     }
   }
 }

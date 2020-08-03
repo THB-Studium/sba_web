@@ -10,12 +10,7 @@ class FavoriesBody extends StatelessWidget {
       // body is the majority of the screen.
       body: Center(
         child: Text('This is the favory page :) <3 :D'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Add', // used by assistive technologies
-        child: Icon(Icons.add),
-        onPressed: null,
-      ),
+      )
     );
   }
 }
