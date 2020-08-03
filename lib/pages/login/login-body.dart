@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sba_web/pages/footer/navbar-footer.dart';
+import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../constants.dart';
+import '../components/constants.dart';
 import 'components/background.dart';
 import 'components/button.dart';
 import 'components/input_field.dart';

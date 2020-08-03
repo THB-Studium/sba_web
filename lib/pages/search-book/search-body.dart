@@ -1,28 +1,15 @@
-import 'dart:async';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sba_web/models/buecher_list.dart';
+import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/search-book/service/buchServices.dart';
 
-class AdvancedSearch extends StatefulWidget {
+class AdvancedSearchBody extends StatefulWidget {
   @override
-  _AdvancedSearchState createState() => _AdvancedSearchState();
+  _AdvancedSearchBodyState createState() => _AdvancedSearchBodyState();
 }
-class Debouncer {
-  final int milliseconds;
-  VoidCallback action;
-  Timer _timer;
 
-  Debouncer({this.milliseconds});
-
-  run(VoidCallback action) {
-    if (null != _timer) {
-      _timer.cancel();
-    }
-    _timer = Timer(Duration(milliseconds: milliseconds), action);
-  }
-}
-class _AdvancedSearchState extends State<AdvancedSearch> {
+class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   BooksDescription bd = new BooksDescription();
   String _verfasser;
   String _titel;
@@ -40,6 +27,90 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
       .getBook();
   BooksDescription book = new BooksDescription();
   final _formKey = GlobalKey<FormState>();
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(24),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildVerfasser(),
+                _buildTitel(),
+                _buildIsbn(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    GestureDetector(
+                      child: Text(
+                        'Weitere Optionen',
+                        style: TextStyle(
+                            color: Colors.blue[400],
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _visible = !_visible;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                _buildAnimatedOpacity(),
+                SizedBox(height: 25),
+                RaisedButton(
+                  color: standardColors_blue,
+                  child: Text(
+                    'Suchen',
+                    style: TextStyle(
+                        color: standardColors_white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  ),
+
+                  //Lorsqu'il faudra faire des requetes a la BD
+                  //modifier ici
+                  elevation: 6.0,
+                  onPressed: () {
+                    final form = _formKey.currentState;
+                    if (!form.validate()) {
+                      return;
+                    }
+                    form.save();
+                    //Navigator.pushNamed(context, '/search_book');
+                    BuchServices.getBook().then((getBookList) {
+                      setState(() {
+                        //book = BooksDescription.filterList(getBookList);
+                      });
+                    });
+                    //print(_titel);
+                    // print(_isbn);
+                    // print(_titelanfang);
+                    // print(_verlag);
+                    // print(_schlagwort);
+                    // print(_notation);
+                    // print(_signatur);
+                    //setState(() {
+                    //getBook();
+                    // });
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+
+// Widgets:.....................................................................
 
   Widget _buildVerfasser() {
     return Padding(
@@ -119,7 +190,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
         ),
         Container(
           width: _minimumPadding * 5,
-          child: Image.asset('assets/images/isbn.png', width: 30),
+          child: Image.asset(assetsIcon + 'isbn.png', width: 30),
         ),
       ],
     );
@@ -272,93 +343,5 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white70),
-          tooltip: 'Back',
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text('Erweiterte Suche'),
-        centerTitle: true,
-        backgroundColor: Colors.blue[600],
-        elevation: 0.0,
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildVerfasser(),
-                _buildTitel(),
-                _buildIsbn(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    GestureDetector(
-                      child: Text(
-                        'Weitere Optionen',
-                        style: TextStyle(
-                            color: Colors.blue[400],
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          _visible = !_visible;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                _buildAnimatedOpacity(),
-                SizedBox(height: 25),
-                RaisedButton(
-                  child: Text(
-                    'Suchen',
-                    style: TextStyle(
-                        color: Colors.blue[400],
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700),
-                  ),
 
-                  //Lorsqu'il faudra faire des requetes a la BD
-                  //modifier ici
-                  elevation: 6.0,
-                  onPressed: () {
-                    final form = _formKey.currentState;
-                    if (!form.validate()) {
-                      return;
-                    }
-                    form.save();
-                    //Navigator.pushNamed(context, '/search_book');
-                    BuchServices.getBook().then((getBookList) {
-                      setState(() {
-                        //book = BooksDescription.filterList(getBookList);
-                      });
-                    });
-                    //print(_titel);
-                    // print(_isbn);
-                    // print(_titelanfang);
-                    // print(_verlag);
-                    // print(_schlagwort);
-                    // print(_notation);
-                    // print(_signatur);
-                    //setState(() {
-                    //getBook();
-                    // });
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }

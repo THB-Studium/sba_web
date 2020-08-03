@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sba_web/constants.dart';
-import 'package:sba_web/pages/menu/drawer_menu.dart';
+import 'file:///G:/Mes%20Cours/TH%20Brandenburg/Workspace/master/mux/sba_web/lib/pages/components/constants.dart';
+import 'package:sba_web/pages/components/menu/drawer_menu.dart';
 
 // ignore: must_be_immutable
 class NavbarFooter extends StatefulWidget {

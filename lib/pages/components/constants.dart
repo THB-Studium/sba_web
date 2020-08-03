@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:sba_web/pages/favories/favoriten-page.dart';
-import 'package:sba_web/pages/footer/navbar-footer.dart';
 import 'package:sba_web/pages/history/history-page.dart';
-import 'package:sba_web/pages/live-chat/nachrichten_page.dart';
-import 'package:sba_web/pages/mahnungen/mahnungen_page.dart';
-import 'package:sba_web/pages/search-book/advanced-search.dart';
+import 'package:sba_web/pages/live-chat/nachrichten-page.dart';
+import 'package:sba_web/pages/mahnungen/mahnungen-page.dart';
+import 'package:sba_web/pages/search-book/search-page.dart';
 
 // about the standards colors:
-const standardColorsBlue = Colors.blue;
-const standardColorsWhite = Colors.white;
+const standardColors_blue = Colors.blue;
+const standardColors_white = Colors.white70;
 
 
 // about assets:
@@ -44,5 +44,14 @@ Padding actionButton(int childIndex, IconData icon, BuildContext context) {
       },
       child: Icon(icon),
     ),
+  );
+}
+
+// Zurrück button:
+IconButton zurrueckButton(BuildContext context) {
+  return IconButton(
+    icon: Icon(Icons.arrow_back_ios, color: Colors.white70),
+    tooltip: 'Zurrueck',
+    onPressed: () => Navigator.of(context).pop(),
   );
 }

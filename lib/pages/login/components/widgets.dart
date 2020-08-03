@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
+import '../../components/constants.dart';
 
 
 // loading page:
@@ -47,7 +47,7 @@ Widget suffixIconIfPassword(bool passwort) {
   if (passwort) {
     return Icon(
       Icons.visibility,
-      color: standardColorsBlue,
+      color: standardColors_blue,
     );
   } return null;
 }

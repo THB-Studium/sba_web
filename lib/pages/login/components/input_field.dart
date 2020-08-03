@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sba_web/pages/login/components/text_field_container.dart';
 import 'package:sba_web/pages/login/components/widgets.dart';
 
-import '../../../constants.dart';
+import '../../components/constants.dart';
 
 class InputField extends StatelessWidget {
   final String hintText;
@@ -37,10 +37,10 @@ class InputField extends StatelessWidget {
         },
         obscureText: passwordInput,
         onChanged: onChanged,
-        cursorColor: standardColorsBlue,
+        cursorColor: standardColors_blue,
         decoration: InputDecoration(
           labelText: hintText,
-          icon: Icon(icon, color: standardColorsBlue),
+          icon: Icon(icon, color: standardColors_blue),
           suffixIcon: suffixIconIfPassword(passwordInput),
         ),
       ),

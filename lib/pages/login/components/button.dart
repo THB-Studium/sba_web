@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
+import '../../components/constants.dart';
 
 class RoundedButton extends StatelessWidget {
   final String text;
@@ -10,7 +10,7 @@ class RoundedButton extends StatelessWidget {
     Key key,
     this.text,
     this.press,
-    this.color = standardColorsBlue,
+    this.color = standardColors_blue,
     this.textColor = Colors.white,
   }) : super(key: key);
 

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sba_web/pages/live-chat/nachrichten-body.dart';
 
-import '../menu/drawer_menu.dart';
-
-class MahnungenPage extends StatefulWidget {
+class NachrichtenPage extends StatefulWidget {
   @override
-  _MahnungenState createState() => _MahnungenState();
+  _NachrichtenPageState createState() => _NachrichtenPageState();
 }
 
-class _MahnungenState extends State<MahnungenPage> {
+class _NachrichtenPageState extends State<NachrichtenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(child: sbaDrawer),
       appBar: AppBar(
-        title: Text('Mahnungen'),
+        title: Text('Nachrichten'),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 20.0),
@@ -30,15 +28,9 @@ class _MahnungenState extends State<MahnungenPage> {
             ),
           ),
         ],
-
       ),
 
-      body: SafeArea(
-        child: Container(
-          color: Colors.red,
-        ),
-      ),
-//      drawer: Drawer(child: sbaDrawer),
+      body: NachrichtenBody(),
     );
   }
 }

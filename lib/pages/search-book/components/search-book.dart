@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sba_web/models/buecher_list.dart';
 import 'package:sba_web/pages/search-book/service/buchServices.dart';
 
-import 'search-book-result/details-page.dart';
+import '../search-book-result/details-page.dart';
 
 class BuchKatalog extends StatefulWidget {
 

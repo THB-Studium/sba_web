@@ -1,33 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'buch.dart';
-
-// to build a book:
-Widget buildOneBuch(Buch dasBuch) {
-  return Container(
-//    decoration: BoxDecoration(
-//      border: borderItem(0.5, Colors.grey),
-//      borderRadius: BorderRadius.circular(13.0),
-//    ),
-//    child: ListTile(
-//      title: Text.rich(
-//        TextSpan(
-//          text: dasBuch.buchTitel,
-//          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-//        ),
-//      ),
-//      subtitle: Text(dasBuch.buchAuthor),
-//      trailing: Wrap(
-//        spacing: 12, // space between two icons
-//        children: <Widget>[
-//          Text("12.06.2020"), // icon-1
-//          Icon(Icons.arrow_forward_ios), // icon-2
-//        ],
-//      ),
-//    ),
-  );
-}
+import '../../models/buch-for-histories.dart';
 
 // to build a Reservierung:
 Widget buildOneReservierung(Reservierung reservierung) {
@@ -36,8 +10,9 @@ Widget buildOneReservierung(Reservierung reservierung) {
       SizedBox(height: 5),
       Container(
         decoration: BoxDecoration(
-          border: borderItem(0.9, reservierung.bis, "Reservierung"),
+          border: borderItem(2, reservierung.bis, "Reservierung"),
           borderRadius: BorderRadius.circular(13.0),
+          color: Colors.white24
         ),
         child: ListTile(
           title: Text.rich(
@@ -67,8 +42,9 @@ Widget buildOneAusleihe(Ausleihe ausleihe) {
       SizedBox(height: 5),
       Container(
         decoration: BoxDecoration(
-          border: borderItem(0.9, ausleihe.bis, "Ausleihe"),
+          border: borderItem(2, ausleihe.bis, "Ausleihe"),
           borderRadius: BorderRadius.circular(13.0),
+          color: Colors.white24
         ),
         child: ListTile(
           title: Text.rich(
