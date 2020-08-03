@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'THB SBApp',
       theme: ThemeData(
-        primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: kPrimaryLightColor,
+        primaryColor: standardColorsBlue,
+        scaffoldBackgroundColor: standardColorsWhite,
         visualDensity: VisualDensity.adaptivePlatformDensity
       ),
-      home: LogIn(),
+      home: LogIn()
     );
   }
 }

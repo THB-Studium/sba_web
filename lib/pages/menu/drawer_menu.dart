@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sba_web/pages/login/login-page.dart';
 
 Widget sbaDrawer = Container(
  child: ListView(
@@ -49,6 +50,10 @@ Widget sbaDrawer = Container(
       ListTile(
         leading: Icon(Icons.do_not_disturb_on),
         title: Text('Abmelden'),
+        onTap: () {
+//          Navigator.pushReplacement(null, MaterialPageRoute(
+//              builder: (context) => LogIn()));
+        },
       ),
     ],
   ),

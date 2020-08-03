@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sba_web/pages/favories/FavoriesBody.dart';
 
 import '../menu/drawer_menu.dart';
 
@@ -12,7 +13,13 @@ class _FavoritenPageState extends State<FavoritenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white70),
+          tooltip: 'Back',
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: Text('Favoriten'),
+        centerTitle: true,
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 20.0),
@@ -32,12 +39,7 @@ class _FavoritenPageState extends State<FavoritenPage> {
 
       ),
 
-      body: SafeArea(
-        child: Container(
-          color: Colors.purpleAccent,
-        ),
-      ),
-      drawer: Drawer(child: sbaDrawer),
+      body: FavoriesBody()
     );
   }
 }

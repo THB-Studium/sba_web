@@ -56,6 +56,35 @@ class Buch {
   }
 }
 
+class Ausleihe {
+  String userId;
+  Buch buch;
+  DateTime von;
+  DateTime bis;
+
+  Ausleihe(this.userId, this.buch, this.von, this.bis);
+}
+
+class Reservierung {
+  String userId;
+  Buch buch;
+  DateTime von;
+  DateTime bis;
+
+  Reservierung(this.userId, this.buch, this.von, this.bis);
+}
+
+final ausleihe = [
+  Ausleihe("1", buecher[0], new DateTime.now(),  new DateTime(2020, new DateTime.now().month + 1, new DateTime.now().day)),
+  Ausleihe("1", buecher[0], new DateTime.now(),  new DateTime(2020, new DateTime.now().month + 1, new DateTime.now().day + 5)),
+  Ausleihe("1", buecher[0], new DateTime(2020,7,5),  new DateTime(2020,7,20))
+];
+
+final reservierungen = [
+  Reservierung("1", buecher[0], new DateTime.now(),  new DateTime(2020, new DateTime.now().month, new DateTime.now().day + 3)),
+  Reservierung("1", buecher[0], new DateTime.now(),  new DateTime(2020, new DateTime.now().month, new DateTime.now().day + 3)),
+];
+
 
 final buecher = [
   Buch(

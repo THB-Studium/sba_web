@@ -11,6 +11,7 @@ class _MahnungenState extends State<MahnungenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(child: sbaDrawer),
       appBar: AppBar(
         title: Text('Mahnungen'),
         actions: <Widget>[
@@ -37,7 +38,7 @@ class _MahnungenState extends State<MahnungenPage> {
           color: Colors.red,
         ),
       ),
-      drawer: Drawer(child: sbaDrawer),
+//      drawer: Drawer(child: sbaDrawer),
     );
   }
 }

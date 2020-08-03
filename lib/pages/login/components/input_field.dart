@@ -37,10 +37,10 @@ class InputField extends StatelessWidget {
         },
         obscureText: passwordInput,
         onChanged: onChanged,
-        cursorColor: kPrimaryColor,
+        cursorColor: standardColorsBlue,
         decoration: InputDecoration(
-          hintText: hintText,
-          icon: Icon(icon, color: kPrimaryColor),
+          labelText: hintText,
+          icon: Icon(icon, color: standardColorsBlue),
           suffixIcon: suffixIconIfPassword(passwordInput),
         ),
       ),

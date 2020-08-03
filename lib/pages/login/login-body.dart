@@ -28,8 +28,7 @@ class _LoginBodyState extends State<LoginBody> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: isLoading ? Container(
-        child: Center(child: CircularProgressIndicator()) ) :
+      body: isLoading ? Container(child: Center(child: loading()) ) :
       Background(
         child: SingleChildScrollView(
           child: Container(
@@ -123,9 +122,9 @@ class _LoginBodyState extends State<LoginBody> {
         });
 //        authMethods.signInWithBenutzerNummerAndKennwort(benutzerNummer, kennwort)
 //          .then((value) => print(value));
-        
+
         Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context) => NavbarFooter(),
+          builder: (context) => NavbarFooter(0),
         ));
     }
   }

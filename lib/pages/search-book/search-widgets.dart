@@ -1,8 +1,8 @@
-//import 'package:flutter/material.dart';
-//
-//final _minimumPadding = 5.0;
-//final ValueChanged<String> onChanged = null;
-//
+import 'package:flutter/material.dart';
+
+final _minimumPadding = 5.0;
+final ValueChanged<String> onChanged = null;
+
 //Widget buildVerfasser() {
 //  return Padding(
 //    padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
@@ -24,7 +24,7 @@
 //    ),
 //  );
 //}
-//
+
 //Widget buildTitel() {
 //  return Padding(
 //    padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),

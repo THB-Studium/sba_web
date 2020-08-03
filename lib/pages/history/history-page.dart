@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sba_web/pages/favories/Favories.dart';
+import 'package:sba_web/constants.dart';
+import 'package:sba_web/pages/favories/favoriten-page.dart';
 import 'package:sba_web/pages/history/history-widgets.dart';
 import 'package:sba_web/pages/menu/drawer_menu.dart';
 import 'package:sba_web/pages/search-book/advanced-search.dart';
@@ -13,34 +14,41 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  AdvancedSearch advancedSearch = new AdvancedSearch();
-  Favories favories = new Favories();
+//  List<Buch> _diebuecher = buecher;
+  List<Reservierung> _reservierungen = reservierungen;
+  List<Ausleihe> _ausleihe = ausleihe;
 
-  List<Buch> _diebuecher = buecher;
+//  final int searchIndex = historyOptions.indexOf(AdvancedSearch());
+//  final int favoriesIndex = historyOptions.indexOf(FavoritenPage());
+
+  final int searchIndex = 1;
+  final int favoriesIndex = 2;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(child: sbaDrawer),
       appBar: AppBar(
         title: Text('History'),
+        centerTitle: true,
 
         actions: <Widget>[
-          actionButton(advancedSearch, Icons.search, context),
-          actionButton(favories, Icons.star_half, context),
-          actionButton(null, Icons.more_vert, context)
+          actionButton(searchIndex, Icons.search, context),
+          actionButton(favoriesIndex, Icons.star_half, context),
+          actionButton(favoriesIndex, Icons.more_vert, context)
         ],
         //actionsIconTheme: IconThemeData(color: Colors.black, size: 30.0),
       ),
+
       body: SafeArea(
         child: Container(
           color: Colors.white,
           child: ListView(
-            children: _diebuecher.map(buildOneBuch).toList(),
+            children: _reservierungen.map(buildOneReservierung).toList() +
+                      _ausleihe.map(buildOneAusleihe).toList(),
           ),
         ),
       ),
-//      drawer: Drawer(child: sbaDrawer),
     );
   }
-
 }
