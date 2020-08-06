@@ -64,6 +64,10 @@ class BooksDescription {
   String toc;
   String editorialReviews;
 
+  String schlagwort;
+  String notation;
+  String year;
+
   factory BooksDescription.fromJson(Map<String, dynamic> json) =>
       BooksDescription(
         id: json["id"],

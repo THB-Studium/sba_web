@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/menu/drawer_menu.dart';
+import 'package:sba_web/pages/favories/favories-page.dart';
+import 'package:sba_web/pages/history/history-page.dart';
+import 'package:sba_web/pages/live-chat/nachrichten-page.dart';
+import 'package:sba_web/pages/mahnungen/mahnungen-page.dart';
+
 
 // ignore: must_be_immutable
-class NavbarFooter extends StatefulWidget {
-  int index;
-  NavbarFooter(this.index);
+class NavBarFooter extends StatefulWidget {
+  Widget childPage;
+  NavBarFooter(this.childPage);
 
   @override
-  _NavbarFooterState createState() => _NavbarFooterState(index);
+  _NavBarFooterState createState() => _NavBarFooterState();
 }
 
 
-class _NavbarFooterState extends State<NavbarFooter> {
-  _NavbarFooterState(this._childIndex);
-
+class _NavBarFooterState extends State<NavBarFooter> {
+  final navBarPages = [HistoryPage(), MahnungenPage(), NachrichtenPage(), FavoritenPage()];
   int _selectedNavIndex = 0;
-  int _childIndex = 0;
 
 
   @override
@@ -25,7 +27,8 @@ class _NavbarFooterState extends State<NavbarFooter> {
     return Scaffold(
         backgroundColor: Colors.blue.shade50,
         body: Center(
-            child: _selectedPage(_selectedNavIndex, _childIndex)
+            child: widget.childPage != null ?
+            widget.childPage : navBarPages.elementAt(_selectedNavIndex),
         ),
 
         bottomNavigationBar: Theme(
@@ -48,33 +51,15 @@ class _NavbarFooterState extends State<NavbarFooter> {
 
             ),
         ),
-      drawer: Drawer(child: sbaDrawer),
+      drawer: Drawer(child: sbaDrawer(context)),
       );
   }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedNavIndex = index;
-      _childIndex = 0;
+      widget.childPage = null;
     });
   }
 
-  Widget _selectedPage(int pageIndex, int childIndex) {
-    print(childIndex);
-    if (childIndex < 0) {
-      childIndex = 0;
-    }
-    if (pageIndex == 0) {
-      return historyOptions.elementAt(childIndex);
-    }
-    if (pageIndex == 1) {
-      return mahnungenOptions.elementAt(childIndex);
-    }
-    if (pageIndex == 2) {
-      return nachrichtenOptions.elementAt(childIndex);
-    }
-    if (pageIndex == 3) {
-      return favoritenOptions.elementAt(childIndex);
-    }
-  }
 }

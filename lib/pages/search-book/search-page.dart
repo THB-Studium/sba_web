@@ -13,8 +13,7 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
     return Scaffold(
       appBar: AppBar(
         leading: zurrueckButton(context),
-        title: Text('Erweiterte Suche'),
-        centerTitle: true,
+        title: Text('Buchsuche'),
         backgroundColor: standardColors_blue,
         elevation: 0.0,
       ),

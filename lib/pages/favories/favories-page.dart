@@ -11,10 +11,13 @@ class _FavoritenPageState extends State<FavoritenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(child: sbaDrawer),
+      drawer: Drawer(child: sbaDrawer(context)),
       appBar: AppBar(
         title: Text('Favoriten'),
-        centerTitle: true
+        actions: <Widget>[
+//          actionButton(AdvancedSearch(), Icons.search, context),
+//          actionButton(AdvancedSearch(), Icons.more_vert, context)
+        ],
       ),
 
       body: FavoriesBody()

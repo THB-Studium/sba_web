@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sba_web/pages/login/components/widgets.dart';
+import 'package:sba_web/pages/components/constants.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
@@ -17,7 +17,6 @@ class Background extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-//          text("willkommen in...", 15, 50),
           setImage("bibsapp_logo.png", size.width * 0.4, 50, null),
           child,
         ],

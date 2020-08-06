@@ -3,7 +3,7 @@ import 'package:sba_web/pages/components/constants.dart';
 
 import '../../models/buch-for-histories.dart';
 
-// to build a Reservierung:
+/// to build a Reservierung view:
 Widget buildOneReservierung(Reservierung reservierung) {
   return Column(
     children: <Widget>[
@@ -35,7 +35,7 @@ Widget buildOneReservierung(Reservierung reservierung) {
   );
 }
 
-// to build a ausleihe:
+/// to build a ausleihe view:
 Widget buildOneAusleihe(Ausleihe ausleihe) {
   return Column(
     children: <Widget>[
@@ -67,7 +67,7 @@ Widget buildOneAusleihe(Ausleihe ausleihe) {
   );
 }
 
-// to set the border of each item:
+/// to set the border of each item:
 Border _borderItem (double width, DateTime date, String listClass) {
   if (listClass == "Reservierung") {
     return date.isBefore(new DateTime.now()) ?
@@ -77,6 +77,7 @@ Border _borderItem (double width, DateTime date, String listClass) {
     return date.isBefore(new DateTime.now()) ?
     borderColor(width, Colors.red) : borderColor(width, Colors.green);
   }
+  return null;
 }
 
 

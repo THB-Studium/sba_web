@@ -12,11 +12,12 @@ class _MahnungenState extends State<MahnungenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(child: sbaDrawer),
+      drawer: Drawer(child: sbaDrawer(context)),
       appBar: AppBar(
         title: Text('Mahnungen'),
         actions: <Widget>[
-//          actionButton(1, Icons.search, context)
+//          actionButton(AdvancedSearch(), Icons.search, context),
+//          actionButton(AdvancedSearch(), Icons.more_vert, context)
         ]
       ),
 

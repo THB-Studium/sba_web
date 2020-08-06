@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
-import 'package:sba_web/pages/favories/favoriten-page.dart';
-import 'package:sba_web/pages/history/history-page.dart';
-import 'package:sba_web/pages/live-chat/nachrichten-page.dart';
-import 'package:sba_web/pages/mahnungen/mahnungen-page.dart';
-import 'package:sba_web/pages/search-book/search-page.dart';
 import 'package:intl/intl.dart';
+
 
 // about the standards colors:
 const standardColors_blue = Colors.blue;
 const standardColors_white = Colors.white70;
 
-
 // about assets:
-const assetsImage = "assets/images/";
-const assetsIcon = "assets/icons/";
-const assetsFont = "assets/fonts/";
-const assetsDummyDb = "assets/dummy_db/";
+final String assetsImage = "assets/images/";
+final String assetsIcon = "assets/icons/";
+final String assetsFont = "assets/fonts/";
+final String assetsDummyDb = "assets/dummy_db/";
 
 
 // about hyperlink paths:
@@ -25,31 +20,54 @@ final String impressumUrl = 'https://www.th-brandenburg.de/impressum/';
 final String datenschutzUrl = 'https://www.th-brandenburg.de/datenschutz/?S=0%25253F%253F';
 final String hilfeUrl = 'https://opac.th-brandenburg.de/InfoGuideClient.bfbsis/jsp/common/metaHelp.jsp?helpfile=rech_einfach.html';
 
-
-// Navbar pages elements:
-final historyOptions = [HistoryPage(), AdvancedSearch()];
-final mahnungenOptions = [MahnungenPage()];
-final nachrichtenOptions = [NachrichtenPage(), AdvancedSearch()];
-final favoritenOptions = [FavoritenPage()];
+// about the book status:
+final String ausliehbar = 'ausliehbar';
+final String entliehen = 'ausliehbar';
 
 
-// for the actions buttons:
-Padding actionButton(int childIndex, IconData icon, BuildContext context) {
+
+/// loading circle icon by waiting of the loading of a page:
+Column loading() {
+  return Column(
+    children: <Widget>[
+      SizedBox(height: 200),
+      setImage("bibsapp_logo.png", 150, 200, null),
+      SizedBox(height: 20),
+      CircularProgressIndicator(),
+    ],
+  );
+}
+
+/// to choose and position a logo/image:
+Widget setImage(String imgName, double size, double position, Color color) {
+  return Positioned(
+    top: position,
+    child: Image.asset(
+      assetsImage + imgName,
+      width: size,
+      color: color,
+    ),
+  );
+}
+
+/// for the actions buttons:
+Padding actionButton(Widget childPage, IconData icon, BuildContext context) {
   return Padding(
     padding: EdgeInsets.only(right: 10.0),
     child:
     GestureDetector(
       onTap: () {
-        print('index = ' + childIndex.toString());
         Navigator.push(context, MaterialPageRoute(
-            builder: (context) => NavbarFooter(childIndex) ));
+            builder: (context) => NavBarFooter(childPage))
+        );
       },
       child: Icon(icon),
     ),
   );
 }
 
-// Zurrück button:
+
+/// about the Zurrück button:
 IconButton zurrueckButton(BuildContext context) {
   return IconButton(
     icon: Icon(Icons.arrow_back_ios, color: Colors.white70),
@@ -58,13 +76,13 @@ IconButton zurrueckButton(BuildContext context) {
   );
 }
 
-// to format date:
+/// to format date:
 String dateformat(DateTime date){
   final DateFormat formatter = DateFormat('dd-MM-yyyy');
   return formatter.format(date);
 }
 
-// to set the color border of each item:
+/// to set the color border of each item:
 Border borderColor (double width, Color color) {
   return Border(
     top: BorderSide(width: width, color: color),

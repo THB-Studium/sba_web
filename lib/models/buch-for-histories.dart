@@ -1,4 +1,6 @@
 class Buch {
+  final String buchId;
+
   final String buchTitel;
   final String buchAuthor;
   final String buchISBN10;
@@ -10,8 +12,13 @@ class Buch {
   final String buchArt;
   final String buchKategorie;
 
-  const Buch(
-      {this.buchTitel,
+  final String mediaTyp;
+  final String verfuegbarkeit;
+
+  const Buch({
+      this.buchId,
+
+      this.buchTitel,
       this.buchAuthor,
       this.buchISBN10,
       this.buchISBN13,
@@ -20,10 +27,15 @@ class Buch {
       this.buchSeiten,
       this.buchSprache,
       this.buchArt,
-      this.buchKategorie});
+      this.buchKategorie,
+
+      this.mediaTyp,
+      this.verfuegbarkeit
+  });
 
   Map<String, dynamic> toMap() {
     return {
+      'buchId': buchId,
       'buchTitel': buchTitel,
       'buchAuthor': buchAuthor,
       'buchISBN10': buchISBN10,
@@ -33,7 +45,9 @@ class Buch {
       'buchSeiten': buchSeiten,
       'buchSprache': buchSprache,
       'buchArt': buchArt,
-      'buchKategorie': buchKategorie
+      'buchKategorie': buchKategorie,
+      'mediaTyp': mediaTyp,
+      'verfuegbarkeit': verfuegbarkeit
     };
   }
 
@@ -88,6 +102,7 @@ final reservierungen = [
 
 final buecher = [
   Buch(
+      buchId: "1",
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
       buchISBN10: "3-938899-46-8",
@@ -97,8 +112,10 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
+      buchId: "2",
       buchTitel: "Sundjata Keita",
       buchAuthor: "Thomas Sankara",
       buchISBN10: "3-938899-46-8",
@@ -108,8 +125,10 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
+      buchId: "3",
       buchTitel: "Bois d'ebene",
       buchAuthor: "Patrice Lumumba",
       buchISBN10: "3-938899-46-8",
@@ -119,8 +138,10 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
+      buchId: "4",
       buchTitel: "Urgence de la pensée",
       buchAuthor: "Maurice Kamto",
       buchISBN10: "3-938899-46-8",
@@ -130,8 +151,10 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
+      buchId: "5",
       buchTitel: "Il est temps que tu t'engages",
       buchAuthor: "Wilfried Ekanga",
       buchISBN10: "3-938899-46-8",
@@ -141,7 +164,73 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
+  ),Buch(
+      buchId: "6",
+      buchTitel: "Das kleine weiße Pferd",
+      buchAuthor: "Goudge, Elizabeth",
+      buchISBN10: "3-938899-46-8",
+      buchISBN13: "978-3-938899-46-5",
+      buchJahr: "25.01.2009",
+      buchVerlag: "ZEIT-Verlag",
+      buchSeiten: "200",
+      buchSprache: "Deutsch",
+      buchArt: "Buch Hardcover",
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
+  ),Buch(
+      buchId: "7",
+      buchTitel: "Das kleine weiße Pferd",
+      buchAuthor: "Goudge, Elizabeth",
+      buchISBN10: "3-938899-46-8",
+      buchISBN13: "978-3-938899-46-5",
+      buchJahr: "25.01.2009",
+      buchVerlag: "ZEIT-Verlag",
+      buchSeiten: "200",
+      buchSprache: "Deutsch",
+      buchArt: "Buch Hardcover",
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
+  ),Buch(
+      buchId: "8",
+      buchTitel: "Das kleine weiße Pferd",
+      buchAuthor: "Goudge, Elizabeth",
+      buchISBN10: "3-938899-46-8",
+      buchISBN13: "978-3-938899-46-5",
+      buchJahr: "25.01.2009",
+      buchVerlag: "ZEIT-Verlag",
+      buchSeiten: "200",
+      buchSprache: "Deutsch",
+      buchArt: "Buch Hardcover",
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
+  ),Buch(
+      buchId: "9",
+      buchTitel: "Das kleine weiße Pferd",
+      buchAuthor: "Goudge, Elizabeth",
+      buchISBN10: "3-938899-46-8",
+      buchISBN13: "978-3-938899-46-5",
+      buchJahr: "25.01.2009",
+      buchVerlag: "ZEIT-Verlag",
+      buchSeiten: "200",
+      buchSprache: "Deutsch",
+      buchArt: "Buch Hardcover",
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
+  ),Buch(
+      buchId: "10",
+      buchTitel: "Das kleine weiße Pferd",
+      buchAuthor: "Goudge, Elizabeth",
+      buchISBN10: "3-938899-46-8",
+      buchISBN13: "978-3-938899-46-5",
+      buchJahr: "25.01.2009",
+      buchVerlag: "ZEIT-Verlag",
+      buchSeiten: "200",
+      buchSprache: "Deutsch",
+      buchArt: "Buch Hardcover",
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -152,7 +241,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -163,7 +253,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -174,7 +265,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -185,7 +277,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -196,7 +289,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -207,7 +301,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -218,7 +313,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -229,7 +325,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -240,7 +337,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -251,7 +349,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -262,7 +361,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -273,7 +373,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -284,7 +385,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -295,7 +397,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -306,7 +409,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -317,7 +421,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -328,7 +433,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -339,7 +445,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -350,7 +457,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -361,7 +469,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -372,7 +481,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -383,7 +493,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -394,7 +505,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -405,7 +517,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -416,7 +529,8 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "ausliehbar"
   ),Buch(
       buchTitel: "Das kleine weiße Pferd",
       buchAuthor: "Goudge, Elizabeth",
@@ -427,149 +541,7 @@ final buecher = [
       buchSeiten: "200",
       buchSprache: "Deutsch",
       buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
-  ),Buch(
-      buchTitel: "Das kleine weiße Pferd",
-      buchAuthor: "Goudge, Elizabeth",
-      buchISBN10: "3-938899-46-8",
-      buchISBN13: "978-3-938899-46-5",
-      buchJahr: "25.01.2009",
-      buchVerlag: "ZEIT-Verlag",
-      buchSeiten: "200",
-      buchSprache: "Deutsch",
-      buchArt: "Buch Hardcover",
-      buchKategorie: "Nicht verfügbar"
+      buchKategorie: "Nicht verfügbar",
+      verfuegbarkeit: "entliehen"
   )
 ];

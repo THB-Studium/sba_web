@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
+import 'package:sba_web/pages/history/history-page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../components/constants.dart';
 import 'components/background.dart';
 import 'components/button.dart';
 import 'components/input_field.dart';
-import 'components/widgets.dart';
+import 'login-widgets.dart';
 
 class LoginBody extends StatefulWidget {
   @override
@@ -124,7 +125,7 @@ class _LoginBodyState extends State<LoginBody> {
 //          .then((value) => print(value));
 
         Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context) => NavbarFooter(0),
+          builder: (context) => NavBarFooter(HistoryPage()),
         ));
     }
   }

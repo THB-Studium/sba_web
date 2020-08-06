@@ -17,7 +17,7 @@ class _NachrichtenBodyState extends State<NachrichtenBody> {
           color: standardColors_white,
         ),
       ),
-      drawer: Drawer(child: sbaDrawer),
+      drawer: Drawer(child: sbaDrawer(context)),
     );
   }
 }

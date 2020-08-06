@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 
 class FavoriesBody extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     // Scaffold is a layout for the major Material Components.
