@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/models/buch-for-histories.dart';
 
+import 'favories-widgets.dart';
+
 
 class FavoriesBody extends StatefulWidget {
   @override
@@ -13,9 +15,31 @@ class _FavoriesBodyState extends State<FavoriesBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('This is the favory page :) <3 :D'),
-      )
+      body:new Container(
+        child: new ListView.builder(
+          itemBuilder: (_,int index) => listFavoriesItem(context, favoriesList[index]),
+          itemCount: favoriesList.length,
+        ) ,
+      ),
+
+//      Container(
+//        child: FutureBuilder(
+//            //future: fetchItems(context),
+//            builder:(context, snapshot){
+//              if(!snapshot.hasData){
+//                return ListView.builder(
+//                  itemCount: favoriesList.length,
+//                  shrinkWrap: true,
+//                  itemBuilder: (BuildContext context, int index){
+//                    Buch item = favoriesList[index];
+//                    return Text(item.buchTitel);
+//                  },
+//                );
+//              }
+//              return Center(child: CircularProgressIndicator());
+//            }
+//        ),
+//      ),
     );
   }
 }

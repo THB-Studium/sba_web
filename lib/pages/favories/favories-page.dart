@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sba_web/pages/components/menu/drawer_menu.dart';
-import 'package:sba_web/pages/favories/favories-body.dart';
+import '../components/menu/drawer_menu.dart';
+import 'favories-body.dart';
 
 class FavoritenPage extends StatefulWidget {
   @override

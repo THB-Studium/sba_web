@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/pages/login/components/text_field_container.dart';
-import 'file:///G:/Mes%20Cours/TH%20Brandenburg/Workspace/master/mux/sba_web/lib/pages/login/login-widgets.dart';
 
 import '../../components/constants.dart';
+import '../login-widgets.dart';
 
 // ignore: must_be_immutable
 class InputField extends StatelessWidget {
