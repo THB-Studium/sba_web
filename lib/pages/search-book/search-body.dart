@@ -1,11 +1,14 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sba_web/models/buch-for-histories.dart';
 import 'package:sba_web/models/buecher_list.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:sba_web/pages/search-book/search-book-result/search-results-page.dart';
 import 'package:sba_web/pages/search-book/search-widgets.dart';
+
 
 class AdvancedSearchBody extends StatefulWidget {
   @override
@@ -20,6 +23,14 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   final _formKey = GlobalKey<FormState>();
   final List<Buch> buchItems = buecher;
 
+  //QR CODE Camera implementation
+
+  String barcode = "";
+
+  @override
+  initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,6 +149,26 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
     }
   }
 
+  // Scan function for QR CODE Camera
+  Future scan() async {
+    try {
+      String barcode = (await BarcodeScanner.scan()) as String;
+      setState(() => this.barcode = barcode);
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
+        setState(() {
+          this.barcode = 'The user did not grant the camera permission!';
+        });
+      } else {
+        setState(() => this.barcode = 'Unknown error: $e');
+      }
+    } on FormatException{
+      setState(() => this.barcode = 'null (User returned using the "back"-button before scanning anything. Result)');
+    } catch (e) {
+      setState(() => this.barcode = 'Unknown error: $e');
+    }
+  }
+
   Widget _buildIsbn() {
     return Row(
       children: <Widget>[
@@ -148,10 +179,14 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
             child: TextFormField(
               decoration: InputDecoration(
                 labelText: 'ISBN / ISSN',
-                suffixIcon: Container(
-                  child: Container(
-                      width: 1,
-                      child: Image.asset(assetsIcon + 'isbn.png', width: 1)),
+                suffixIcon: IconButton(
+                  //child: Container(
+                      //width: 1,
+                      //child: Image.asset(assetsIcon + 'isbn.png', width: 1)
+                  //),
+
+                  icon: Image.asset('assets/icons/isbn.png'),
+                  onPressed: scan,
                 ),
               ),
               style: TextStyle(
