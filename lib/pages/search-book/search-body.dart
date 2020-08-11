@@ -9,7 +9,6 @@ import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:sba_web/pages/search-book/search-book-result/search-results-page.dart';
 import 'package:sba_web/pages/search-book/search-widgets.dart';
 
-
 class AdvancedSearchBody extends StatefulWidget {
   @override
   _AdvancedSearchBodyState createState() => _AdvancedSearchBodyState();
@@ -25,7 +24,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
 
   //QR CODE Camera implementation
 
-  String barcode = "";
+  String barcode = " ";
 
   @override
   initState() {
@@ -52,7 +51,9 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                     Container(
                       width: _minimumPadding * 5,
                       child: Icon(
-                          _visible ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                          _visible
+                              ? Icons.keyboard_arrow_up
+                              : Icons.keyboard_arrow_down,
                           color: standardColors_blue),
                     ),
                     GestureDetector(
@@ -88,8 +89,11 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                   elevation: 6.0,
                   onPressed: () {
                     print(booksDescription);
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => NavBarFooter(SearchResultsPage(buchItems))));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                NavBarFooter(SearchResultsPage(buchItems))));
                   },
                 ),
               ],
@@ -99,7 +103,6 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
       ),
     );
   }
-
 
 // Widgets:.....................................................................
 
@@ -153,7 +156,10 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   Future scan() async {
     try {
       String barcode = (await BarcodeScanner.scan()) as String;
-      setState(() => this.barcode = barcode);
+      setState(() => {
+            if (barcode.length == 13) {booksDescription.isbn13 = barcode},
+            if (barcode.length == 10) {booksDescription.isbn10 = barcode}
+          });
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.cameraAccessDenied) {
         setState(() {
@@ -162,49 +168,75 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
       } else {
         setState(() => this.barcode = 'Unknown error: $e');
       }
-    } on FormatException{
-      setState(() => this.barcode = 'null (User returned using the "back"-button before scanning anything. Result)');
+    } on FormatException {
+      setState(() => this.barcode =
+          'null (User returned using the "back"-button before scanning anything. Result)');
     } catch (e) {
       setState(() => this.barcode = 'Unknown error: $e');
     }
+
   }
 
-  Widget _buildIsbn() {
-    return Row(
-      children: <Widget>[
-        Flexible(
-          child: Padding(
-            padding:
-            EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: 'ISBN / ISSN',
-                suffixIcon: IconButton(
-                  //child: Container(
-                      //width: 1,
-                      //child: Image.asset(assetsIcon + 'isbn.png', width: 1)
-                  //),
+  TextEditingController c = new TextEditingController();
 
-                  icon: Image.asset('assets/icons/isbn.png'),
-                  onPressed: scan,
-                ),
-              ),
-              style: TextStyle(
-                fontSize: 12,
-              ),
-              onSaved: (value) {
-                if (value.length == 13) {
-                  booksDescription.isbn13 = validateIsbn(value) as int;
-                }
-                if (value.length <= 10) {
-                  booksDescription.isbn10 = validateIsbn(value);
-                }
-              }
-            )
-          )
-        )
-      ]
-    );
+  Widget _buildIsbn() {
+    return Row(children: <Widget>[
+      Flexible(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(
+                      top: _minimumPadding, bottom: _minimumPadding),
+                  child: TextFormField(
+                      decoration: InputDecoration(
+                        labelText: 'ISBN / ISSN',
+                        suffixIcon: IconButton(
+                          //child: Container(
+                          //width: 1,
+                          //child: Image.asset(assetsIcon + 'isbn.png', width: 1)
+                          //),
+
+                          icon: Image.asset('assets/icons/isbn.png'),
+                          onPressed: scan,
+                        ),
+                      ),
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                      initialValue: setInitialValues(),
+                      onSaved: (value) {
+                        if (value != null) {
+                          if (value.length == 13) {
+                            booksDescription.isbn13 = validateIsbn(value);
+                          }
+                          if (value.length <= 10) {
+                            booksDescription.isbn10 = validateIsbn(value);
+                          }
+                        }
+                      })),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Text(barcode, textAlign: TextAlign.center,),
+              )
+            ],
+          ))
+    ]);
+
+  }
+
+
+  String setInitialValues() {
+    if (booksDescription != null) {
+      if (booksDescription.isbn10 == null && booksDescription.isbn13 == null) {
+        return '';
+      } else if (booksDescription.isbn13) {
+        return booksDescription.isbn13.toString();
+      } else if (booksDescription.isbn10) {
+        return booksDescription.isbn10.toString();
+      }
+    }
+
+    return '';
   }
 
   /// to be sure that the current ISBN is correct formatted:
@@ -222,21 +254,20 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   Widget _buildAnimatedOpacity() {
     return Container(
         child: Visibility(
-          //child: Container(color: Colors.blue, width: 100, height: 100),
-          visible: _visible,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildBookDescriptionItems(titelanfang),
-                _buildBookDescriptionItems(verlag),
-                _buildBookDescriptionItems(schlagwort),
-                _buildBookDescriptionItems(notation),
-                _buildBookDescriptionItems(plublisher),
-                _buildBookDescriptionItems(veroeffentlichungsdatum)
-              ]),
-        ));
+      //child: Container(color: Colors.blue, width: 100, height: 100),
+      visible: _visible,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _buildBookDescriptionItems(titelanfang),
+            _buildBookDescriptionItems(verlag),
+            _buildBookDescriptionItems(schlagwort),
+            _buildBookDescriptionItems(notation),
+            _buildBookDescriptionItems(plublisher),
+            _buildBookDescriptionItems(veroeffentlichungsdatum)
+          ]),
+    ));
   }
-
 //  Widget _buildsearchTF() {
 //    return TextField(
 //      decoration: InputDecoration(
@@ -254,5 +285,4 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
 //      ),
 //    );
 //  }
-
 }
