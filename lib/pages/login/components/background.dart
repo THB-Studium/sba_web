@@ -17,7 +17,7 @@ class Background extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-          setImage("bibsapp_logo.png", size.width * 0.4, 50, null),
+          setImage("bibsapp_logo.png", size.width * 0.4, 70, null),
           child,
         ],
       ),
