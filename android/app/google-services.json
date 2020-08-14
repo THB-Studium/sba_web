@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "585896632620",
+    "firebase_url": "https://thbsearchapp.firebaseio.com",
+    "project_id": "thbsearchapp",
+    "storage_bucket": "thbsearchapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585896632620:android:c700ebeed40ed9d56d8c89",
+        "android_client_info": {
+          "package_name": "com.example.sba_web"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585896632620-bqnfjk3kgvjuabhifmv26qa9lpr1fg5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCubEU5KcuYcHUtUm6MkID61khdf__YfdM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585896632620-bqnfjk3kgvjuabhifmv26qa9lpr1fg5e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

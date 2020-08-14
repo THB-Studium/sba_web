@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/pages/login/components/text_field_container.dart';
-
+import '../login-widgets.dart';
 import '../../components/constants.dart';
 import '../login-widgets.dart';
 
@@ -24,7 +24,7 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
-        validator: (val){
+        validator: (val) {
           if (val.isEmpty) {
             return hintText + " kann nicht leer sein!";
           }

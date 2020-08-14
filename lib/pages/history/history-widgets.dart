@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sba_web/models/ausleihe.dart';
+import 'package:sba_web/models/reservierung.dart';
 import 'package:sba_web/pages/components/constants.dart';
-
-import '../../models/buch-for-histories.dart';
 
 /// to build a Reservierung view:
 Widget buildOneReservierung(Reservierung reservierung) {

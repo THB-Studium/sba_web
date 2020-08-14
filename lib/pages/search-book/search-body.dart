@@ -1,11 +1,15 @@
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sba_web/models/buch-for-histories.dart';
+import 'package:flutter/services.dart';
+import 'package:sba_web/models/buch-items.dart';
+import 'package:sba_web/models/buch.dart';
 import 'package:sba_web/models/buecher_list.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:sba_web/pages/search-book/search-book-result/search-results-page.dart';
 import 'package:sba_web/pages/search-book/search-widgets.dart';
+import 'package:validators/validators.dart';
 
 class AdvancedSearchBody extends StatefulWidget {
   @override
@@ -15,11 +19,21 @@ class AdvancedSearchBody extends StatefulWidget {
 class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   BooksDescription booksDescription = new BooksDescription();
   bool _visible = false;
+  TextEditingController textInputController = new TextEditingController();
 
   final _minimumPadding = 5.0;
   final _formKey = GlobalKey<FormState>();
   final List<Buch> buchItems = buecher;
 
+  /// QR CODE Camera implementation
+  static final _possibleFormats = BarcodeFormat.values.toList()
+    ..removeWhere((e) => e == BarcodeFormat.unknown);
+  List<BarcodeFormat> selectedFormats = [..._possibleFormats];
+
+  @override
+  initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +55,9 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                     Container(
                       width: _minimumPadding * 5,
                       child: Icon(
-                          _visible ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                          _visible
+                              ? Icons.keyboard_arrow_up
+                              : Icons.keyboard_arrow_down,
                           color: standardColors_blue),
                     ),
                     GestureDetector(
@@ -76,9 +92,15 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                   //modifier ici
                   elevation: 6.0,
                   onPressed: () {
-                    print(booksDescription);
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => NavBarFooter(SearchResultsPage(buchItems))));
+                    print('Title: ' + booksDescription.title.toString());
+                    print('Author: ' + booksDescription.author.toString());
+                    print('ISBN13: ' + booksDescription.isbn13.toString());
+                    print('ISBN10: ' + booksDescription.isbn10.toString());
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                NavBarFooter(SearchResultsPage(buchItems))));
                   },
                 ),
               ],
@@ -88,7 +110,6 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
       ),
     );
   }
-
 
 // Widgets:.....................................................................
 
@@ -104,7 +125,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
         style: TextStyle(
           fontSize: 12,
         ),
-        onSaved: (value) {
+        onChanged: (value) {
           setBookDescriptionItems(labelText, value);
         },
       ),
@@ -112,72 +133,104 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   }
 
   void setBookDescriptionItems(String itemName, String value) {
-    if (itemName == verfasser) {
-      booksDescription.author = value;
-    }
-    if (itemName == titel) {
-      booksDescription.title = value;
-    }
-    if (itemName == titelanfang) {
-      booksDescription.titleSlug = value;
-    }
-    if (itemName == verlag) {
-      booksDescription.edition = value;
-    }
-    if (itemName == schlagwort) {
-      booksDescription.schlagwort = value;
-    }
-    if (itemName == notation) {
-      booksDescription.notation = value;
-    }
-    if (itemName == plublisher) {
-      booksDescription.publisher = value;
-    }
-    if (itemName == veroeffentlichungsdatum) {
-      booksDescription.pubdate = value;
+    setState(() {
+      if (itemName == verfasser) {
+        booksDescription.author = value;
+      }
+      if (itemName == titel) {
+        booksDescription.title = value;
+      }
+      if (itemName == titelanfang) {
+        booksDescription.titleSlug = value;
+      }
+      if (itemName == verlag) {
+        booksDescription.edition = value;
+      }
+      if (itemName == schlagwort) {
+        booksDescription.schlagwort = value;
+      }
+      if (itemName == notation) {
+        booksDescription.notation = value;
+      }
+      if (itemName == plublisher) {
+        booksDescription.publisher = value;
+      }
+      if (itemName == veroeffentlichungsdatum) {
+        booksDescription.pubdate = value;
+      }
+    });
+  }
+
+  // Scan function for QR CODE Camera
+  Future _scan() async {
+    try {
+      var scanResult = await BarcodeScanner.scan();
+      var isbnNummer;
+
+      setState(() {
+        isbnNummer = validateIsbn(scanResult.rawContent);
+        if (isbnNummer.length == 13) {
+          booksDescription.isbn13 = isbnNummer;
+        }
+        if (isbnNummer.length <= 10) {
+          booksDescription.isbn10 = isbnNummer;
+        }
+        textInputController.text = isbnNummer;
+      });
+    } on PlatformException catch (e) {
+      var scanResult = ScanResult(
+        type: ResultType.Error,
+        format: BarcodeFormat.unknown,
+      );
+
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
+        setState(() {
+          scanResult.rawContent = 'The user did not grant the camera permission!';
+        });
+      } else {
+        scanResult.rawContent = 'Unknown error: $e';
+      }
     }
   }
 
   Widget _buildIsbn() {
-    return Row(
-      children: <Widget>[
-        Flexible(
-          child: Padding(
-            padding:
-            EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: 'ISBN / ISSN',
-                suffixIcon: Container(
-                  child: Container(
-                      width: 1,
-                      child: Image.asset(assetsIcon + 'isbn.png', width: 1)),
-                ),
-              ),
-              style: TextStyle(
-                fontSize: 12,
-              ),
-              onSaved: (value) {
-                if (value.length == 13) {
-                  booksDescription.isbn13 = validateIsbn(value) as int;
-                }
-                if (value.length <= 10) {
-                  booksDescription.isbn10 = validateIsbn(value);
-                }
-              }
-            )
-          )
-        )
-      ]
-    );
+    return Row(children: <Widget>[
+      Flexible(
+          child: Column(
+        children: <Widget>[
+          Padding(
+              padding: EdgeInsets.only(
+                  top: _minimumPadding, bottom: _minimumPadding),
+              child: TextFormField(
+                  controller: textInputController,
+                  decoration: InputDecoration(
+                    labelText: 'ISBN / ISSN',
+                    suffixIcon: IconButton(
+                      icon: Image.asset('assets/icons/isbn.png'),
+                      onPressed: _scan,
+                    ),
+                  ),
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                  onChanged: (value) {
+                    if (value != null) {
+                      if (value.length == 13) {
+                        booksDescription.isbn13 = validateIsbn(value);
+                      }
+                      if (value.length <= 10) {
+                        booksDescription.isbn10 = validateIsbn(value);
+                      }
+                    }
+                  })),
+        ],
+      ))
+    ]);
   }
 
   /// to be sure that the current ISBN is correct formatted:
   static String validateIsbn(String value) {
-    Pattern pattern =
-        r'/((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])/';
-    RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value)) {
+    if (!isISBN(value)) {
       return 'Bitte richtige ISBN / ISSN Nummer eingeben';
     } else {
       return value;
@@ -187,37 +240,17 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   Widget _buildAnimatedOpacity() {
     return Container(
         child: Visibility(
-          //child: Container(color: Colors.blue, width: 100, height: 100),
-          visible: _visible,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildBookDescriptionItems(titelanfang),
-                _buildBookDescriptionItems(verlag),
-                _buildBookDescriptionItems(schlagwort),
-                _buildBookDescriptionItems(notation),
-                _buildBookDescriptionItems(plublisher),
-                _buildBookDescriptionItems(veroeffentlichungsdatum)
-              ]),
-        ));
+      visible: _visible,
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _buildBookDescriptionItems(titelanfang),
+            _buildBookDescriptionItems(verlag),
+            _buildBookDescriptionItems(schlagwort),
+            _buildBookDescriptionItems(notation),
+            _buildBookDescriptionItems(plublisher),
+            _buildBookDescriptionItems(veroeffentlichungsdatum)
+          ]),
+    ));
   }
-
-//  Widget _buildsearchTF() {
-//    return TextField(
-//      decoration: InputDecoration(
-//        border: OutlineInputBorder(
-//          borderRadius: const BorderRadius.all(
-//            const Radius.circular(
-//              5.0,
-//            ),
-//          ),
-//        ),
-//        filled: true,
-//        fillColor: Colors.white60,
-//        contentPadding: EdgeInsets.all(15.0),
-//        hintText: 'Eingeben...',
-//      ),
-//    );
-//  }
-
 }

@@ -47,7 +47,7 @@ class BooksDescription {
   String authors;
   dynamic titleSlug;
   String authorSlug;
-  int isbn13;
+  dynamic isbn13;
   dynamic isbn10;
   String price;
   Format format;

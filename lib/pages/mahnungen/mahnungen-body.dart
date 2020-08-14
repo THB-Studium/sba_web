@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../components/constants.dart';
+import 'package:sba_web/pages/components/constants.dart';
 
 class MahnungenBody extends StatefulWidget {
   @override
