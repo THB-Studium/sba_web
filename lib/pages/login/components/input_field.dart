@@ -23,7 +23,7 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFieldContainer(
       child: TextFormField(
-        validator: (val){
+        validator: (val) {
           if (val.isEmpty) {
             return hintText + " kann nicht leer sein!";
           }

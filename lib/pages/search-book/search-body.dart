@@ -2,7 +2,6 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sba_web/models/buch-for-histories.dart';
 import 'package:sba_web/models/buch-items.dart';
 import 'package:sba_web/models/buch.dart';
 import 'package:sba_web/models/buecher_list.dart';
@@ -26,13 +25,9 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   final _formKey = GlobalKey<FormState>();
   final List<Buch> buchItems = buecher;
 
-  //QR CODE Camera implementation
-
-  ScanResult scanResult;
-
+  /// QR CODE Camera implementation
   static final _possibleFormats = BarcodeFormat.values.toList()
     ..removeWhere((e) => e == BarcodeFormat.unknown);
-
   List<BarcodeFormat> selectedFormats = [..._possibleFormats];
 
   @override
@@ -97,10 +92,10 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                   //modifier ici
                   elevation: 6.0,
                   onPressed: () {
-                    print('Title ' + booksDescription.title.toString());
-                    print('Author ' + booksDescription.author.toString());
-                    print('ISBN13 ' + booksDescription.isbn13.toString());
-                    print('ISBN10 ' + booksDescription.isbn10.toString());
+                    print('Title: ' + booksDescription.title.toString());
+                    print('Author: ' + booksDescription.author.toString());
+                    print('ISBN13: ' + booksDescription.isbn13.toString());
+                    print('ISBN10: ' + booksDescription.isbn10.toString());
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -169,36 +164,32 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   // Scan function for QR CODE Camera
   Future _scan() async {
     try {
-      var result = await BarcodeScanner.scan();
-      var barcodeResult;
+      var scanResult = await BarcodeScanner.scan();
+      var isbnNummer;
 
       setState(() {
-        scanResult = result;
-        barcodeResult = validateIsbn(scanResult.rawContent);
-        if (barcodeResult.length == 13) {
-          booksDescription.isbn13 = barcodeResult;
+        isbnNummer = validateIsbn(scanResult.rawContent);
+        if (isbnNummer.length == 13) {
+          booksDescription.isbn13 = isbnNummer;
         }
-        if (barcodeResult.length <= 10) {
-          booksDescription.isbn10 = barcodeResult;
+        if (isbnNummer.length <= 10) {
+          booksDescription.isbn10 = isbnNummer;
         }
-        textInputController.text = barcodeResult;
+        textInputController.text = isbnNummer;
       });
     } on PlatformException catch (e) {
-      var result = ScanResult(
+      var scanResult = ScanResult(
         type: ResultType.Error,
         format: BarcodeFormat.unknown,
       );
 
       if (e.code == BarcodeScanner.cameraAccessDenied) {
         setState(() {
-          result.rawContent = 'The user did not grant the camera permission!';
+          scanResult.rawContent = 'The user did not grant the camera permission!';
         });
       } else {
-        result.rawContent = 'Unknown error: $e';
+        scanResult.rawContent = 'Unknown error: $e';
       }
-      setState(() {
-        scanResult = result;
-      });
     }
   }
 
@@ -239,11 +230,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
 
   /// to be sure that the current ISBN is correct formatted:
   static String validateIsbn(String value) {
-    //Pattern pattern =
-    //   r'/((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])/';
-    //RegExp regex = new RegExp(pattern);
     if (!isISBN(value)) {
-      //if (!regex.hasMatch(value))
       return 'Bitte richtige ISBN / ISSN Nummer eingeben';
     } else {
       return value;
@@ -253,7 +240,6 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   Widget _buildAnimatedOpacity() {
     return Container(
         child: Visibility(
-      //child: Container(color: Colors.blue, width: 100, height: 100),
       visible: _visible,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
