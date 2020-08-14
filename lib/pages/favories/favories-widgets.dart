@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sba_web/models/buch-for-histories.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:sba_web/pages/search-book/Bookdetails/details-page.dart';
+import 'package:share/share.dart';
+
 
 // to build a item:
 Widget listFavoriesItem (BuildContext context, Buch item) {
@@ -28,9 +30,7 @@ Widget listFavoriesItem (BuildContext context, Buch item) {
                           IconButton(
                               tooltip: item.verfuegbarkeit,
                               icon: Icon(Icons.share), //mes icons
-                              onPressed: (){
-                                print("check_box Clicked");
-                              }
+                              onPressed: () => share(context, item),
                           ) ,
                           IconButton(
                               tooltip: item.verfuegbarkeit,
@@ -42,7 +42,7 @@ Widget listFavoriesItem (BuildContext context, Buch item) {
                           IconButton(
                               icon: Icon(Icons.arrow_forward_ios),
                               onPressed: (){
-                                print("forward Clicked");
+                                print("forward Clicked"); //ici
                               }) ,
                         ]
                     ),
@@ -66,6 +66,17 @@ Widget listFavoriesItem (BuildContext context, Buch item) {
       )
   );
 
+}
+
+void share(BuildContext context, Buch item) {
+  final RenderBox box = context.findRenderObject();
+  final String text = "${item.buchTitel} - ${item.buchAuthor}";
+
+  Share.share(
+      text,
+      subject: item.buchTitel,
+      sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size
+  );
 }
 
 

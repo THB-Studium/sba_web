@@ -21,25 +21,7 @@ class _FavoriesBodyState extends State<FavoriesBody> {
           itemCount: favoriesList.length,
         ) ,
       ),
-
-//      Container(
-//        child: FutureBuilder(
-//            //future: fetchItems(context),
-//            builder:(context, snapshot){
-//              if(!snapshot.hasData){
-//                return ListView.builder(
-//                  itemCount: favoriesList.length,
-//                  shrinkWrap: true,
-//                  itemBuilder: (BuildContext context, int index){
-//                    Buch item = favoriesList[index];
-//                    return Text(item.buchTitel);
-//                  },
-//                );
-//              }
-//              return Center(child: CircularProgressIndicator());
-//            }
-//        ),
-//      ),
     );
   }
 }
+
