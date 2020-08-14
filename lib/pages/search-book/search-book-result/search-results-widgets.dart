@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sba_web/models/buch-for-histories.dart';
+import 'package:sba_web/models/buch.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:sba_web/pages/search-book/Bookdetails/details-page.dart';
 

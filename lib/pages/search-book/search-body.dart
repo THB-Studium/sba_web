@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sba_web/models/buch-for-histories.dart';
+import 'package:sba_web/models/buch-items.dart';
+import 'package:sba_web/models/buch.dart';
 import 'package:sba_web/models/buecher_list.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
