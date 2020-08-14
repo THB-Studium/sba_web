@@ -2,8 +2,7 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sba_web/models/buch-items.dart';
-import 'package:sba_web/models/buch.dart';
+import 'package:sba_web/models/buch-for-histories.dart';
 import 'package:sba_web/models/buecher_list.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
@@ -177,11 +176,11 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
         if (barcodeResult.length == 13) {
           booksDescription.isbn13 = barcodeResult;
         }
-        if (barcodeResult.length == 10) {
 <<<<<<< HEAD
-        if (barcodeResult.length <= 10) {
+        if (barcodeResult.length == 10) {
 =======
->>>>>>> Future _scan() method doesn't work with widget muss find a solution
+        if (barcodeResult.length <= 10) {
+>>>>>>> barcode scan done !
           booksDescription.isbn10 = barcodeResult;
         }
         textInputController.text = barcodeResult;
@@ -242,16 +241,10 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
 
   /// to be sure that the current ISBN is correct formatted:
   String validateIsbn(String value) {
-<<<<<<< HEAD
     if (!isISBN(value)) {
       return 'Bitte richtige ISBN / ISSN Nummer eingeben';
-    } else {
-=======
-    if(isISBN(value)){
->>>>>>> Future _scan() method doesn't work with widget muss find a solution
-      return value;
     }else{
-      return 'Bitte richtige ISBN / ISSN Nummer eingeben';
+      return value;
     }
   }
 
