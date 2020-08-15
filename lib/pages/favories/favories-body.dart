@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sba_web/models/buch-for-histories.dart';
+import 'package:sba_web/models/buch-items.dart';
+import 'package:sba_web/models/buch.dart';
 
 import 'favories-widgets.dart';
 

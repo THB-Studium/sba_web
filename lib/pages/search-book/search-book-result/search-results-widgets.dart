@@ -64,8 +64,9 @@ import 'package:sba_web/pages/search-book/Bookdetails/details-page.dart';
   Icon setIcon (String status) {
     if (status == 'ausliehbar') {
       return Icon(Icons.check_circle_outline, color: Colors.green);
-    }
+    } else
     if (status == 'entliehen') {
       return Icon(Icons.do_not_disturb_alt, color: Colors.red);
     }
+    return null;
   }
