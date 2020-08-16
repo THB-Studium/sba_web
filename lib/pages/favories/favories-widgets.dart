@@ -5,6 +5,8 @@ import 'package:sba_web/pages/book-details/details-page.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:share/share.dart';
+import 'package:sba_web/pages/search-book/Bookdetails/details-page.dart';
+//import 'package:share/share.dart';
 
 
 // to build a item:
