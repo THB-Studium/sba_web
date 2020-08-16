@@ -8,6 +8,8 @@ import 'package:sba_web/pages/weiterleitung/weiterleitung-page.dart';
 
 import 'history-widgets.dart';
 
+import 'history-widgets.dart';
+
 
 class HistoryPage extends StatefulWidget {
   @override
@@ -25,6 +27,7 @@ class _HistoryPageState extends State<HistoryPage> {
           actionButton(AdvancedSearch(), Icons.search, context),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           newWeiterleitung(context)
 =======
           actionButton(scWeiterleitung(), Icons.scanner, context)
@@ -32,6 +35,9 @@ class _HistoryPageState extends State<HistoryPage> {
 =======
           newWeiterleitung(context)
 >>>>>>> implementation of the start a new forwarding
+=======
+          actionButton(scWeiterleitung(), Icons.scanner, context)
+>>>>>>> new folder weiterleitung-body.dart, weiterleitung-page.dart, weiterleitung-widgets.dart and wltBestaetigung.dart have been created to get pop-up warning and pop-up validation.
         ],
       ),
 
