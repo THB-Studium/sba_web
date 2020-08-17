@@ -22,7 +22,6 @@ Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
       SizedBox(height: 5),
       Container(
         decoration: BoxDecoration(
-<<<<<<< HEAD
           border: _borderItem(2, reservierung.bis, "Reservierung"),
           borderRadius: BorderRadius.circular(13.0),
           color: Colors.white24),
@@ -50,11 +49,9 @@ Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
                 Text(dateformat(reservierung.bis)), // icon-1
                 Icon(Icons.arrow_forward_ios), // icon-2
               ],
-=======
             border: _borderItem(2, reservierung.bis, "Reservierung"),
             borderRadius: BorderRadius.circular(13.0),
             color: Colors.white24),
->>>>>>> isbnValidator fixed! It should be working!
         child: ListTile(
           title: Text.rich(
             TextSpan(
@@ -78,7 +75,6 @@ Column buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
             border: _borderItem(2, ausleihe.bis, "Ausleihe"),
             borderRadius: BorderRadius.circular(13.0),
             color: Colors.white24),
-<<<<<<< HEAD
         child: GestureDetector(
           onTap: () {
             print('Ausleihe titel' + ausleihe.buch.titel);
@@ -103,8 +99,6 @@ Column buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
                 Text(dateformat(ausleihe.bis)), // icon-1
                 Icon(Icons.arrow_forward_ios), // icon-2
               ],
-=======
->>>>>>> isbnValidator fixed! It should be working!
         child: ListTile(
           title: Text.rich(
             TextSpan(
@@ -123,10 +117,7 @@ Border _borderItem(double width, DateTime date, String listClass) {
   if (listClass == "Reservierung") {
     return date.isBefore(new DateTime.now())
         ? borderColor(width, Colors.red)
-<<<<<<< HEAD
         : borderColor(width, Colors.orangeAccent);
-=======
->>>>>>> isbnValidator fixed! It should be working!
         : borderColor(width, Colors.amberAccent);
   }
   if (listClass == "Ausleihe") {
@@ -150,7 +141,6 @@ Padding newWeiterleitung(BuildContext context) {
         width: 30,
         color: standardColors_white,
       ),
-<<<<<<< HEAD
     ),
   );
 }
@@ -159,8 +149,6 @@ Padding newWeiterleitung(BuildContext context) {
     GestureDetector(
       onTap: () {_newWeiterleitung(context);},
       child: Image.asset('assets/icons/isbn.png', width: 30, color: standardColors_white,),
-=======
->>>>>>> isbnValidator fixed! It should be working!
     ),
   );
 }
@@ -179,14 +167,12 @@ Future _newWeiterleitung(BuildContext context) {
           actions: [_ablehen(context), _bestaetigen(context)],
         );
       });
-<<<<<<< HEAD
   return showDialog (
     context: context,
     builder: (context) {
       return AlertDialog(
         title: Text('New Weiterletung'),
         content: Container(
-            height: 90,
             child: Text('Sie sind dabei, eine neue Weiterleitung zu starten. Möchten Sie fortfahren?')),
         actions: [
             _ablehen(context),
@@ -195,12 +181,11 @@ Future _newWeiterleitung(BuildContext context) {
       );
     }
   );
-=======
->>>>>>> isbnValidator fixed! It should be working!
 }
 
 /// answer action buttons (ablehnen oder bestätigen):
 Widget _ablehen(BuildContext context) {
+<<<<<<< HEAD
   return RaisedButton(
       color: standardColors_blue,
       child: Text(
@@ -214,7 +199,6 @@ Widget _ablehen(BuildContext context) {
       onPressed: () {
         Navigator.of(context).pop();
       });
-<<<<<<< HEAD
 }
 
 Widget _bestaetigen(BuildContext context) {
@@ -297,8 +281,6 @@ Future errorDialog(BuildContext context) {
     child: new Text("Nein"),
     onPressed: () {Navigator.of(context).pop();},
   );
-=======
->>>>>>> isbnValidator fixed! It should be working!
 }
 
 Widget _bestaetigen(BuildContext context) {
@@ -306,6 +288,18 @@ Widget _bestaetigen(BuildContext context) {
     child: new Text("Ja"),
     onPressed: () {_scan();},
 
+=======
+  return FlatButton(
+    child: new Text("Nein"),
+    onPressed: () {Navigator.of(context).pop();},
+  );
+}
+
+Widget _bestaetigen(BuildContext context) {
+  return FlatButton(
+    child: new Text("Ja"),
+    onPressed: () {_scan();},
+>>>>>>> somme corrections
   );
 }
 
@@ -499,8 +493,10 @@ Future _scan() async {
     //BuildContext context;
 /// to be sure that the current ISBN is correct formatted:
 String validateIsbn(String value) {
-  Pattern pattern =
-     r'^(97(8|9))?\d{9}(\d|X)$';
+  Pattern pattern = r'^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|'
+      r'(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|'
+      r'(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?'
+      r'[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$';
   RegExp regex = new RegExp(pattern);
   if (!regex.hasMatch(value)) {
     return 'Bitte richtige ISBN / ISSN Nummer eingeben';
@@ -508,7 +504,6 @@ String validateIsbn(String value) {
     return value;
   }
 }
-<<<<<<< HEAD
 
 
     try {
@@ -617,5 +612,3 @@ String validateIsbn(String value) {
     return 'Bitte richtige ISBN / ISSN Nummer eingeben';
   }
 }
-=======
->>>>>>> isbnValidator fixed! It should be working!
