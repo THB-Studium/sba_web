@@ -1,0 +1,469 @@
+import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:sba_web/models/ausleihe.dart';
+import 'package:sba_web/models/reservierung.dart';
+import 'package:sba_web/pages/book-details/details-page.dart';
+import 'package:sba_web/pages/components/constants.dart';
+<<<<<<< HEAD
+import 'package:sba_web/pages/components/footer/navbar-footer.dart';
+=======
+>>>>>>> implementation of the start a new forwarding
+import 'package:validators/validators.dart';
+
+@override
+initState() {}
+<<<<<<< HEAD
+
+ScanResult scanResult;
+var isbnNummer;
+var result;
+String button = '';
+=======
+>>>>>>> implementation of the start a new forwarding
+
+/// to build a Reservierung view:
+Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
+  return Column(
+    children: <Widget>[
+      SizedBox(height: 5),
+      Container(
+        decoration: BoxDecoration(
+            border: _borderItem(2, reservierung.bis, "Reservierung"),
+            borderRadius: BorderRadius.circular(13.0),
+            color: Colors.white24),
+        child: GestureDetector(
+          onTap: () {
+            print('Reservierung titel' + reservierung.buch.titel);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => NavBarFooter(BuchDetailPage(
+                        book: reservierung.buch, parentView: histories))));
+          },
+          child: ListTile(
+            title: Text.rich(
+              TextSpan(
+                text: reservierung.buch.titel,
+                style:
+                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+              ),
+            ),
+            subtitle: Text(reservierung.buch.author),
+            trailing: Wrap(
+              spacing: 5, // space between two icons
+              children: <Widget>[
+                Text(dateformat(reservierung.bis)), // icon-1
+                Icon(Icons.arrow_forward_ios), // icon-2
+              ],
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+/// to build a ausleihe view:
+Column buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
+  return Column(
+    children: <Widget>[
+      SizedBox(height: 5),
+      Container(
+        decoration: BoxDecoration(
+            border: _borderItem(2, ausleihe.bis, "Ausleihe"),
+            borderRadius: BorderRadius.circular(13.0),
+            color: Colors.white24),
+        child: GestureDetector(
+          onTap: () {
+            print('Ausleihe titel' + ausleihe.buch.titel);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => NavBarFooter(BuchDetailPage(
+                        book: ausleihe.buch, parentView: histories))));
+          },
+          child: ListTile(
+            title: Text.rich(
+              TextSpan(
+                text: ausleihe.buch.titel,
+                style:
+                    TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+              ),
+            ),
+            subtitle: Text(ausleihe.buch.author),
+            trailing: Wrap(
+              spacing: 5, // space between two icons
+              children: <Widget>[
+                Text(dateformat(ausleihe.bis)), // icon-1
+                Icon(Icons.arrow_forward_ios), // icon-2
+              ],
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+}
+
+/// to set the border of each item:
+Border _borderItem(double width, DateTime date, String listClass) {
+  if (listClass == "Reservierung") {
+    return date.isBefore(new DateTime.now())
+        ? borderColor(width, Colors.red)
+        : borderColor(width, Colors.orangeAccent);
+  }
+  if (listClass == "Ausleihe") {
+    return date.isBefore(new DateTime.now())
+        ? borderColor(width, Colors.red)
+        : borderColor(width, Colors.green);
+  }
+  return null;
+}
+
+/// for the new forwarding buttons:
+Padding newWeiterleitung(BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.only(right: 10.0),
+<<<<<<< HEAD
+    child: GestureDetector(
+      onTap: () {
+        _newWeiterleitung(context);
+      },
+      child: Image.asset(
+        'assets/icons/isbn.png',
+        width: 30,
+        color: standardColors_white,
+      ),
+    ),
+  );
+}
+=======
+    child:
+    GestureDetector(
+      onTap: () {_newWeiterleitung(context);},
+      child: Image.asset('assets/icons/isbn.png', width: 30, color: standardColors_white,),
+    ),
+  );
+}
+
+/// to start a new forwarding:
+Future _newWeiterleitung(BuildContext context) {
+  return showDialog (
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('New Weiterletung'),
+        content: Container(
+            height: 90,
+            child: Text('Sie sind dabei, eine neue Weiterleitung zu starten. Möchten Sie fortfahren?')),
+        actions: [
+            _ablehen(context),
+            _bestaetigen(context)
+        ],
+      );
+    }
+  );
+}
+
+/// answer action buttons (ablehnen oder bestätigen):
+Widget _ablehen(BuildContext context) {
+  return RaisedButton(
+      color: standardColors_blue,
+      child: Text(
+        'Nein',
+        style: TextStyle(
+            color: standardColors_white,
+            fontSize: 16,
+            fontWeight: FontWeight.w700),
+      ),
+      elevation: 6.0,
+      onPressed: () {Navigator.of(context).pop();}
+  );
+}
+
+Widget _bestaetigen(BuildContext context) {
+  return RaisedButton(
+    color: standardColors_blue,
+    child: Text(
+      'Ja',
+      style: TextStyle(
+          color: standardColors_white,
+          fontSize: 16,
+          fontWeight: FontWeight.w700),
+    ),
+    elevation: 6.0,
+    onPressed: () {_scan();}
+  );
+}
+
+/// Scan function for QR CODE Camera
+Future _scan() async {
+  try {
+    var scanResult = await BarcodeScanner.scan();
+    var isbnNummer;
+
+      isbnNummer = validateIsbn(scanResult.rawContent);
+      if (scanResult.rawContent != null) {
+        // si c'est different de null tu aaffiche un AlertDialog avec le Weiterleitungbedigung
+      } else {
+        // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
+      }
+  } on PlatformException catch (e) {
+    var scanResult = ScanResult(
+      type: ResultType.Error,
+      format: BarcodeFormat.unknown,
+    );
+
+    if (e.code == BarcodeScanner.cameraAccessDenied) {
+      scanResult.rawContent = 'The user did not grant the camera permission!';
+    } else {
+      scanResult.rawContent = 'Unknown error: $e';
+    }
+  }
+}
+
+/// to be sure that the current ISBN is correct formatted:
+String validateIsbn(String value) {
+if (!isISBN(value)) {
+return 'Bitte richtige ISBN / ISSN Nummer eingeben';
+} else {
+return value;
+}
+}
+
+>>>>>>> implementation of the start a new forwarding
+
+/// to start a new forwarding:
+Future _newWeiterleitung(BuildContext context) {
+  bool manuallyClosed = false;
+  return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        // If the user spends time without clicking on one button the AlertDialog
+        // will disappear after 30 seconds.
+        Future.delayed(Duration(seconds: 30)).then((value) {
+          if (!manuallyClosed) {
+            Navigator.of(context).pop();
+          }
+        });
+        return AlertDialog(
+          title: Text('New Weiterletung'),
+          content: Container(
+              height: 90,
+              child: Text(
+                  'Sie sind dabei, eine neue Weiterleitung zu starten. Möchten Sie fortfahren?')),
+          actions: [_ablehen(context), _bestaetigen(context)],
+        );
+      });
+}
+
+/// answer action buttons (ablehnen oder bestätigen):
+Widget _ablehen(BuildContext context) {
+  return RaisedButton(
+      color: standardColors_blue,
+      child: Text(
+        'Nein',
+        style: TextStyle(
+            color: standardColors_white,
+            fontSize: 16,
+            fontWeight: FontWeight.w700),
+      ),
+      elevation: 6.0,
+      onPressed: () {
+        Navigator.of(context).pop();
+      });
+}
+
+Widget _bestaetigen(BuildContext context) {
+  return RaisedButton(
+      color: standardColors_blue,
+      child: Text(
+        'Ja',
+        style: TextStyle(
+            color: standardColors_white,
+            fontSize: 16,
+            fontWeight: FontWeight.w700),
+      ),
+      elevation: 6.0,
+      onPressed: () {
+        _scan(context);
+        Navigator.of(context).pop();
+      });
+}
+
+Future errorDialog(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('FEHLER'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('False ISBN'),
+              Text('Sure it is a good one?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Alles Klar'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future warteDialogBestaetigung(BuildContext context) {
+  return showDialog(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return StatefulBuilder(builder: (context, setState) {
+        return AlertDialog(
+          title: Text('Bestätigung Weiterleitung'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('ISBN gültig.'),
+                Text('Einen Augenblick bitte!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Okay'),
+              onPressed: () {
+                setState(() {
+                  print('**************TESTER****************');
+                  Navigator.of(context).pop();
+                  print(context);
+                });
+              },
+            ),
+          ],
+        );
+      });
+    },
+  );
+
+  /**showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context){
+      return Center(
+      child: SizedBox(
+      width: 40.0,
+      height: 40.0,
+      child: const CircularProgressIndicator(
+      value: null,
+      strokeWidth: 2.0,
+      ),
+      ),
+      );
+      }
+      );*/
+}
+
+/**Widget futureBuilder(BuildContext context){
+    _scan().then((scanResult){
+    Navigator.of(context).pop();
+    });
+
+    warteDialogBestaetigung(context);
+    }*/
+
+/// Scan function for QR CODE Camera
+///
+
+Future _scan(BuildContext context) async {
+  try {
+    //BuildContext context;
+
+    result = await BarcodeScanner.scan();
+    scanResult = result;
+    isbnNummer = validateIsbn(scanResult.rawContent);
+
+    print('1 Nein ' + validateIsbn('0672317249!?'));
+    print('2 Nein ' + validateIsbn('0-672-31724-9c'));
+    print('3 ja ' + validateIsbn('960 425 059 0'));
+    print('4 nein ' + validateIsbn('90-70002-34-x'));
+    print('5 ja ' + validateIsbn('90-700-02-34-5'));
+    print('6 Nein ' + validateIsbn('90-70002-34-x'));
+    print('7 ja ' + validateIsbn('978-3-642-11746-6 '));
+    print('8 ja ' + validateIsbn('3-642-11746-5'));
+
+    if (scanResult != null) {
+      if (scanResult.rawContent != null) {
+        // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung;
+        if (isbnNummer != null) {
+          print('***************************Test******************');
+          return warteDialogBestaetigung(context);
+        }
+      } else {
+        // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
+        return errorDialog(context);
+      }
+    }
+  } on PlatformException catch (e) {
+    var scanResult = ScanResult(
+      type: ResultType.Error,
+      format: BarcodeFormat.unknown,
+    );
+
+    if (e.code == BarcodeScanner.cameraAccessDenied) {
+      scanResult.rawContent = 'The user did not grant the camera permission!';
+    } else {
+      scanResult.rawContent = 'Unknown error: $e';
+    }
+  }
+}
+
+/**Future _scan() async {
+    try {
+    var scanResult = await BarcodeScanner.scan();
+    var isbnNummer;
+
+    isbnNummer = validateIsbn(scanResult.rawContent);
+    print('1 Nein ' + validateIsbn('0672317249!?'));
+    print('2 Nein ' + validateIsbn('0-672-31724-9c'));
+    print('3 ja ' + validateIsbn('960 425 059 0'));
+    print('4 nein ' + validateIsbn('90-70002-34-x'));
+    print('5 ja ' + validateIsbn('90-700-02-34-5'));
+    print('6 Nein ' + validateIsbn('90-70002-34-x'));
+    print('7 ja ' + validateIsbn('978-3-642-11746-6 '));
+    print('8 ja ' + validateIsbn('3-642-11746-5'));
+    if (scanResult.rawContent != null) {
+    // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung;
+    } else {
+    // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
+    }
+    } on PlatformException catch (e) {
+    var scanResult = ScanResult(
+    type: ResultType.Error,
+    format: BarcodeFormat.unknown,
+    );
+
+    if (e.code == BarcodeScanner.cameraAccessDenied) {
+    scanResult.rawContent = 'The user did not grant the camera permission!';
+    } else {
+    scanResult.rawContent = 'Unknown error: $e';
+    }
+    }
+    }*/
+
+/// to be sure that the current ISBN is correct formatted:
+String validateIsbn(String value) {
+  if (isISBN(value)) {
+    return value;
+  } else {
+    return 'Bitte richtige ISBN / ISSN Nummer eingeben';
+  }
+}
