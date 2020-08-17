@@ -5,15 +5,21 @@ import 'package:sba_web/models/ausleihe.dart';
 import 'package:sba_web/models/reservierung.dart';
 import 'package:sba_web/pages/book-details/details-page.dart';
 import 'package:sba_web/pages/components/constants.dart';
+<<<<<<< HEAD
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
+=======
+>>>>>>> implementation of the start a new forwarding
 import 'package:validators/validators.dart';
 
 @override
 initState() {}
+<<<<<<< HEAD
 
 ScanResult scanResult;
 var isbnNummer;
 var result;
+=======
+>>>>>>> implementation of the start a new forwarding
 
 /// to build a Reservierung view:
 Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
@@ -129,6 +135,7 @@ Border _borderItem(double width, DateTime date, String listClass) {
 Padding newWeiterleitung(BuildContext context) {
   return Padding(
     padding: EdgeInsets.only(right: 10.0),
+<<<<<<< HEAD
     child: GestureDetector(
       onTap: () {
         _newWeiterleitung(context);
@@ -141,6 +148,8 @@ Padding newWeiterleitung(BuildContext context) {
     ),
   );
 }
+=======
+>>>>>>> implementation of the start a new forwarding
     child:
     GestureDetector(
       onTap: () {_newWeiterleitung(context);},
@@ -151,6 +160,7 @@ Padding newWeiterleitung(BuildContext context) {
 
 /// to start a new forwarding:
 Future _newWeiterleitung(BuildContext context) {
+<<<<<<< HEAD
   return showDialog(
       context: context,
       builder: (context) {
@@ -163,12 +173,18 @@ Future _newWeiterleitung(BuildContext context) {
           actions: [_ablehen(context), _bestaetigen(context)],
         );
       });
+=======
+>>>>>>> implementation of the start a new forwarding
   return showDialog (
     context: context,
     builder: (context) {
       return AlertDialog(
         title: Text('New Weiterletung'),
         content: Container(
+<<<<<<< HEAD
+=======
+            height: 90,
+>>>>>>> implementation of the start a new forwarding
             child: Text('Sie sind dabei, eine neue Weiterleitung zu starten. Möchten Sie fortfahren?')),
         actions: [
             _ablehen(context),
@@ -191,6 +207,7 @@ Widget _ablehen(BuildContext context) {
             fontWeight: FontWeight.w700),
       ),
       elevation: 6.0,
+<<<<<<< HEAD
       onPressed: () {
         Navigator.of(context).pop();
       });
@@ -213,7 +230,6 @@ Widget _bestaetigen(BuildContext context) {
       });
 }
 
-<<<<<<< HEAD
 /// to be sure that the current ISBN is correct formatted:
 String validateIsbn(String value) {
   if (!iISBN(value)) {
@@ -247,40 +263,6 @@ Future _newWeiterleitung(BuildContext context) {
       });
 }
 
-/// answer action buttons (ablehnen oder bestätigen):
-Widget _ablehen(BuildContext context) {
-  return RaisedButton(
-      color: standardColors_blue,
-      child: Text(
-        'Nein',
-        style: TextStyle(
-            color: standardColors_white,
-            fontSize: 16,
-            fontWeight: FontWeight.w700),
-      ),
-      elevation: 6.0,
-      onPressed: () {
-        Navigator.of(context).pop();
-      });
-}
-
-Widget _bestaetigen(BuildContext context) {
-  return RaisedButton(
-      color: standardColors_blue,
-      child: Text(
-        'Ja',
-        style: TextStyle(
-            color: standardColors_white,
-            fontSize: 16,
-            fontWeight: FontWeight.w700),
-      ),
-      elevation: 6.0,
-      onPressed: () {
-        _scan(context);
-        Navigator.of(context).pop();
-      });
-}
-
 Future errorDialog(BuildContext context) {
   return showDialog<void>(
     context: context,
@@ -310,10 +292,14 @@ Future errorDialog(BuildContext context) {
   return FlatButton(
     child: new Text("Nein"),
     onPressed: () {Navigator.of(context).pop();},
+=======
+      onPressed: () {Navigator.of(context).pop();}
+>>>>>>> implementation of the start a new forwarding
   );
 }
 
 Widget _bestaetigen(BuildContext context) {
+<<<<<<< HEAD
   return FlatButton(
     child: new Text("Ja"),
     onPressed: () {_scan();},
@@ -380,14 +366,9 @@ Future warteDialogBestaetigung(BuildContext context) {
     warteDialogBestaetigung(context);
     }*/
 
-/// Scan function for QR CODE Camera
-Future _scan(BuildContext context) async {
-warteDialogBestaetigung(BuildContext context){
-  return showDialog(
-=======
+
 Future errorDialog(BuildContext context) {
   showDialog<void>(
->>>>>>> Weiterleitung Message almost done! muss finish it
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
@@ -498,6 +479,34 @@ Future _scan(BuildContext context, var result) async {
       // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
       return errorDialog(context);
     }
+=======
+  return RaisedButton(
+    color: standardColors_blue,
+    child: Text(
+      'Ja',
+      style: TextStyle(
+          color: standardColors_white,
+          fontSize: 16,
+          fontWeight: FontWeight.w700),
+    ),
+    elevation: 6.0,
+    onPressed: () {_scan();}
+  );
+}
+
+/// Scan function for QR CODE Camera
+Future _scan() async {
+  try {
+    var scanResult = await BarcodeScanner.scan();
+    var isbnNummer;
+
+      isbnNummer = validateIsbn(scanResult.rawContent);
+      if (scanResult.rawContent != null) {
+        // si c'est different de null tu aaffiche un AlertDialog avec le Weiterleitungbedigung
+      } else {
+        // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
+      }
+>>>>>>> implementation of the start a new forwarding
   } on PlatformException catch (e) {
     var scanResult = ScanResult(
       type: ResultType.Error,
@@ -512,15 +521,25 @@ Future _scan(BuildContext context, var result) async {
   }
 }
 
-/**Future _scan() async {
 <<<<<<< HEAD
+/**Future _scan() async {
   try {
     //BuildContext context;
 =======
+/// to be sure that the current ISBN is correct formatted:
+String validateIsbn(String value) {
+if (!isISBN(value)) {
+return 'Bitte richtige ISBN / ISSN Nummer eingeben';
+} else {
+return value;
+}
+}
+
+>>>>>>> implementation of the start a new forwarding
+
     try {
     var scanResult = await BarcodeScanner.scan();
     var isbnNummer;
->>>>>>> Weiterleitung Message almost done! muss finish it
 
     result = await BarcodeScanner.scan();
     scanResult = result;
@@ -534,7 +553,6 @@ Future _scan(BuildContext context, var result) async {
     print('6 Nein ' + validateIsbn('90-70002-34-x'));
     print('7 ja ' + validateIsbn('978-3-642-11746-6 '));
     print('8 ja ' + validateIsbn('3-642-11746-5'));
-<<<<<<< HEAD
 
     if (scanResult != null) {
       if (scanResult.rawContent != null) {
@@ -552,13 +570,11 @@ Future _scan(BuildContext context, var result) async {
       // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung;
     } else {
       // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
->>>>>>> Future _scan() method doesn't work with widget muss find a solution
-=======
+
     if (scanResult.rawContent != null) {
     // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung;
     } else {
     // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
->>>>>>> Weiterleitung Message almost done! muss finish it
     }
     } on PlatformException catch (e) {
     var scanResult = ScanResult(
