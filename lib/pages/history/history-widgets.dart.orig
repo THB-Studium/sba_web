@@ -5,21 +5,15 @@ import 'package:sba_web/models/ausleihe.dart';
 import 'package:sba_web/models/reservierung.dart';
 import 'package:sba_web/pages/book-details/details-page.dart';
 import 'package:sba_web/pages/components/constants.dart';
-<<<<<<< HEAD
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
-=======
->>>>>>> implementation of the start a new forwarding
 import 'package:validators/validators.dart';
 
 @override
 initState() {}
-<<<<<<< HEAD
 
 ScanResult scanResult;
 var isbnNummer;
 var result;
-=======
->>>>>>> implementation of the start a new forwarding
 
 /// to build a Reservierung view:
 Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
@@ -28,6 +22,7 @@ Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
       SizedBox(height: 5),
       Container(
         decoration: BoxDecoration(
+<<<<<<< HEAD
           border: _borderItem(2, reservierung.bis, "Reservierung"),
           borderRadius: BorderRadius.circular(13.0),
           color: Colors.white24),
@@ -55,6 +50,11 @@ Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
                 Text(dateformat(reservierung.bis)), // icon-1
                 Icon(Icons.arrow_forward_ios), // icon-2
               ],
+=======
+            border: _borderItem(2, reservierung.bis, "Reservierung"),
+            borderRadius: BorderRadius.circular(13.0),
+            color: Colors.white24),
+>>>>>>> isbnValidator fixed! It should be working!
         child: ListTile(
           title: Text.rich(
             TextSpan(
@@ -78,6 +78,7 @@ Column buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
             border: _borderItem(2, ausleihe.bis, "Ausleihe"),
             borderRadius: BorderRadius.circular(13.0),
             color: Colors.white24),
+<<<<<<< HEAD
         child: GestureDetector(
           onTap: () {
             print('Ausleihe titel' + ausleihe.buch.titel);
@@ -102,6 +103,8 @@ Column buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
                 Text(dateformat(ausleihe.bis)), // icon-1
                 Icon(Icons.arrow_forward_ios), // icon-2
               ],
+=======
+>>>>>>> isbnValidator fixed! It should be working!
         child: ListTile(
           title: Text.rich(
             TextSpan(
@@ -120,7 +123,10 @@ Border _borderItem(double width, DateTime date, String listClass) {
   if (listClass == "Reservierung") {
     return date.isBefore(new DateTime.now())
         ? borderColor(width, Colors.red)
+<<<<<<< HEAD
         : borderColor(width, Colors.orangeAccent);
+=======
+>>>>>>> isbnValidator fixed! It should be working!
         : borderColor(width, Colors.amberAccent);
   }
   if (listClass == "Ausleihe") {
@@ -135,7 +141,6 @@ Border _borderItem(double width, DateTime date, String listClass) {
 Padding newWeiterleitung(BuildContext context) {
   return Padding(
     padding: EdgeInsets.only(right: 10.0),
-<<<<<<< HEAD
     child: GestureDetector(
       onTap: () {
         _newWeiterleitung(context);
@@ -145,22 +150,23 @@ Padding newWeiterleitung(BuildContext context) {
         width: 30,
         color: standardColors_white,
       ),
+<<<<<<< HEAD
     ),
   );
 }
-=======
->>>>>>> implementation of the start a new forwarding
+
     child:
     GestureDetector(
       onTap: () {_newWeiterleitung(context);},
       child: Image.asset('assets/icons/isbn.png', width: 30, color: standardColors_white,),
+=======
+>>>>>>> isbnValidator fixed! It should be working!
     ),
   );
 }
 
 /// to start a new forwarding:
 Future _newWeiterleitung(BuildContext context) {
-<<<<<<< HEAD
   return showDialog(
       context: context,
       builder: (context) {
@@ -173,18 +179,14 @@ Future _newWeiterleitung(BuildContext context) {
           actions: [_ablehen(context), _bestaetigen(context)],
         );
       });
-=======
->>>>>>> implementation of the start a new forwarding
+<<<<<<< HEAD
   return showDialog (
     context: context,
     builder: (context) {
       return AlertDialog(
         title: Text('New Weiterletung'),
         content: Container(
-<<<<<<< HEAD
-=======
             height: 90,
->>>>>>> implementation of the start a new forwarding
             child: Text('Sie sind dabei, eine neue Weiterleitung zu starten. Möchten Sie fortfahren?')),
         actions: [
             _ablehen(context),
@@ -193,6 +195,8 @@ Future _newWeiterleitung(BuildContext context) {
       );
     }
   );
+=======
+>>>>>>> isbnValidator fixed! It should be working!
 }
 
 /// answer action buttons (ablehnen oder bestätigen):
@@ -207,10 +211,10 @@ Widget _ablehen(BuildContext context) {
             fontWeight: FontWeight.w700),
       ),
       elevation: 6.0,
-<<<<<<< HEAD
       onPressed: () {
         Navigator.of(context).pop();
       });
+<<<<<<< HEAD
 }
 
 Widget _bestaetigen(BuildContext context) {
@@ -292,14 +296,12 @@ Future errorDialog(BuildContext context) {
   return FlatButton(
     child: new Text("Nein"),
     onPressed: () {Navigator.of(context).pop();},
-=======
-      onPressed: () {Navigator.of(context).pop();}
->>>>>>> implementation of the start a new forwarding
   );
+=======
+>>>>>>> isbnValidator fixed! It should be working!
 }
 
 Widget _bestaetigen(BuildContext context) {
-<<<<<<< HEAD
   return FlatButton(
     child: new Text("Ja"),
     onPressed: () {_scan();},
@@ -366,34 +368,6 @@ Future warteDialogBestaetigung(BuildContext context) {
     warteDialogBestaetigung(context);
     }*/
 
-
-Future errorDialog(BuildContext context) {
-  showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('AlertDialog ERREUR'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text('False ISBN'),
-              Text('Sure it is a good one?'),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Alles Klar'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
 
 Future warteDialogBestaetigung(BuildContext context) {
   return showDialog(
@@ -479,19 +453,19 @@ Future _scan(BuildContext context, var result) async {
       // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
       return errorDialog(context);
     }
-=======
   return RaisedButton(
-    color: standardColors_blue,
-    child: Text(
-      'Ja',
-      style: TextStyle(
-          color: standardColors_white,
-          fontSize: 16,
-          fontWeight: FontWeight.w700),
-    ),
-    elevation: 6.0,
-    onPressed: () {_scan();}
-  );
+      color: standardColors_blue,
+      child: Text(
+        'Ja',
+        style: TextStyle(
+            color: standardColors_white,
+            fontSize: 16,
+            fontWeight: FontWeight.w700),
+      ),
+      elevation: 6.0,
+      onPressed: () {
+        _scan();
+      });
 }
 
 /// Scan function for QR CODE Camera
@@ -500,13 +474,12 @@ Future _scan() async {
     var scanResult = await BarcodeScanner.scan();
     var isbnNummer;
 
-      isbnNummer = validateIsbn(scanResult.rawContent);
-      if (scanResult.rawContent != null) {
-        // si c'est different de null tu aaffiche un AlertDialog avec le Weiterleitungbedigung
-      } else {
-        // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
-      }
->>>>>>> implementation of the start a new forwarding
+    isbnNummer = validateIsbn(scanResult.rawContent);
+    if (scanResult.rawContent != null) {
+      // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung
+    } else {
+      // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
+    }
   } on PlatformException catch (e) {
     var scanResult = ScanResult(
       type: ResultType.Error,
@@ -521,21 +494,22 @@ Future _scan() async {
   }
 }
 
-<<<<<<< HEAD
 /**Future _scan() async {
   try {
     //BuildContext context;
-=======
 /// to be sure that the current ISBN is correct formatted:
 String validateIsbn(String value) {
-if (!isISBN(value)) {
-return 'Bitte richtige ISBN / ISSN Nummer eingeben';
-} else {
-return value;
+  Pattern pattern =
+     r'^(97(8|9))?\d{9}(\d|X)$';
+  RegExp regex = new RegExp(pattern);
+  if (!regex.hasMatch(value)) {
+    return 'Bitte richtige ISBN / ISSN Nummer eingeben';
+  } else {
+    return value;
+  }
 }
-}
+<<<<<<< HEAD
 
->>>>>>> implementation of the start a new forwarding
 
     try {
     var scanResult = await BarcodeScanner.scan();
@@ -625,9 +599,6 @@ return value;
 
 /// to be sure that the current ISBN is correct formatted:
 String validateIsbn(String value) {
-  if (isISBN(value)) {
-    return value;
-  } else {
   /**Pattern pattern = r'^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|'
       r'(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|'
       r'(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?'
@@ -646,3 +617,5 @@ String validateIsbn(String value) {
     return 'Bitte richtige ISBN / ISSN Nummer eingeben';
   }
 }
+=======
+>>>>>>> isbnValidator fixed! It should be working!

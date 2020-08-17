@@ -2,7 +2,8 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sba_web/models/buch-for-histories.dart';
+import 'package:sba_web/models/buch-items.dart';
+import 'package:sba_web/models/buch.dart';
 import 'package:sba_web/models/buecher_list.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
@@ -176,11 +177,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
         if (barcodeResult.length == 13) {
           booksDescription.isbn13 = barcodeResult;
         }
-<<<<<<< HEAD
-        if (barcodeResult.length == 10) {
-=======
         if (barcodeResult.length <= 10) {
->>>>>>> barcode scan done !
           booksDescription.isbn10 = barcodeResult;
         }
         textInputController.text = barcodeResult;
@@ -241,16 +238,28 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
 
   /// to be sure that the current ISBN is correct formatted:
   String validateIsbn(String value) {
+<<<<<<< HEAD
     if (!isISBN(value)) {
       return 'Bitte richtige ISBN / ISSN Nummer eingeben';
     }else{
+=======
+    Pattern pattern =
+        r'^(97(8|9))?\d{9}(\d|X)$';
+    RegExp regex = new RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Bitte richtige ISBN / ISSN Nummer eingeben';
+    } else {
+>>>>>>> isbnValidator fixed! It should be working!
       return value;
     }
   }
 
 
   /**static String validateIsbn(String value) {
+<<<<<<< HEAD
   static String validateIsbn(String value) {
+=======
+>>>>>>> isbnValidator fixed! It should be working!
     //Pattern pattern =
     //   r'/((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])/';
     //RegExp regex = new RegExp(pattern);
