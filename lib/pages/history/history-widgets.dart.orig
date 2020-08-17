@@ -151,6 +151,7 @@ Padding newWeiterleitung(BuildContext context) {
 
 /// to start a new forwarding:
 Future _newWeiterleitung(BuildContext context) {
+<<<<<<< HEAD
   return showDialog(
       context: context,
       builder: (context) {
@@ -163,10 +164,27 @@ Future _newWeiterleitung(BuildContext context) {
           actions: [_ablehen(context), _bestaetigen(context)],
         );
       });
+=======
+  return showDialog (
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('New Weiterletung'),
+        content: Container(
+            child: Text('Sie sind dabei, eine neue Weiterleitung zu starten. Möchten Sie fortfahren?')),
+        actions: [
+            _ablehen(context),
+            _bestaetigen(context)
+        ],
+      );
+    }
+  );
+>>>>>>> somme corrections
 }
 
 /// answer action buttons (ablehnen oder bestätigen):
 Widget _ablehen(BuildContext context) {
+<<<<<<< HEAD
   return RaisedButton(
       color: standardColors_blue,
       child: Text(
@@ -290,6 +308,18 @@ Future errorDialog(BuildContext context) {
         ],
       );
     },
+=======
+  return FlatButton(
+    child: new Text("Nein"),
+    onPressed: () {Navigator.of(context).pop();},
+  );
+}
+
+Widget _bestaetigen(BuildContext context) {
+  return FlatButton(
+    child: new Text("Ja"),
+    onPressed: () {_scan();},
+>>>>>>> somme corrections
   );
 }
 
@@ -353,8 +383,6 @@ Future warteDialogBestaetigung(BuildContext context) {
     }*/
 
 /// Scan function for QR CODE Camera
-///
-
 Future _scan(BuildContext context) async {
   try {
     //BuildContext context;
@@ -433,18 +461,7 @@ Future _scan(BuildContext context) async {
 
 /// to be sure that the current ISBN is correct formatted:
 String validateIsbn(String value) {
-<<<<<<< HEAD
   if (isISBN(value)) {
-=======
-  Pattern pattern = r'^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|'
-      r'(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|'
-      r'(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?'
-      r'[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$';
-  RegExp regex = new RegExp(pattern);
-  if (!regex.hasMatch(value)) {
-    return 'Bitte richtige ISBN / ISSN Nummer eingeben';
-  } else {
->>>>>>> isbnValidator fixed! It should be working!!
     return value;
   } else {
     return 'Bitte richtige ISBN / ISSN Nummer eingeben';
