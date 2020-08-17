@@ -32,6 +32,7 @@ Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
             border: _borderItem(2, reservierung.bis, "Reservierung"),
             borderRadius: BorderRadius.circular(13.0),
             color: Colors.white24),
+<<<<<<< HEAD
         child: GestureDetector(
           onTap: () {
             print('Reservierung titel' + reservierung.buch.titel);
@@ -56,6 +57,13 @@ Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
                 Text(dateformat(reservierung.bis)), // icon-1
                 Icon(Icons.arrow_forward_ios), // icon-2
               ],
+=======
+        child: ListTile(
+          title: Text.rich(
+            TextSpan(
+              text: reservierung.buch.buchTitel,
+              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+>>>>>>> isbnValidator fixed! It should be working!
             ),
           ),
         ),
@@ -74,6 +82,7 @@ Column buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
             border: _borderItem(2, ausleihe.bis, "Ausleihe"),
             borderRadius: BorderRadius.circular(13.0),
             color: Colors.white24),
+<<<<<<< HEAD
         child: GestureDetector(
           onTap: () {
             print('Ausleihe titel' + ausleihe.buch.titel);
@@ -98,6 +107,13 @@ Column buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
                 Text(dateformat(ausleihe.bis)), // icon-1
                 Icon(Icons.arrow_forward_ios), // icon-2
               ],
+=======
+        child: ListTile(
+          title: Text.rich(
+            TextSpan(
+              text: ausleihe.buch.buchTitel,
+              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+>>>>>>> isbnValidator fixed! It should be working!
             ),
           ),
         ),
@@ -111,7 +127,11 @@ Border _borderItem(double width, DateTime date, String listClass) {
   if (listClass == "Reservierung") {
     return date.isBefore(new DateTime.now())
         ? borderColor(width, Colors.red)
+<<<<<<< HEAD
         : borderColor(width, Colors.orangeAccent);
+=======
+        : borderColor(width, Colors.amberAccent);
+>>>>>>> isbnValidator fixed! It should be working!
   }
   if (listClass == "Ausleihe") {
     return date.isBefore(new DateTime.now())
@@ -126,6 +146,9 @@ Padding newWeiterleitung(BuildContext context) {
   return Padding(
     padding: EdgeInsets.only(right: 10.0),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> isbnValidator fixed! It should be working!
     child: GestureDetector(
       onTap: () {
         _newWeiterleitung(context);
@@ -135,6 +158,7 @@ Padding newWeiterleitung(BuildContext context) {
         width: 30,
         color: standardColors_white,
       ),
+<<<<<<< HEAD
     ),
   );
 }
@@ -143,27 +167,26 @@ Padding newWeiterleitung(BuildContext context) {
     GestureDetector(
       onTap: () {_newWeiterleitung(context);},
       child: Image.asset('assets/icons/isbn.png', width: 30, color: standardColors_white,),
+=======
+>>>>>>> isbnValidator fixed! It should be working!
     ),
   );
 }
 
 /// to start a new forwarding:
 Future _newWeiterleitung(BuildContext context) {
-  return showDialog (
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text('New Weiterletung'),
-        content: Container(
-            height: 90,
-            child: Text('Sie sind dabei, eine neue Weiterleitung zu starten. Möchten Sie fortfahren?')),
-        actions: [
-            _ablehen(context),
-            _bestaetigen(context)
-        ],
-      );
-    }
-  );
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('New Weiterletung'),
+          content: Container(
+              height: 90,
+              child: Text(
+                  'Sie sind dabei, eine neue Weiterleitung zu starten. Möchten Sie fortfahren?')),
+          actions: [_ablehen(context), _bestaetigen(context)],
+        );
+      });
 }
 
 /// answer action buttons (ablehnen oder bestätigen):
@@ -178,23 +201,25 @@ Widget _ablehen(BuildContext context) {
             fontWeight: FontWeight.w700),
       ),
       elevation: 6.0,
-      onPressed: () {Navigator.of(context).pop();}
-  );
+      onPressed: () {
+        Navigator.of(context).pop();
+      });
 }
 
 Widget _bestaetigen(BuildContext context) {
   return RaisedButton(
-    color: standardColors_blue,
-    child: Text(
-      'Ja',
-      style: TextStyle(
-          color: standardColors_white,
-          fontSize: 16,
-          fontWeight: FontWeight.w700),
-    ),
-    elevation: 6.0,
-    onPressed: () {_scan();}
-  );
+      color: standardColors_blue,
+      child: Text(
+        'Ja',
+        style: TextStyle(
+            color: standardColors_white,
+            fontSize: 16,
+            fontWeight: FontWeight.w700),
+      ),
+      elevation: 6.0,
+      onPressed: () {
+        _scan();
+      });
 }
 
 /// Scan function for QR CODE Camera
@@ -203,12 +228,12 @@ Future _scan() async {
     var scanResult = await BarcodeScanner.scan();
     var isbnNummer;
 
-      isbnNummer = validateIsbn(scanResult.rawContent);
-      if (scanResult.rawContent != null) {
-        // si c'est different de null tu aaffiche un AlertDialog avec le Weiterleitungbedigung
-      } else {
-        // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
-      }
+    isbnNummer = validateIsbn(scanResult.rawContent);
+    if (scanResult.rawContent != null) {
+      // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung
+    } else {
+      // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
+    }
   } on PlatformException catch (e) {
     var scanResult = ScanResult(
       type: ResultType.Error,
@@ -225,12 +250,16 @@ Future _scan() async {
 
 /// to be sure that the current ISBN is correct formatted:
 String validateIsbn(String value) {
-if (!isISBN(value)) {
-return 'Bitte richtige ISBN / ISSN Nummer eingeben';
-} else {
-return value;
+  Pattern pattern =
+     r'^(97(8|9))?\d{9}(\d|X)$';
+  RegExp regex = new RegExp(pattern);
+  if (!regex.hasMatch(value)) {
+    return 'Bitte richtige ISBN / ISSN Nummer eingeben';
+  } else {
+    return value;
+  }
 }
-}
+<<<<<<< HEAD
 
 >>>>>>> implementation of the start a new forwarding
 
@@ -467,3 +496,5 @@ String validateIsbn(String value) {
     return 'Bitte richtige ISBN / ISSN Nummer eingeben';
   }
 }
+=======
+>>>>>>> isbnValidator fixed! It should be working!
