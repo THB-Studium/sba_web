@@ -5,22 +5,15 @@ import 'package:sba_web/models/ausleihe.dart';
 import 'package:sba_web/models/reservierung.dart';
 import 'package:sba_web/pages/book-details/details-page.dart';
 import 'package:sba_web/pages/components/constants.dart';
-<<<<<<< HEAD
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
-=======
->>>>>>> implementation of the start a new forwarding
 import 'package:validators/validators.dart';
 
 @override
 initState() {}
-<<<<<<< HEAD
 
 ScanResult scanResult;
 var isbnNummer;
 var result;
-String button = '';
-=======
->>>>>>> implementation of the start a new forwarding
 
 /// to build a Reservierung view:
 Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
@@ -29,10 +22,9 @@ Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
       SizedBox(height: 5),
       Container(
         decoration: BoxDecoration(
-            border: _borderItem(2, reservierung.bis, "Reservierung"),
-            borderRadius: BorderRadius.circular(13.0),
-            color: Colors.white24),
-<<<<<<< HEAD
+          border: _borderItem(2, reservierung.bis, "Reservierung"),
+          borderRadius: BorderRadius.circular(13.0),
+          color: Colors.white24),
         child: GestureDetector(
           onTap: () {
             print('Reservierung titel' + reservierung.buch.titel);
@@ -57,13 +49,11 @@ Column buildOneReservierung(BuildContext context, Reservierung reservierung) {
                 Text(dateformat(reservierung.bis)), // icon-1
                 Icon(Icons.arrow_forward_ios), // icon-2
               ],
-=======
         child: ListTile(
           title: Text.rich(
             TextSpan(
               text: reservierung.buch.buchTitel,
               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
->>>>>>> isbnValidator fixed! It should be working!
             ),
           ),
         ),
@@ -82,7 +72,6 @@ Column buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
             border: _borderItem(2, ausleihe.bis, "Ausleihe"),
             borderRadius: BorderRadius.circular(13.0),
             color: Colors.white24),
-<<<<<<< HEAD
         child: GestureDetector(
           onTap: () {
             print('Ausleihe titel' + ausleihe.buch.titel);
@@ -107,13 +96,11 @@ Column buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
                 Text(dateformat(ausleihe.bis)), // icon-1
                 Icon(Icons.arrow_forward_ios), // icon-2
               ],
-=======
         child: ListTile(
           title: Text.rich(
             TextSpan(
               text: ausleihe.buch.buchTitel,
               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
->>>>>>> isbnValidator fixed! It should be working!
             ),
           ),
         ),
@@ -127,11 +114,8 @@ Border _borderItem(double width, DateTime date, String listClass) {
   if (listClass == "Reservierung") {
     return date.isBefore(new DateTime.now())
         ? borderColor(width, Colors.red)
-<<<<<<< HEAD
         : borderColor(width, Colors.orangeAccent);
-=======
         : borderColor(width, Colors.amberAccent);
->>>>>>> isbnValidator fixed! It should be working!
   }
   if (listClass == "Ausleihe") {
     return date.isBefore(new DateTime.now())
@@ -145,10 +129,6 @@ Border _borderItem(double width, DateTime date, String listClass) {
 Padding newWeiterleitung(BuildContext context) {
   return Padding(
     padding: EdgeInsets.only(right: 10.0),
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> isbnValidator fixed! It should be working!
     child: GestureDetector(
       onTap: () {
         _newWeiterleitung(context);
@@ -158,17 +138,13 @@ Padding newWeiterleitung(BuildContext context) {
         width: 30,
         color: standardColors_white,
       ),
-<<<<<<< HEAD
     ),
   );
 }
-=======
     child:
     GestureDetector(
       onTap: () {_newWeiterleitung(context);},
       child: Image.asset('assets/icons/isbn.png', width: 30, color: standardColors_white,),
-=======
->>>>>>> isbnValidator fixed! It should be working!
     ),
   );
 }
@@ -222,48 +198,15 @@ Widget _bestaetigen(BuildContext context) {
       });
 }
 
-/// Scan function for QR CODE Camera
-Future _scan() async {
-  try {
-    var scanResult = await BarcodeScanner.scan();
-    var isbnNummer;
-
-    isbnNummer = validateIsbn(scanResult.rawContent);
-    if (scanResult.rawContent != null) {
-      // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung
-    } else {
-      // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
-    }
-  } on PlatformException catch (e) {
-    var scanResult = ScanResult(
-      type: ResultType.Error,
-      format: BarcodeFormat.unknown,
-    );
-
-    if (e.code == BarcodeScanner.cameraAccessDenied) {
-      scanResult.rawContent = 'The user did not grant the camera permission!';
-    } else {
-      scanResult.rawContent = 'Unknown error: $e';
-    }
-  }
-}
-
 /// to be sure that the current ISBN is correct formatted:
 String validateIsbn(String value) {
-  Pattern pattern =
-     r'^(97(8|9))?\d{9}(\d|X)$';
-  RegExp regex = new RegExp(pattern);
-  if (!regex.hasMatch(value)) {
+  if (!iISBN(value)) {
     return 'Bitte richtige ISBN / ISSN Nummer eingeben';
   } else {
     return value;
   }
 }
-<<<<<<< HEAD
 
->>>>>>> implementation of the start a new forwarding
-
-/// to start a new forwarding:
 Future _newWeiterleitung(BuildContext context) {
   bool manuallyClosed = false;
   return showDialog(
@@ -490,11 +433,20 @@ Future _scan(BuildContext context) async {
 
 /// to be sure that the current ISBN is correct formatted:
 String validateIsbn(String value) {
+<<<<<<< HEAD
   if (isISBN(value)) {
+=======
+  Pattern pattern = r'^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|'
+      r'(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|'
+      r'(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?'
+      r'[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$';
+  RegExp regex = new RegExp(pattern);
+  if (!regex.hasMatch(value)) {
+    return 'Bitte richtige ISBN / ISSN Nummer eingeben';
+  } else {
+>>>>>>> isbnValidator fixed! It should be working!!
     return value;
   } else {
     return 'Bitte richtige ISBN / ISSN Nummer eingeben';
   }
 }
-=======
->>>>>>> isbnValidator fixed! It should be working!
