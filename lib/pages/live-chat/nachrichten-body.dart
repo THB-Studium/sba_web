@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'file:///G:/Mes%20Cours/TH%20Brandenburg/Workspace/master/mux/sba_web/lib/pages/components/constants.dart';
+import 'package:sba_web/pages/components/constants.dart';
+//import 'file:///G:/Mes%20Cours/TH%20Brandenburg/Workspace/master/mux/sba_web/lib/pages/components/constants.dart';
 import 'package:sba_web/pages/components/menu/drawer_menu.dart';
 
 class NachrichtenBody extends StatefulWidget {
