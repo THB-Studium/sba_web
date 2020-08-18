@@ -240,26 +240,23 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   String validateIsbn(String value) {
 <<<<<<< HEAD
     if (!isISBN(value)) {
-      return 'Bitte richtige ISBN / ISSN Nummer eingeben';
-    }else{
 =======
-    Pattern pattern =
-        r'^(97(8|9))?\d{9}(\d|X)$';
+    Pattern pattern = r'^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|'
+        r'(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|'
+        r'(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?'
+        r'[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$';
     RegExp regex = new RegExp(pattern);
     if (!regex.hasMatch(value)) {
+>>>>>>> isbnValidator fixed! It should be working!!
       return 'Bitte richtige ISBN / ISSN Nummer eingeben';
     } else {
->>>>>>> isbnValidator fixed! It should be working!
       return value;
     }
   }
 
 
   /**static String validateIsbn(String value) {
-<<<<<<< HEAD
   static String validateIsbn(String value) {
-=======
->>>>>>> isbnValidator fixed! It should be working!
     //Pattern pattern =
     //   r'/((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])/';
     //RegExp regex = new RegExp(pattern);
