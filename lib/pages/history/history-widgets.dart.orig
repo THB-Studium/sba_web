@@ -1,3 +1,5 @@
+//import 'dart:js';
+
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -185,7 +187,6 @@ Future _newWeiterleitung(BuildContext context) {
 
 /// answer action buttons (ablehnen oder bestätigen):
 Widget _ablehen(BuildContext context) {
-<<<<<<< HEAD
   return RaisedButton(
       color: standardColors_blue,
       child: Text(
@@ -202,6 +203,7 @@ Widget _ablehen(BuildContext context) {
 }
 
 Widget _bestaetigen(BuildContext context) {
+<<<<<<< HEAD
   var value = validateIsbn(scanResult.rawContent);
   return RaisedButton(
       color: standardColors_blue,
@@ -288,18 +290,6 @@ Widget _bestaetigen(BuildContext context) {
     child: new Text("Ja"),
     onPressed: () {_scan();},
 
-=======
-  return FlatButton(
-    child: new Text("Nein"),
-    onPressed: () {Navigator.of(context).pop();},
-  );
-}
-
-Widget _bestaetigen(BuildContext context) {
-  return FlatButton(
-    child: new Text("Ja"),
-    onPressed: () {_scan();},
->>>>>>> somme corrections
   );
 }
 
@@ -447,6 +437,8 @@ Future _scan(BuildContext context, var result) async {
       // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
       return errorDialog(context);
     }
+=======
+>>>>>>> Future _scan() method doesn't work with widget muss find a solution
   return RaisedButton(
       color: standardColors_blue,
       child: Text(
@@ -462,15 +454,145 @@ Future _scan(BuildContext context, var result) async {
       });
 }
 
+warteDialogBestaetigung(BuildContext context){
+  return showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context){
+      return Center(
+        child: SizedBox(
+          width: 40.0,
+          height: 40.0,
+          child: const CircularProgressIndicator(
+            value: null,
+            strokeWidth: 2.0,
+          ),
+        ),
+      );
+    }
+  );
+}
+
+
+Widget futureBuilder(BuildContext context){
+  _scan().then((scanResult){
+    Navigator.of(context).pop();
+  });
+
+  warteDialogBestaetigung(context);
+}
 /// Scan function for QR CODE Camera
+///
+ScanResult scanResult;
+
+
 Future _scan() async {
+  BuildContext context;
+  try {
+    var isbnNummer;
+    var result = await BarcodeScanner.scan();
+    scanResult = result;
+    isbnNummer = validateIsbn(scanResult.rawContent);
+
+
+    print('1 Nein ' + validateIsbn('0672317249!?'));
+    print('2 Nein ' + validateIsbn('0-672-31724-9c'));
+    print('3 ja ' + validateIsbn('960 425 059 0'));
+    print('4 nein ' + validateIsbn('90-70002-34-x'));
+    print('5 ja ' + validateIsbn('90-700-02-34-5'));
+    print('6 Nein ' + validateIsbn('90-70002-34-x'));
+    print('7 ja ' + validateIsbn('978-3-642-11746-6 '));
+    print('8 ja ' + validateIsbn('3-642-11746-5'));
+
+    if (scanResult.rawContent != null) {
+      if(isbnNummer.length == 13 || isbnNummer.length == 10){
+        // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung;
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('AlertDialog Title'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text('This is a demo alert dialog.'),
+                    Text('Would you like to approve of this message?'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Approve'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }else {
+        // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: false, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('AlertDialog ERREUR'),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: <Widget>[
+                    Text('False ISBN'),
+                    Text('Sure it is a good one?'),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Approve'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+
+    }
+  }on PlatformException catch (e) {
+    var scanResult = ScanResult(
+      type: ResultType.Error,
+      format: BarcodeFormat.unknown,
+    );
+
+    if (e.code == BarcodeScanner.cameraAccessDenied) {
+      scanResult.rawContent = 'The user did not grant the camera permission!';
+    } else {
+      scanResult.rawContent = 'Unknown error: $e';
+    }
+  }
+
+}
+
+/**Future _scan() async {
   try {
     var scanResult = await BarcodeScanner.scan();
     var isbnNummer;
 
     isbnNummer = validateIsbn(scanResult.rawContent);
-    if (scanResult.rawContent != null) {
-      // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung
+    print('1 Nein ' + validateIsbn('0672317249!?'));
+    print('2 Nein ' + validateIsbn('0-672-31724-9c'));
+    print('3 ja ' + validateIsbn('960 425 059 0'));
+    print('4 nein ' + validateIsbn('90-70002-34-x'));
+    print('5 ja ' + validateIsbn('90-700-02-34-5'));
+    print('6 Nein ' + validateIsbn('90-70002-34-x'));
+    print('7 ja ' + validateIsbn('978-3-642-11746-6 '));
+    print('8 ja ' + validateIsbn('3-642-11746-5'));
+   if (scanResult.rawContent != null) {
+      // si c'est different de null tu affiche un AlertDialog avec le Weiterleitungbedigung;
     } else {
       // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
     }
@@ -486,22 +608,29 @@ Future _scan() async {
       scanResult.rawContent = 'Unknown error: $e';
     }
   }
-}
+}*/
 
 /**Future _scan() async {
   try {
     //BuildContext context;
 /// to be sure that the current ISBN is correct formatted:
 String validateIsbn(String value) {
-  Pattern pattern = r'^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|'
+  /**Pattern pattern = r'^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|'
       r'(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|'
       r'(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?'
       r'[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$';
   RegExp regex = new RegExp(pattern);
+
   if (!regex.hasMatch(value)) {
     return 'Bitte richtige ISBN / ISSN Nummer eingeben';
   } else {
     return value;
+  }*/
+
+  if(isISBN(value)){
+    return value;
+  }else{
+    return 'Bitte richtige ISBN / ISSN Nummer eingeben';
   }
 }
 

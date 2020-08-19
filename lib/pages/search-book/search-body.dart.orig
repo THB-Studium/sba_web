@@ -177,7 +177,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
         if (barcodeResult.length == 13) {
           booksDescription.isbn13 = barcodeResult;
         }
-        if (barcodeResult.length <= 10) {
+        if (barcodeResult.length == 10) {
           booksDescription.isbn10 = barcodeResult;
         }
         textInputController.text = barcodeResult;
@@ -240,17 +240,14 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   String validateIsbn(String value) {
 <<<<<<< HEAD
     if (!isISBN(value)) {
-=======
-    Pattern pattern = r'^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|'
-        r'(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|'
-        r'(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?'
-        r'[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$';
-    RegExp regex = new RegExp(pattern);
-    if (!regex.hasMatch(value)) {
->>>>>>> isbnValidator fixed! It should be working!!
       return 'Bitte richtige ISBN / ISSN Nummer eingeben';
     } else {
+=======
+    if(isISBN(value)){
+>>>>>>> Future _scan() method doesn't work with widget muss find a solution
       return value;
+    }else{
+      return 'Bitte richtige ISBN / ISSN Nummer eingeben';
     }
   }
 
