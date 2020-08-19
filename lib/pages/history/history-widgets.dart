@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sba_web/models/ausleihe.dart';
 import 'package:sba_web/models/reservierung.dart';
 import 'package:sba_web/pages/components/constants.dart';
+import 'package:sba_web/pages/components/footer/navbar-footer.dart';
+import 'package:sba_web/pages/search-book/Bookdetails/details-page.dart';
 
 /// to build a Reservierung view:
-Column buildOneReservierung(Reservierung reservierung) {
+Widget buildOneReservierung(BuildContext context, Reservierung reservierung) {
   return Column(
     children: <Widget>[
       SizedBox(height: 5),
@@ -14,20 +16,28 @@ Column buildOneReservierung(Reservierung reservierung) {
           borderRadius: BorderRadius.circular(13.0),
           color: Colors.white24
         ),
-        child: ListTile(
-          title: Text.rich(
-            TextSpan(
-              text: reservierung.buch.buchTitel,
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+        child: GestureDetector(
+          onTap: () {
+            print('Reservierung titel' + reservierung.buch.buchTitel);
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => NavBarFooter(BuchDetailPage(book: reservierung.buch))
+            ));
+          },
+          child: ListTile(
+            title: Text.rich(
+              TextSpan(
+                text: reservierung.buch.buchTitel,
+                style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          subtitle: Text(reservierung.buch.buchAuthor),
-          trailing: Wrap(
-            spacing: 5, // space between two icons
-            children: <Widget>[
-              Text(dateformat(reservierung.bis)), // icon-1
-              Icon(Icons.arrow_forward_ios), // icon-2
-            ],
+            subtitle: Text(reservierung.buch.buchAuthor),
+            trailing: Wrap(
+              spacing: 5, // space between two icons
+              children: <Widget>[
+                Text(dateformat(reservierung.bis)), // icon-1
+                Icon(Icons.arrow_forward_ios), // icon-2
+              ],
+            ),
           ),
         ),
       ),
@@ -36,7 +46,7 @@ Column buildOneReservierung(Reservierung reservierung) {
 }
 
 /// to build a ausleihe view:
-Column buildOneAusleihe(Ausleihe ausleihe) {
+Widget buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
   return Column(
     children: <Widget>[
       SizedBox(height: 5),
@@ -46,20 +56,28 @@ Column buildOneAusleihe(Ausleihe ausleihe) {
           borderRadius: BorderRadius.circular(13.0),
           color: Colors.white24
         ),
-        child: ListTile(
-          title: Text.rich(
-            TextSpan(
-              text: ausleihe.buch.buchTitel,
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+        child: GestureDetector(
+          onTap: () {
+            print('Ausleihe titel' + ausleihe.buch.buchTitel);
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => NavBarFooter(BuchDetailPage(book: ausleihe.buch))
+            ));
+          },
+          child: ListTile(
+            title: Text.rich(
+              TextSpan(
+                text: ausleihe.buch.buchTitel,
+                style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          subtitle: Text(ausleihe.buch.buchAuthor),
-          trailing: Wrap(
-            spacing: 5, // space between two icons
-            children: <Widget>[
-              Text(dateformat(ausleihe.bis)), // icon-1
-              Icon(Icons.arrow_forward_ios), // icon-2
-            ],
+            subtitle: Text(ausleihe.buch.buchAuthor),
+            trailing: Wrap(
+              spacing: 5, // space between two icons
+              children: <Widget>[
+                Text(dateformat(ausleihe.bis)), // icon-1
+                Icon(Icons.arrow_forward_ios), // icon-2
+              ],
+            ),
           ),
         ),
       ),
