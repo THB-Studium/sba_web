@@ -39,7 +39,7 @@ Column loading() {
 }
 
 /// to choose and position a logo/image:
-Widget setImage(String imgName, double size, double position, Color color) {
+Positioned setImage(String imgName, double size, double position, Color color) {
   return Positioned(
     top: position,
     child: Image.asset(

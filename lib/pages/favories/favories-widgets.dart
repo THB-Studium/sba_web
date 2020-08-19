@@ -7,7 +7,7 @@ import 'package:share/share.dart';
 
 
 // to build a item:
-Widget listFavoriesItem (BuildContext context, Buch item) {
+Center listFavoriesItem (BuildContext context, Buch item) {
   return Center (
       child: Column(
           children: <Widget>[

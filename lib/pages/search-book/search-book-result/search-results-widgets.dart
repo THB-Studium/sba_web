@@ -5,7 +5,7 @@ import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:sba_web/pages/search-book/Bookdetails/details-page.dart';
 
 // to build a item:
-  Widget listDataItem (BuildContext context, Buch item) {
+Center listDataItem (BuildContext context, Buch item) {
     return Center (
       child: Column(
         children: <Widget>[

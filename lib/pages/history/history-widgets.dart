@@ -4,7 +4,7 @@ import 'package:sba_web/models/reservierung.dart';
 import 'package:sba_web/pages/components/constants.dart';
 
 /// to build a Reservierung view:
-Widget buildOneReservierung(Reservierung reservierung) {
+Column buildOneReservierung(Reservierung reservierung) {
   return Column(
     children: <Widget>[
       SizedBox(height: 5),
@@ -36,7 +36,7 @@ Widget buildOneReservierung(Reservierung reservierung) {
 }
 
 /// to build a ausleihe view:
-Widget buildOneAusleihe(Ausleihe ausleihe) {
+Column buildOneAusleihe(Ausleihe ausleihe) {
   return Column(
     children: <Widget>[
       SizedBox(height: 5),
