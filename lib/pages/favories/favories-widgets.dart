@@ -73,7 +73,7 @@ Widget listFavoriesItem (BuildContext context, Buch item) {
 
 void share(BuildContext context, Buch item) {
   final RenderBox box = context.findRenderObject();
-  final String text = "${item.buchTitel} - ${item.buchAuthor}";
+  final String text = "${item.buchTitel} - ${item.buchAuthor} - ${item.buchISBN10} - ${item.verfuegbarkeit}";
 
   Share.share(
       text,
