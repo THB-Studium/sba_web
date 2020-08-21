@@ -114,7 +114,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
 // Widgets:.....................................................................
 
   /// to build an input for a search option:
-  Widget _buildBookDescriptionItems(String labelText) {
+  Padding _buildBookDescriptionItems(String labelText) {
     return Padding(
       padding: EdgeInsets.only(top: _minimumPadding, bottom: _minimumPadding),
       child: TextFormField(
@@ -193,7 +193,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
     }
   }
 
-  Widget _buildIsbn() {
+  Row _buildIsbn() {
     return Row(children: <Widget>[
       Flexible(
           child: Column(
@@ -237,7 +237,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
     }
   }
 
-  Widget _buildAnimatedOpacity() {
+  Container _buildAnimatedOpacity() {
     return Container(
         child: Visibility(
       visible: _visible,

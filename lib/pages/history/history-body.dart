@@ -25,8 +25,9 @@ class _HistoriesBodyState extends State<HistoriesBody> {
         child: Container(
           color: standardColors_white,
           child: ListView(
-            children: _reservierungen.map(buildOneReservierung).toList() +
-                _ausleihe.map(buildOneAusleihe).toList(),
+            children:
+                _reservierungen.map((reservierung) => buildOneReservierung(context, reservierung)).toList() +
+                _ausleihe.map((ausleihe) => buildOneAusleihe(context, ausleihe)).toList(),
           ),
         ),
       )

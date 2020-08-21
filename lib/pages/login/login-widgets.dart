@@ -4,7 +4,7 @@ import 'package:sba_web/pages/components/constants.dart';
 bool test = false;
 
 /// Text format:
-Widget text(String text, double fontSize, double position) {
+Positioned text(String text, double fontSize, double position) {
   return Positioned(
     top: position,
     child: Text(
@@ -19,7 +19,7 @@ Widget text(String text, double fontSize, double position) {
 }
 
 /// InputField
-Widget suffixIconIfPassword(bool passwort) {
+IconButton suffixIconIfPassword(bool passwort) {
   if (passwort) {
     return IconButton(
       onPressed: () {

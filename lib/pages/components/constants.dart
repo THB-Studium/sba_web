@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sba_web/models/buch.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:intl/intl.dart';
+import 'package:share/share.dart';
 
 
 // about the standards colors:
@@ -22,7 +24,12 @@ final String hilfeUrl = 'https://opac.th-brandenburg.de/InfoGuideClient.bfbsis/j
 
 // about the book status:
 final String ausliehbar = 'ausliehbar';
-final String entliehen = 'ausliehbar';
+final String entliehen = 'entliehen';
+
+// about somme parent names:
+final String favories = 'favories';
+final String histories = 'histories';
+final String searchResult = 'searchResult';
 
 
 
@@ -39,7 +46,7 @@ Column loading() {
 }
 
 /// to choose and position a logo/image:
-Widget setImage(String imgName, double size, double position, Color color) {
+Positioned setImage(String imgName, double size, double position, Color color) {
   return Positioned(
     top: position,
     child: Image.asset(
@@ -89,5 +96,17 @@ Border borderColor (double width, Color color) {
     bottom: BorderSide(width: width, color: color),
     right: BorderSide(width: width, color: color),
     left: BorderSide(width: width, color: color),
+  );
+}
+
+/// to share a book informations:
+void share(BuildContext context, Buch item) {
+  final RenderBox box = context.findRenderObject();
+  final String text = "${item.titel} - ${item.author}";
+
+  Share.share(
+      text,
+      subject: item.titel,
+      sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size
   );
 }

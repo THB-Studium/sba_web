@@ -1,26 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sba_web/models/buch.dart';
+import 'package:sba_web/pages/book-details/details-page.dart';
+import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
-import 'package:sba_web/pages/search-book/Bookdetails/details-page.dart';
 import 'package:share/share.dart';
 
 
 // to build a item:
-Widget listFavoriesItem (BuildContext context, Buch item) {
+Center listFavoriesItem (BuildContext context, Buch item) {
   return Center (
       child: Column(
           children: <Widget>[
             GestureDetector(
+                onTap: () {
+                  print('Buch titel' + item.titel);
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => NavBarFooter(
+                          BuchDetailPage(book: item, parentView: favories,)
+                      )
+                  ));
+                },
               child: ListTile(
                   leading: Icon(Icons.book),
                   title: Text.rich(
                     TextSpan(
-                      text: item.buchTitel,
+                      text: item.titel,
                       style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  subtitle: Text(item.buchAuthor),
+                  subtitle: Text(item.author),
 
                   trailing: Container(
                     padding: EdgeInsets.symmetric(horizontal: 0),
@@ -39,24 +48,18 @@ Widget listFavoriesItem (BuildContext context, Buch item) {
                                 print("check_box Clicked");
                               }
                           ) ,
-                          IconButton(
-                              icon: Icon(Icons.arrow_forward_ios),
-                              onPressed: (){
-                                print('Buch titel' + item.buchTitel);
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) => NavBarFooter(BuchDetailPage(book: item))
-                                ));
-                              }) ,
+//                          IconButton(
+//                              icon: Icon(Icons.arrow_forward_ios),
+//                              onPressed: (){
+//                                print('Buch titel' + item.titel);
+//                                Navigator.push(context, MaterialPageRoute(
+//                                    builder: (context) => NavBarFooter(BuchDetailPage(book: item))
+//                                ));
+//                              }) ,
                         ]
                     ),
                   )
-              ),
-              onTap: () {
-                print('Buch titel' + item.buchTitel);
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => NavBarFooter(BuchDetailPage(book: item))
-                ));
-              },
+              )
             ),
             const Divider(
               color: Colors.blueGrey,
@@ -73,11 +76,11 @@ Widget listFavoriesItem (BuildContext context, Buch item) {
 
 void share(BuildContext context, Buch item) {
   final RenderBox box = context.findRenderObject();
-  final String text = "${item.buchTitel} - ${item.buchAuthor}";
+  final String text = "${item.titel} - ${item.author}";
 
   Share.share(
       text,
-      subject: item.buchTitel,
+      subject: item.titel,
       sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size
   );
 }
