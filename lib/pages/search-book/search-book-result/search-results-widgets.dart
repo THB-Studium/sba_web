@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sba_web/models/buch.dart';
+import 'package:sba_web/pages/book-details/details-page.dart';
+import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
-import 'package:sba_web/pages/search-book/Bookdetails/details-page.dart';
 
 // to build a item:
 Center listDataItem (BuildContext context, Buch item) {
@@ -14,11 +15,11 @@ Center listDataItem (BuildContext context, Buch item) {
                 leading: Icon(Icons.book),
                 title: Text.rich(
               TextSpan(
-                text: item.buchTitel,
+                text: item.titel,
                 style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
               ),
             ),
-                subtitle: Text(item.buchAuthor),
+                subtitle: Text(item.author),
 
                 trailing: Container(
                   padding: EdgeInsets.symmetric(horizontal: 0),
@@ -42,9 +43,9 @@ Center listDataItem (BuildContext context, Buch item) {
                 )
             ),
             onTap: () {
-              print('Buch titel' + item.buchTitel);
+              print('Buch titel' + item.titel);
               Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => NavBarFooter(BuchDetailPage(book: item))
+                  builder: (context) => NavBarFooter(BuchDetailPage(book: item, parentView: searchResult))
               ));
             },
           ),

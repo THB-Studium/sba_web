@@ -33,7 +33,7 @@ class _LoginBodyState extends State<LoginBody> {
       Background(
         child: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.of(context).size.height - 50,
+            height: MediaQuery.of(context).size.height,
             alignment: Alignment.bottomCenter,
             child: Column(
               mainAxisSize: MainAxisSize.min,
