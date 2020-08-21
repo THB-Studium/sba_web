@@ -68,7 +68,7 @@ Center listFavoriesItem (BuildContext context, Buch item) {
 
 void share(BuildContext context, Buch item) {
   final RenderBox box = context.findRenderObject();
-  final String text = "${item.titel} - ${item.author}";
+  final String text = 'Titel: ${item.titel} - Autor: ${item.author} - ISBN: ${item.iSBN13} - Verfügbarkeit: ${item.verfuegbarkeit}';
 
   Share.share(
       text,
