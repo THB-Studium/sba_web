@@ -1,10 +1,10 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sba_web/pages/Mailbox/mailbox-page.dart';
 import 'package:sba_web/pages/components/menu/drawer_menu.dart';
 import 'package:sba_web/pages/favories/favories-page.dart';
 import 'package:sba_web/pages/history/history-page.dart';
-import 'package:sba_web/pages/live-chat/nachrichten-page.dart';
 import 'package:sba_web/pages/mahnungen/mahnungen-page.dart';
 
 import '../constants.dart';
@@ -21,7 +21,7 @@ class NavBarFooter extends StatefulWidget {
 
 
 class _NavBarFooterState extends State<NavBarFooter> {
-  final navBarPages = [HistoryPage(), MahnungenPage(), NachrichtenPage(), FavoritenPage()];
+  final navBarPages = [HistoryPage(), MahnungenPage(), MailboxPage(), FavoritenPage()];
   int _selectedNavIndex = 0;
 
 

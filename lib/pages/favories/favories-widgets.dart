@@ -56,9 +56,9 @@ Center listFavoriesItem (BuildContext context, Buch item) {
             const Divider(
               color: Colors.blueGrey,
               height: 2,
-              thickness: 2,
+              thickness: 0,
               indent: 70,
-              endIndent: 1,
+              endIndent: 10,
             )
           ]
       )
