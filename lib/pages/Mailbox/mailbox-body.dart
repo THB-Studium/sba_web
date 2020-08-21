@@ -4,23 +4,20 @@ import 'package:sba_web/pages/Mailbox/mailbox-widgets.dart';
 import 'package:flutter/material.dart';
 
 class MailboxBody extends StatefulWidget {
-  final List<Mailbox>mailboxListe;
-  MailboxBody(this.mailboxListe);
-
-
   @override
   _MailboxBodyState createState() => _MailboxBodyState();
 }
 
 class _MailboxBodyState extends State<MailboxBody> {
+  List<Mailbox> mailboxListe = nachrichten;
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new Container(
         child: new ListView.builder(
-          itemBuilder: (_,int index) => listDataItem(context, widget.mailboxListe[index]),
-          itemCount: widget.mailboxListe.length,
+          itemBuilder: (_,int index) => listDataItem(context, mailboxListe[index]),
+          itemCount: mailboxListe.length,
         ) ,
       ),
     );

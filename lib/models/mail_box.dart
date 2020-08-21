@@ -24,7 +24,7 @@ class Mailbox {
   }
 }
 
-final buecher = [
+final nachrichten = [
   Mailbox(
     mailboxId: "1",
     mailboxName: "Resrvierungsbestätigung",
