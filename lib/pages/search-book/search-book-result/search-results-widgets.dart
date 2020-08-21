@@ -12,7 +12,7 @@ Center listDataItem (BuildContext context, Buch item) {
         children: <Widget>[
           GestureDetector(
             child: ListTile(
-                leading: Icon(Icons.book),
+                leading: Image.asset(assetsIcon + 'book_logo.png', width: 45),
                 title: Text.rich(
               TextSpan(
                 text: item.titel,
@@ -22,7 +22,7 @@ Center listDataItem (BuildContext context, Buch item) {
                 subtitle: Text(item.author),
 
                 trailing: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 0),
+                  padding: EdgeInsets.all(0),
                   child: Wrap(
                       spacing: -5,
                       children: <Widget>[
@@ -34,7 +34,7 @@ Center listDataItem (BuildContext context, Buch item) {
                             }
                         ) ,
                         IconButton(
-                            icon: Icon(Icons.arrow_forward_ios),
+                            icon: Icon(Icons.arrow_forward_ios, size: 20),
                             onPressed: (){
                           print("forward Clicked");
                         }) ,
@@ -64,10 +64,10 @@ Center listDataItem (BuildContext context, Buch item) {
 
   Icon setIcon (String status) {
     if (status == 'ausliehbar') {
-      return Icon(Icons.check_circle_outline, color: Colors.green);
+      return Icon(Icons.check_circle_outline, color: Colors.green, size: 20);
     } else
     if (status == 'entliehen') {
-      return Icon(Icons.do_not_disturb_alt, color: Colors.red);
+      return Icon(Icons.do_not_disturb_alt, color: Colors.red, size: 20);
     }
     return null;
   }

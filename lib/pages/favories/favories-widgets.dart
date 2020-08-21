@@ -22,7 +22,7 @@ Center listFavoriesItem (BuildContext context, Buch item) {
                   ));
                 },
               child: ListTile(
-                  leading: Icon(Icons.book),
+                  leading: Image.asset(assetsIcon + 'book_logo.png', width: 45),
                   title: Text.rich(
                     TextSpan(
                       text: item.titel,
