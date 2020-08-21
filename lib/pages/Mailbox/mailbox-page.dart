@@ -10,12 +10,13 @@ class MailboxPage extends StatefulWidget {
 }
 
 class _MailboxPageState extends State<MailboxPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: Drawer(child: sbaDrawer(context)),
         appBar: AppBar(
-          title: Text('Nachrichten')
+          title: Text('Mailbox')
         ),
 
         body: MailboxBody()
