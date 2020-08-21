@@ -91,9 +91,8 @@ Future _pushDialog(Buch buch, BuildContext context) {
         return AlertDialog(
           title: Text('Push notification'),
           content: Container(
-              height: 90,
               child: Text(
-                  'Nach was fragen Sie für das Buch "' + buch.titel + '"?')),
+                  'Was verlangen Sie dann zu diesem Buch "${buch.titel}" ?')),
           actions: [
             _pushAction('Fotos', context),
             _pushAction('Weiterleitung', context)
@@ -104,17 +103,8 @@ Future _pushDialog(Buch buch, BuildContext context) {
 
 /// answer action buttons (ablehnen oder bestätigen):
 Widget _pushAction(String titel, BuildContext context) {
-  return RaisedButton(
-      color: standardColors_blue,
-      child: Text(
-        titel,
-        style: TextStyle(
-            color: standardColors_white,
-            fontSize: 16,
-            fontWeight: FontWeight.w700),
-      ),
-      elevation: 6.0,
-      onPressed: () {
-        Navigator.of(context).pop();
-      });
+  return FlatButton(
+    child: new Text(titel),
+    onPressed: () {Navigator.of(context).pop();}, // pour le moment ca ne fait pas grand chose
+  );
 }
