@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/models/buch-items.dart';
-import 'package:sba_web/models/buch.dart';
+import 'package:sba_web/models/favory.dart';
 
 import 'favories-widgets.dart';
 
@@ -11,17 +11,19 @@ class FavoriesBody extends StatefulWidget {
 }
 
 class _FavoriesBodyState extends State<FavoriesBody> {
-  List<Buch> favoriesList = buecher;
+  final Favory currentFavory = favoriten[0];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:new Container(
-        child: new ListView.builder(
-          itemBuilder: (_,int index) => listFavoriesItem(context, favoriesList[index]),
-          itemCount: favoriesList.length,
-        ) ,
-      ),
+      body: Container(
+        child: currentFavory != null && currentFavory.buecher.length > 0
+        ? ListView.builder(
+          itemBuilder: (_,int index) => listFavoriesItem(context, currentFavory.buecher[index]),
+          itemCount: currentFavory.buecher.length,
+        )
+        : Center(child: Text('Favoritenliste leer!'))
+      )
     );
   }
 }

@@ -1,50 +1,54 @@
 class Buch {
-  final String buchId;
+  final String id;
 
-  final String buchTitel;
-  final String buchAuthor;
-  final String buchISBN10;
-  final String buchISBN13;
-  final String buchJahr;
-  final String buchVerlag;
-  final String buchSeiten;
-  final String buchSprache;
+  final String titel;
+  final String author;
+  final String iSBN10;
+  final String iSBN13;
+  final String jahr;
+  final String verlag;
+  final String seiten;
+  final String sprache;
   final String buchArt;
   final String buchKategorie;
 
   final String mediaTyp;
   final String verfuegbarkeit;
+  final int kopien;
 
   const Buch({
-      this.buchId,
-      this.buchTitel,
-      this.buchAuthor,
-      this.buchISBN10,
-      this.buchISBN13,
-      this.buchJahr,
-      this.buchVerlag,
-      this.buchSeiten,
-      this.buchSprache,
+      this.id,
+      this.titel,
+      this.author,
+      this.iSBN10,
+      this.iSBN13,
+      this.jahr,
+      this.verlag,
+      this.seiten,
+      this.sprache,
       this.buchArt,
       this.buchKategorie,
       this.mediaTyp,
-      this.verfuegbarkeit});
+      this.verfuegbarkeit,
+      this.kopien
+  });
 
   Map<String, dynamic> toMap() {
     return {
-      'buchId': buchId,
-      'buchTitel': buchTitel,
-      'buchAuthor': buchAuthor,
-      'buchISBN10': buchISBN10,
-      'buchISBN13': buchISBN13,
-      'buchJahr': buchJahr,
-      'buchVerlag': buchVerlag,
-      'buchSeiten': buchSeiten,
-      'buchSprache': buchSprache,
+      'buchId': id,
+      'buchTitel': titel,
+      'buchAuthor': author,
+      'buchISBN10': iSBN10,
+      'buchISBN13': iSBN13,
+      'buchJahr': jahr,
+      'buchVerlag': verlag,
+      'buchSeiten': seiten,
+      'buchSprache': sprache,
       'buchArt': buchArt,
       'buchKategorie': buchKategorie,
       'mediaTyp': mediaTyp,
-      'verfuegbarkeit': verfuegbarkeit
+      'verfuegbarkeit': verfuegbarkeit,
+      'kopien': kopien
     };
   }
 
@@ -54,14 +58,14 @@ class Buch {
     }
 
     return Buch(
-        buchTitel: json['buchTitel'] as String,
-        buchAuthor: json['buchAuthor'] as String,
-        buchISBN10: json['buchISBN10'] as String,
-        buchISBN13: json['buchISBN13'] as String,
-        buchJahr: json['buchJahr'] as String,
-        buchVerlag: json['buchVerlag'] as String,
-        buchSeiten: json['buchSeiten'] as String,
-        buchSprache: json['buchSprache'] as String,
+        titel: json['buchTitel'] as String,
+        author: json['buchAuthor'] as String,
+        iSBN10: json['buchISBN10'] as String,
+        iSBN13: json['buchISBN13'] as String,
+        jahr: json['buchJahr'] as String,
+        verlag: json['buchVerlag'] as String,
+        seiten: json['buchSeiten'] as String,
+        sprache: json['buchSprache'] as String,
         buchArt: json['buchArt'] as String,
         buchKategorie: json['buchKategorie'] as String);
   }

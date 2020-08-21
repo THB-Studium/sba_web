@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/models/ausleihe.dart';
 import 'package:sba_web/models/reservierung.dart';
+import 'package:sba_web/pages/book-details/details-page.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
-import 'package:sba_web/pages/search-book/Bookdetails/details-page.dart';
 
 /// to build a Reservierung view:
 Widget buildOneReservierung(BuildContext context, Reservierung reservierung) {
@@ -18,19 +18,19 @@ Widget buildOneReservierung(BuildContext context, Reservierung reservierung) {
         ),
         child: GestureDetector(
           onTap: () {
-            print('Reservierung titel' + reservierung.buch.buchTitel);
+            print('Reservierung titel' + reservierung.buch.titel);
             Navigator.push(context, MaterialPageRoute(
-                builder: (context) => NavBarFooter(BuchDetailPage(book: reservierung.buch))
+                builder: (context) => NavBarFooter(BuchDetailPage(book: reservierung.buch, parentView: histories))
             ));
           },
           child: ListTile(
             title: Text.rich(
               TextSpan(
-                text: reservierung.buch.buchTitel,
+                text: reservierung.buch.titel,
                 style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
               ),
             ),
-            subtitle: Text(reservierung.buch.buchAuthor),
+            subtitle: Text(reservierung.buch.author),
             trailing: Wrap(
               spacing: 5, // space between two icons
               children: <Widget>[
@@ -58,19 +58,19 @@ Widget buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
         ),
         child: GestureDetector(
           onTap: () {
-            print('Ausleihe titel' + ausleihe.buch.buchTitel);
+            print('Ausleihe titel' + ausleihe.buch.titel);
             Navigator.push(context, MaterialPageRoute(
-                builder: (context) => NavBarFooter(BuchDetailPage(book: ausleihe.buch))
+                builder: (context) => NavBarFooter(BuchDetailPage(book: ausleihe.buch, parentView: histories))
             ));
           },
           child: ListTile(
             title: Text.rich(
               TextSpan(
-                text: ausleihe.buch.buchTitel,
+                text: ausleihe.buch.titel,
                 style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
               ),
             ),
-            subtitle: Text(ausleihe.buch.buchAuthor),
+            subtitle: Text(ausleihe.buch.author),
             trailing: Wrap(
               spacing: 5, // space between two icons
               children: <Widget>[
@@ -89,7 +89,7 @@ Widget buildOneAusleihe(BuildContext context, Ausleihe ausleihe) {
 Border _borderItem (double width, DateTime date, String listClass) {
   if (listClass == "Reservierung") {
     return date.isBefore(new DateTime.now()) ?
-    borderColor(width, Colors.red) : borderColor(width, Colors.amberAccent);
+    borderColor(width, Colors.red) : borderColor(width, Colors.orangeAccent);
   }
   if (listClass == "Ausleihe") {
     return date.isBefore(new DateTime.now()) ?
