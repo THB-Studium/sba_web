@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 //import 'dart:js';
 
+=======
+>>>>>>> wip
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -203,7 +206,6 @@ Widget _ablehen(BuildContext context) {
 }
 
 Widget _bestaetigen(BuildContext context) {
-<<<<<<< HEAD
 
   var value = validateIsbn(scanResult.rawContent);
   return RaisedButton(
@@ -438,9 +440,7 @@ Future _scan(BuildContext context, var result) async {
       // si non tu affiche un AlertDialog disant que le Code-bar n'a pas pu etre lu
       return errorDialog(context);
     }
-=======
   var value = validateIsbn(scanResult.rawContent);
->>>>>>> Weiterleitung Message almost done! muss finish it
   return RaisedButton(
       color: standardColors_blue,
       child: Text(
