@@ -1,7 +1,33 @@
-//import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:sba_web/models/user.dart';
-//
-//class AuthMethods {
+import 'package:sba_web/models/user.dart';
+import 'package:sba_web/pages/components/constants.dart';
+
+class AuthMethods {
+
+
+  Future login(String benutzerNummer, String kennwort) async {
+    try {
+      var result = await http.get(Uri.encodeFull(loginPath), headers: {'Accept': 'application/json'});
+      FirebaseUser firebaseUser = result.user;
+      return _userFromFirebaseUser(firebaseUser);
+    } catch(e) {
+      print(e);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //  final FirebaseAuth _auth = FirebaseAuth.instance;
 //
 //  Future signInWithBenutzerNummerAndKennwort(String benutzerNummer, String kennwort) async {
@@ -36,4 +62,4 @@
 //    return user != null ? User(id: user.uid) : null;
 //  }
 //
-//}
+}
