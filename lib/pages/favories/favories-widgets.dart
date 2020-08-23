@@ -70,10 +70,10 @@ void share(BuildContext context, Buch item) {
   final RenderBox box = context.findRenderObject();
   final String text = 'Titel: ${item.titel} - Autor: ${item.author} - ISBN: ${item.iSBN13} - Verfügbarkeit: ${item.verfuegbarkeit}';
 
-  /**Share.share(
+  Share.share(
       text,
       subject: item.titel,
       sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size
-  );*/
+  );
 }
 
