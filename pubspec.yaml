@@ -30,7 +30,7 @@ dependencies:
   eva_icons_flutter: ^2.0.1
   google_fonts: ^1.1.0
   flutter_svg: ^0.17.4
-  url_launcher: ^5.5.0
+  url_launcher: ^5.4.11 # the stable version is: ^5.4.11
   barcode_scan: ^3.0.1
   qr_flutter: ^3.2.0
   validators: ^2.0.0
@@ -42,8 +42,12 @@ dependencies:
 
 =======
   string_validator: ^0.1.4
+<<<<<<< HEAD
   http: ^0.12.1
 >>>>>>> 78efe4e... wip
+=======
+  http: ^0.12.2
+>>>>>>> cbdc6ea... wip
 
 dev_dependencies:
   flutter_test:
