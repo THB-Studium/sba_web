@@ -1,16 +1,29 @@
-import 'package:sba_web/models/user.dart';
 import 'package:sba_web/pages/components/constants.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class AuthMethods {
 
 
   Future login(String benutzerNummer, String kennwort) async {
+    String basicAuth = 'Basic ' + base64Encode(utf8.encode('$benutzerNummer:$kennwort'));
+    print('basicAuth: ' + basicAuth);
+    print('urlPath: ' + loginPath);
     try {
-      var result = await http.get(Uri.encodeFull(loginPath), headers: {'Accept': 'application/json'});
-      FirebaseUser firebaseUser = result.user;
-      return _userFromFirebaseUser(firebaseUser);
+      http.Response response  = await http.post(
+          Uri.encodeFull(loginPath),
+          headers: <String, String>{'authorization': basicAuth});
+      print('---------- Body response ----------------------------------------');
+      print('Status code: ' + response.statusCode.toString());
+      print(response.body);
+      print('---------- response ----------------------------------------');
+//      FirebaseUser firebaseUser = result.user;
+//      return _userFromFirebaseUser(firebaseUser);
     } catch(e) {
+      print('---------- Error response ----------------------------------------');
       print(e);
+
+      print('---------- response ----------------------------------------');
     }
   }
 

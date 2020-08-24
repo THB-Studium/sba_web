@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/pages/components/footer/navbar-footer.dart';
 import 'package:sba_web/pages/history/history-page.dart';
+import 'package:sba_web/pages/login/service/authetification/auth.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../components/constants.dart';
@@ -18,7 +19,7 @@ class LoginBody extends StatefulWidget {
 class _LoginBodyState extends State<LoginBody> {
 
   bool isLoading = false;
-//  AuthMethods authMethods = new AuthMethods();
+  AuthMethods authMethods = new AuthMethods();
 
   final formKey = GlobalKey<FormState>();
   static String benutzerNummer;
@@ -76,9 +77,9 @@ class _LoginBodyState extends State<LoginBody> {
                 RoundedButton(
                   text: "LOGIN",
                   press: () {
-                    sigMeIn();
                     print("benutzernummer: " + benutzerNummer);
                     print("kennwort: " + kennwort);
+                    sigMeIn();
                   },
                 ),
                 SizedBox(height: size.height * 0.13),
@@ -123,6 +124,7 @@ class _LoginBodyState extends State<LoginBody> {
         });
 //        authMethods.signInWithBenutzerNummerAndKennwort(benutzerNummer, kennwort)
 //          .then((value) => print(value));
+        authMethods.login(benutzerNummer, kennwort);
 
         Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context) => NavBarFooter(HistoryPage()),
