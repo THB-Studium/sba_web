@@ -16,18 +16,14 @@ class _SearchResultsPageState extends State<SearchResultsPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        leading: zurrueckButton(context),
-        title: new Text("Suchergebniss"),
-        backgroundColor: standardColors_blue,
-        elevation: 0.0,
-      ),
+        appBar: new AppBar(
+          leading: zurrueckButton(context),
+          title: new Text("Suchergebniss"),
+          backgroundColor: standardColors_blue,
+          elevation: 0.0,
+        ),
 
-      body: SearchResultsBody(widget.buchList)
+        body: SearchResultsBody(widget.buchList)
     );
   }
 }
-
-
-
-

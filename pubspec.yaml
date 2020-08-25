@@ -32,8 +32,13 @@ dependencies:
   flutter_svg: ^0.17.4
   url_launcher: ^5.5.0
   barcode_scan: ^3.0.1
+  qr_flutter: ^3.2.0
   validators: ^2.0.0
   share: ^0.6.2+3
+  font_awesome_flutter: ^8.8.1
+  path_provider: 1.6.1
+  intl: ^0.16.1
+
 
 dev_dependencies:
   flutter_test:

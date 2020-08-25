@@ -21,37 +21,37 @@ Center listFavoriesItem (BuildContext context, Buch item) {
                       )
                   ));
                 },
-              child: ListTile(
-                  leading: Image.asset(assetsIcon + 'book_logo.png', width: 45),
-                  title: Text.rich(
-                    TextSpan(
-                      text: item.titel,
-                      style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                child: ListTile(
+                    leading: Image.asset(assetsIcon + 'book_logo.png', width: 45),
+                    title: Text.rich(
+                      TextSpan(
+                        text: item.titel,
+                        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  subtitle: Text(item.author),
+                    subtitle: Text(item.author),
 
-                  trailing: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 0),
-                    child: Wrap(
-                        spacing: -5,
-                        children: <Widget>[
-                          IconButton(
-                              tooltip: item.verfuegbarkeit,
-                              icon: Icon(Icons.share), //mes icons
-                              onPressed: () => share(context, item),
-                          ) ,
-                          IconButton(
-                              tooltip: item.verfuegbarkeit,
-                              icon: Icon(Icons.delete_forever, color: Colors.red), //mes icons
-                              onPressed: (){
-                                print("check_box Clicked");
-                              }
-                          )
-                        ]
+                    trailing: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 0),
+                        child: Wrap(
+                            spacing: -5,
+                            children: <Widget>[
+                              IconButton(
+                                tooltip: item.verfuegbarkeit,
+                                icon: Icon(Icons.share), //mes icons
+                                onPressed: () => share(context, item),
+                              ) ,
+                              IconButton(
+                                  tooltip: item.verfuegbarkeit,
+                                  icon: Icon(Icons.delete_forever, color: Colors.red), //mes icons
+                                  onPressed: (){
+                                    print("check_box Clicked");
+                                  }
+                              )
+                            ]
+                        )
                     )
-                  )
-              )
+                )
             ),
             const Divider(
               color: Colors.blueGrey,
@@ -76,5 +76,4 @@ void share(BuildContext context, Buch item) {
       sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size
   );
 }
-
 

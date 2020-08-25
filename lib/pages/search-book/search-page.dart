@@ -11,13 +11,13 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: zurrueckButton(context),
-        title: Text('Buchsuche'),
-        backgroundColor: standardColors_blue,
-        elevation: 0.0,
-      ),
-      body: AdvancedSearchBody()
+        appBar: AppBar(
+          leading: zurrueckButton(context),
+          title: Text('Buchsuche'),
+          backgroundColor: standardColors_blue,
+          elevation: 0.0,
+        ),
+        body: AdvancedSearchBody()
     );
   }
 }

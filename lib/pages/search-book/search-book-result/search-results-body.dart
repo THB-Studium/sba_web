@@ -18,7 +18,7 @@ class _SearchResultsBodyState extends State<SearchResultsBody> {
     return new Scaffold(
       body: new Container(
         child: new ListView.builder(
-            itemBuilder: (_,int index) => listDataItem(context, widget.buchList[index]),
+          itemBuilder: (_,int index) => listDataItem(context, widget.buchList[index]),
           itemCount: widget.buchList.length,
         ) ,
       ),
@@ -26,9 +26,3 @@ class _SearchResultsBodyState extends State<SearchResultsBody> {
     );
   }
 }
-
-
-
-
-
-

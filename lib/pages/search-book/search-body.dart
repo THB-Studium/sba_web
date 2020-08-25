@@ -18,6 +18,8 @@ class AdvancedSearchBody extends StatefulWidget {
 
 class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   BooksDescription booksDescription = new BooksDescription();
+  int _counter = 0;
+  bool _isButtonDisabled;
   bool _visible = false;
   TextEditingController textInputController = new TextEditingController();
 
@@ -33,6 +35,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   @override
   initState() {
     super.initState();
+    _isButtonDisabled = false;
   }
 
   @override
@@ -197,34 +200,34 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
     return Row(children: <Widget>[
       Flexible(
           child: Column(
-        children: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(
-                  top: _minimumPadding, bottom: _minimumPadding),
-              child: TextFormField(
-                  controller: textInputController,
-                  decoration: InputDecoration(
-                    labelText: 'ISBN / ISSN',
-                    suffixIcon: IconButton(
-                      icon: Image.asset('assets/icons/isbn.png'),
-                      onPressed: _scan,
-                    ),
-                  ),
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
-                  onChanged: (value) {
-                    if (value != null) {
-                      if (value.length == 13) {
-                        booksDescription.isbn13 = validateIsbn(value);
-                      }
-                      if (value.length <= 10) {
-                        booksDescription.isbn10 = validateIsbn(value);
-                      }
-                    }
-                  })),
-        ],
-      ))
+            children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(
+                      top: _minimumPadding, bottom: _minimumPadding),
+                  child: TextFormField(
+                      controller: textInputController,
+                      decoration: InputDecoration(
+                        labelText: 'ISBN / ISSN',
+                        suffixIcon: IconButton(
+                          icon: Image.asset('assets/icons/isbn.png'),
+                          onPressed: _scan,
+                        ),
+                      ),
+                      style: TextStyle(
+                        fontSize: 12,
+                      ),
+                      onChanged: (value) {
+                        if (value != null) {
+                          if (value.length == 13) {
+                            booksDescription.isbn13 = validateIsbn(value);
+                          }
+                          if (value.length <= 10) {
+                            booksDescription.isbn10 = validateIsbn(value);
+                          }
+                        }
+                      })),
+            ],
+          ))
     ]);
   }
 
@@ -240,17 +243,17 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   Container _buildAnimatedOpacity() {
     return Container(
         child: Visibility(
-      visible: _visible,
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _buildBookDescriptionItems(titelanfang),
-            _buildBookDescriptionItems(verlag),
-            _buildBookDescriptionItems(schlagwort),
-            _buildBookDescriptionItems(notation),
-            _buildBookDescriptionItems(plublisher),
-            _buildBookDescriptionItems(veroeffentlichungsdatum)
-          ]),
-    ));
+          visible: _visible,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildBookDescriptionItems(titelanfang),
+                _buildBookDescriptionItems(verlag),
+                _buildBookDescriptionItems(schlagwort),
+                _buildBookDescriptionItems(notation),
+                _buildBookDescriptionItems(plublisher),
+                _buildBookDescriptionItems(veroeffentlichungsdatum)
+              ]),
+        ));
   }
 }

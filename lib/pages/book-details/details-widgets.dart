@@ -104,7 +104,7 @@ Future _pushDialog(Buch buch, BuildContext context) {
 /// answer action buttons (ablehnen oder bestätigen):
 Widget _pushAction(String titel, BuildContext context) {
   return FlatButton(
-    child: new Text(titel),
+    child: Text(titel),
     onPressed: () {Navigator.of(context).pop();}, // pour le moment ca ne fait pas grand chose
   );
 }

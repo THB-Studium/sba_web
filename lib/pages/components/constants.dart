@@ -7,7 +7,7 @@ import 'package:share/share.dart';
 
 // about the standards colors:
 const standardColors_blue = Colors.blue;
-const standardColors_white = Colors.white70;
+const standardColors_white = Colors.white;
 
 // about assets:
 final String assetsImage = "assets/images/";
