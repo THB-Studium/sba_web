@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/login/login-page.dart';
+<<<<<<< HEAD
 import 'package:sba_web/pages/search-book/search-widgets.dart';
+=======
+import 'package:url_launcher/url_launcher.dart';
+>>>>>>> bb3f94b... done
 
 Widget sbaDrawer(BuildContext context) {
   return Container(
@@ -41,6 +45,7 @@ Widget sbaDrawer(BuildContext context) {
         ListTile(
           leading: Icon(Icons.info),
           title: Text('Info'),
+          onTap: () => _showDialog(context),
         ),
         ListTile(
           leading: Icon(Icons.settings),
@@ -67,6 +72,7 @@ Widget sbaDrawer(BuildContext context) {
   );
 }
 
+<<<<<<< HEAD
 openMyDialog(context) {
   showDialog(context: context,
       barrierDismissible: true,
@@ -244,3 +250,35 @@ openMyDialog(context) {
   );
 }
 
+=======
+void _showDialog(context) {
+  // flutter defined function
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // return object of type Dialog
+      return AlertDialog(
+        title: new Text("THB Search Book App"),
+        content: new Text("Eine Entwicklung von 5 Master-Studenten des Fachbereichs "
+            "Informatik an der THB, im Rahmen eines Projekts des Faches Mobile User Experience,"
+            " zur internen Unterstützung der THB-Studierenden "
+            "und wissenshaftlichen Mitarbeiter beim Suchen und Ausleihen "
+            "von Büchern aus dem Online Katalog der THB-Bibliothek."),
+        actions: <Widget>[
+          // usually buttons at the bottom of the dialog
+          new FlatButton(
+              child: new Text("Zur Online Katalog"),
+              onPressed: () => launch('https://bibliothek.th-brandenburg.de/suchen/online-katalog/')
+          ),
+          new FlatButton(
+            child: new Text("Abbrechen"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+>>>>>>> bb3f94b... done
