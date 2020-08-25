@@ -18,7 +18,9 @@ class AdvancedSearchBody extends StatefulWidget {
 
 class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   BooksDescription booksDescription = new BooksDescription();
-  int _counter = 0;
+
+  //int _counter = 0;
+  bool isEnabled = true ;
   bool _isButtonDisabled;
   bool _visible = false;
   TextEditingController textInputController = new TextEditingController();
@@ -82,7 +84,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                 _buildAnimatedOpacity(),
                 SizedBox(height: 25),
                 RaisedButton(
-                  color: standardColors_blue,
+                  color: _isButtonDisabled ? Colors.grey : standardColors_blue,
                   child: Text(
                     'Suchen',
                     style: TextStyle(
@@ -90,7 +92,6 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                         fontSize: 16,
                         fontWeight: FontWeight.w700),
                   ),
-
                   //Lorsqu'il faudra faire des requetes a la BD
                   //modifier ici
                   elevation: 6.0,
@@ -99,11 +100,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                     print('Author: ' + booksDescription.author.toString());
                     print('ISBN13: ' + booksDescription.isbn13.toString());
                     print('ISBN10: ' + booksDescription.isbn10.toString());
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarFooter(SearchResultsPage(buchItems))));
+                    _disableButtonPress();
                   },
                 ),
               ],
@@ -188,7 +185,8 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
 
       if (e.code == BarcodeScanner.cameraAccessDenied) {
         setState(() {
-          scanResult.rawContent = 'The user did not grant the camera permission!';
+          scanResult.rawContent =
+              'The user did not grant the camera permission!';
         });
       } else {
         scanResult.rawContent = 'Unknown error: $e';
@@ -200,34 +198,34 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
     return Row(children: <Widget>[
       Flexible(
           child: Column(
-            children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.only(
-                      top: _minimumPadding, bottom: _minimumPadding),
-                  child: TextFormField(
-                      controller: textInputController,
-                      decoration: InputDecoration(
-                        labelText: 'ISBN / ISSN',
-                        suffixIcon: IconButton(
-                          icon: Image.asset('assets/icons/isbn.png'),
-                          onPressed: _scan,
-                        ),
-                      ),
-                      style: TextStyle(
-                        fontSize: 12,
-                      ),
-                      onChanged: (value) {
-                        if (value != null) {
-                          if (value.length == 13) {
-                            booksDescription.isbn13 = validateIsbn(value);
-                          }
-                          if (value.length <= 10) {
-                            booksDescription.isbn10 = validateIsbn(value);
-                          }
-                        }
-                      })),
-            ],
-          ))
+        children: <Widget>[
+          Padding(
+              padding: EdgeInsets.only(
+                  top: _minimumPadding, bottom: _minimumPadding),
+              child: TextFormField(
+                  controller: textInputController,
+                  decoration: InputDecoration(
+                    labelText: 'ISBN / ISSN',
+                    suffixIcon: IconButton(
+                      icon: Image.asset('assets/icons/isbn.png'),
+                      onPressed: _scan,
+                    ),
+                  ),
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                  onChanged: (value) {
+                    if (value != null) {
+                      if (value.length == 13) {
+                        booksDescription.isbn13 = validateIsbn(value);
+                      }
+                      if (value.length <= 10) {
+                        booksDescription.isbn10 = validateIsbn(value);
+                      }
+                    }
+                  })),
+        ],
+      ))
     ]);
   }
 
@@ -243,17 +241,31 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   Container _buildAnimatedOpacity() {
     return Container(
         child: Visibility(
-          visible: _visible,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _buildBookDescriptionItems(titelanfang),
-                _buildBookDescriptionItems(verlag),
-                _buildBookDescriptionItems(schlagwort),
-                _buildBookDescriptionItems(notation),
-                _buildBookDescriptionItems(plublisher),
-                _buildBookDescriptionItems(veroeffentlichungsdatum)
-              ]),
-        ));
+      visible: _visible,
+
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _buildBookDescriptionItems(titelanfang),
+            _buildBookDescriptionItems(verlag),
+            _buildBookDescriptionItems(schlagwort),
+            _buildBookDescriptionItems(notation),
+            _buildBookDescriptionItems(plublisher),
+            _buildBookDescriptionItems(veroeffentlichungsdatum)
+          ]),
+    ));
   }
+
+  Function _disableButtonPress() {
+    if (_isButtonDisabled) {
+      return null;
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  NavBarFooter(SearchResultsPage(buchItems))));
+    }
+  }
+
 }

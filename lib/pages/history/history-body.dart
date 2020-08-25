@@ -1,3 +1,4 @@
+import 'package:barcode_scan/gen/protos/protos.pb.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sba_web/models/ausleihe.dart';
@@ -14,6 +15,11 @@ class HistoriesBody extends StatefulWidget {
 }
 
 class _HistoriesBodyState extends State<HistoriesBody> {
+
+  ScanResult scanResult;
+  var isbnNummer;
+  var result;
+
   List<Reservierung> _reservierungen = reservierungen;
   List<Ausleihe> _ausleihe = ausleihe;
 
@@ -39,3 +45,4 @@ class _HistoriesBodyState extends State<HistoriesBody> {
     );
   }
 }
+
