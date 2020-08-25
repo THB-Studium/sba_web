@@ -30,7 +30,12 @@ class _HistoriesBodyState extends State<HistoriesBody> {
                 _ausleihe.map((ausleihe) => buildOneAusleihe(context, ausleihe)).toList(),
           ),
         ),
-      )
+      ),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [shareFloatingButton(context)],
+      ),
     );
   }
 }

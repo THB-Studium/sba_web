@@ -144,23 +144,23 @@ Future _newWeiterleitung(BuildContext context) {
               child: Text(
                   'Sie sind dabei, eine neue Weiterleitung zu starten. Möchten Sie fortfahren?')),
           actions: [
-            _alertPopUpAction(context, 'Nein'),
-            _alertPopUpAction(context, 'Ja')
+            _alertPopUpAction(context, 'Start Weiterletung', 'Nein'),
+            _alertPopUpAction(context, 'Start Weiterletung', 'Ja')
           ],
         );
       });
 }
 
 /// answer action buttons (Ja, Nein, ablehnen oder bestätigen):
-FlatButton _alertPopUpAction(BuildContext context, String action) {
+FlatButton _alertPopUpAction(BuildContext context, String parent, String action) {
   return FlatButton(
       child: Text(action),
       onPressed: () {
-        if (action == 'Ablehnen' || action == 'OK') {
+        if (action == 'Ablehnen' || (action == 'OK' && parent != 'Info')) {
           Navigator.of(context).pop();
           Navigator.of(context).pop();
         }
-        if (action == 'Nein') {
+        if (action == 'Nein' || parent == 'Info') {
           Navigator.of(context).pop();
         }
         if (action == 'Ja') {
@@ -192,8 +192,8 @@ Future weiterleitungBedigungenDialog(BuildContext context) {
             ),
           ),
           actions: <Widget>[
-            _alertPopUpAction(context, 'Ablehnen'),
-            _alertPopUpAction(context, 'Bestätigen')
+            _alertPopUpAction(context,'Weiterleitungsbedigungen', 'Ablehnen'),
+            _alertPopUpAction(context,'Weiterleitungsbedigungen', 'Bestätigen')
           ],
         );
       });
@@ -201,17 +201,45 @@ Future weiterleitungBedigungenDialog(BuildContext context) {
   );
 }
 
-Future errorDialog(BuildContext context, String message) {
+Future antwortDialog(BuildContext context, String dialogTitel, String message) {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (context) {
       return AlertDialog(
-        title: Text('Fehlermeldung'),
+        title: Text(dialogTitel),
         content: SingleChildScrollView(
-          child: Text(message),
+          child: dialogTitel != 'Info'
+            ? Text(message)
+            : Column(
+              children: [
+                Text('Die Elemente dieser Ansicht sind entsprechend dem folgenden Farbcode verteilt:'),
+                SizedBox(height: 15),
+                Row(
+                  children: [
+                    Text('Orangefarben: ', style: TextStyle(color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+                    Text('Reservierungen.'),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Text('Grünfarben: ', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                    Text('Offene Ausleihungen.'),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Text('Rotfarben: ', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold)),
+                    Text('Ausleihungen mit           '),
+                  ],
+                ),
+                Text('   abgelaufenem Abgabedatum.'),
+              ],
+            )
         ),
-        actions: <Widget>[_alertPopUpAction(context, 'OK')],
+        actions: <Widget>[_alertPopUpAction(context, dialogTitel, 'OK')],
       );
     },
   );
@@ -230,13 +258,13 @@ Future _scan(BuildContext context) async {
           return weiterleitungBedigungenDialog(context);
         } else {
           String errorMessage = 'Bitte eine gültige ISBN/ISSN eingeben';
-          return errorDialog(context, errorMessage);
+          return antwortDialog(context, 'Fehlermeldung', errorMessage);
         }
       } else {
         String errorMessage =
             'Null ISBN! Bitte wiederholen Sie den Scanvorgang oder prüfen Sie, '
             'ob der Barcode nicht beschädigt ist.';
-        return errorDialog(context, errorMessage);
+        return antwortDialog(context, 'Fehlermeldung', errorMessage);
       }
     }
   } on PlatformException catch (e) {
@@ -253,11 +281,16 @@ Future _scan(BuildContext context) async {
   }
 }
 
-/// to be sure that the current ISBN is correct formatted:
-String validateIsbn(String value) {
-  if (isISBN(value)) {
-    return value;
-  } else {
-    return 'Bitte richtige ISBN / ISSN Nummer eingeben';
-  }
+FloatingActionButton shareFloatingButton(BuildContext context) {
+  return FloatingActionButton(
+    tooltip: 'infos ueber History',
+    heroTag: 'info',
+    backgroundColor: Colors.orangeAccent,
+    child: Icon(Icons.info_outline, size: 45),
+    onPressed: () {
+      //TODO
+      String message = 'some text';
+      antwortDialog(context, 'Info', message);
+      },
+  );
 }
