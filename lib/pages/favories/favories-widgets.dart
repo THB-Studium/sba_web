@@ -29,15 +29,13 @@ Widget listFavoriesItem (BuildContext context, Buch item) {
                         children: <Widget>[
                           IconButton(
                               tooltip: item.verfuegbarkeit,
-                              icon: Icon(Icons.share), //mes icons
+                              icon: Icon(Icons.share),
                               onPressed: () => share(context, item),
                           ) ,
                           IconButton(
                               tooltip: item.verfuegbarkeit,
-                              icon: Icon(Icons.delete_forever, color: Colors.red), //mes icons
-                              onPressed: (){
-                                print("check_box Clicked");
-                              }
+                              icon: Icon(Icons.delete_forever, color: Colors.red),
+                              onPressed: () => _showDialog(context),
                           ) ,
                           IconButton(
                               icon: Icon(Icons.arrow_forward_ios),
@@ -70,6 +68,38 @@ Widget listFavoriesItem (BuildContext context, Buch item) {
   );
 
 }
+
+void _showDialog(context) {
+  // flutter defined function
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // return object of type Dialog
+      return AlertDialog(
+        title: new Text("Buch entfernen"),
+        content: new Text("Sind Sie sicher, dass Sie dieses Buch von der Favoriten-Liste entfernen möchten?"),
+        actions: <Widget>[
+          // usually buttons at the bottom of the dialog
+          new FlatButton(
+            child: new Text("Löschen"),
+            onPressed: () {
+              //removeItem();
+              Navigator.of(context).pop();
+            },
+          ),
+          new FlatButton(
+            child: new Text("Abbrechen"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
 
 void share(BuildContext context, Buch item) {
   final RenderBox box = context.findRenderObject();
