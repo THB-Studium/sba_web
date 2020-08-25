@@ -288,9 +288,7 @@ FloatingActionButton shareFloatingButton(BuildContext context) {
     backgroundColor: Colors.orangeAccent,
     child: Icon(Icons.info_outline, size: 45),
     onPressed: () {
-      //TODO
-      String message = 'some text';
-      antwortDialog(context, 'Info', message);
+      antwortDialog(context, 'Info', '');
       },
   );
 }
