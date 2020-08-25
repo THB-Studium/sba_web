@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/search-book/search-body.dart';
+import 'package:sba_web/pages/search-book/search-widgets.dart';
 
 class AdvancedSearch extends StatefulWidget {
   @override
@@ -14,8 +15,9 @@ class _AdvancedSearchState extends State<AdvancedSearch> {
         appBar: AppBar(
           leading: zurrueckButton(context),
           title: Text('Buchsuche'),
-          backgroundColor: standardColors_blue,
-          elevation: 0.0,
+          actions: <Widget>[
+            externalSearch(context)
+          ],
         ),
         body: AdvancedSearchBody()
     );

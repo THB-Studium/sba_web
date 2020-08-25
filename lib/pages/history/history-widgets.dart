@@ -119,7 +119,7 @@ Padding newWeiterleitung(BuildContext context) {
         _newWeiterleitung(context);
       },
       child: Image.asset(
-        'assets/icons/barcode2.png',
+        assetsIcon + 'barcode3.png',
         width: 30,
         color: Colors.white,
       ),
