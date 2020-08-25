@@ -22,7 +22,7 @@ final String impressumUrl = 'https://www.th-brandenburg.de/impressum/';
 final String datenschutzUrl = 'https://www.th-brandenburg.de/datenschutz/?S=0%25253F%253F';
 final String hilfeUrl = 'https://opac.th-brandenburg.de/InfoGuideClient.bfbsis/jsp/common/metaHelp.jsp?helpfile=rech_einfach.html';
 
-final basePathLocal = 'https://192.168.0.10:8080';
+final basePathLocal = 'http://192.168.0.10:8080';
 final loginPath = basePathLocal + '/sessions';
 
 // about the book status:

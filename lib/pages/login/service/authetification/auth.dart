@@ -12,7 +12,12 @@ class AuthMethods {
     try {
       http.Response response  = await http.post(
           Uri.encodeFull(loginPath),
-          headers: <String, String>{'authorization': basicAuth});
+          headers: <String, String>{
+            'Authorization': basicAuth,
+            'Accept': 'application/json'
+          });
+
+
       print('---------- Body response ----------------------------------------');
       print('Status code: ' + response.statusCode.toString());
       print(response.body);
