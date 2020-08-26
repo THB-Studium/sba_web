@@ -18,7 +18,6 @@ class LoginBody extends StatefulWidget {
 class _LoginBodyState extends State<LoginBody> {
 
   bool isLoading = false;
-//  AuthMethods authMethods = new AuthMethods();
 
   final formKey = GlobalKey<FormState>();
   static String benutzerNummer;
