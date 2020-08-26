@@ -6,8 +6,6 @@ import 'package:sba_web/pages/search-book/search-page.dart';
 
 import 'history-widgets.dart';
 
-import 'history-widgets.dart';
-
 
 class HistoryPage extends StatefulWidget {
   @override

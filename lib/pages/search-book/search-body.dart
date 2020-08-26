@@ -19,11 +19,10 @@ class AdvancedSearchBody extends StatefulWidget {
 class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   BooksDescription booksDescription = new BooksDescription();
 
-  //int _counter = 0;
-  bool isEnabled = true ;
   bool _isButtonDisabled;
   bool _visible = false;
   TextEditingController textInputController = new TextEditingController();
+  RaisedButton button;
 
   final _minimumPadding = 5.0;
   final _formKey = GlobalKey<FormState>();
@@ -84,7 +83,7 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                 _buildAnimatedOpacity(),
                 SizedBox(height: 25),
                 RaisedButton(
-                  color: _isButtonDisabled ? Colors.grey : standardColors_blue,
+                  color: standardColors_blue,
                   child: Text(
                     'Suchen',
                     style: TextStyle(
@@ -95,13 +94,24 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                   //Lorsqu'il faudra faire des requetes a la BD
                   //modifier ici
                   elevation: 6.0,
-                  onPressed: () {
-                    print('Title: ' + booksDescription.title.toString());
-                    print('Author: ' + booksDescription.author.toString());
-                    print('ISBN13: ' + booksDescription.isbn13.toString());
-                    print('ISBN10: ' + booksDescription.isbn10.toString());
-                    _disableButtonPress();
-                  },
+                  onPressed: _isButtonDisabled
+                      ? () {
+                          setState(() => _disableButtonPress());
+                        }
+                      : null,
+                  /**onPressed: _isButtonDisabled ? () {
+                      print('Title: ' + booksDescription.title.toString());
+                      print('Author: ' + booksDescription.author.toString());
+                      print('ISBN13: ' + booksDescription.isbn13.toString());
+                      print('ISBN10: ' + booksDescription.isbn10.toString());
+
+                      _disableButtonPress();
+                      setState(() {
+                      _disableButtonPress();
+                      });
+
+
+                      } : null,*/
                 ),
               ],
             ),
@@ -125,12 +135,24 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
         style: TextStyle(
           fontSize: 12,
         ),
+          autovalidate: true,
+          // ignore: missing_return
+
+        //TODO: enable the button wenn field is not empty
+          validator: (String txt){
+            if (txt.length > 0){
+                _isButtonDisabled = true;
+            } else {
+                _isButtonDisabled = false;
+            }
+          },
         onChanged: (value) {
           setBookDescriptionItems(labelText, value);
         },
       ),
     );
   }
+
 
   void setBookDescriptionItems(String itemName, String value) {
     setState(() {
@@ -214,14 +236,29 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
                   style: TextStyle(
                     fontSize: 12,
                   ),
+                  autovalidate: true,
+                  // ignore: missing_return
+                  validator: (String text){
+                    bool check = text.length > 0 ;
+                    if(_isButtonDisabled != check){
+                      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                        setState(() {
+                          _isButtonDisabled = text.length > 0;
+                        });
+                      });
+                    }
+                  },
                   onChanged: (value) {
                     if (value != null) {
+                      _isButtonDisabled = !_isButtonDisabled;
                       if (value.length == 13) {
                         booksDescription.isbn13 = validateIsbn(value);
                       }
                       if (value.length <= 10) {
                         booksDescription.isbn10 = validateIsbn(value);
                       }
+                    } else {
+                      return _isButtonDisabled;
                     }
                   })),
         ],
@@ -242,7 +279,6 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
     return Container(
         child: Visibility(
       visible: _visible,
-
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -257,15 +293,12 @@ class _AdvancedSearchBodyState extends State<AdvancedSearchBody> {
   }
 
   Function _disableButtonPress() {
-    if (_isButtonDisabled) {
-      return null;
-    } else {
+    setState(() {
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) =>
                   NavBarFooter(SearchResultsPage(buchItems))));
-    }
+    });
   }
-
 }
