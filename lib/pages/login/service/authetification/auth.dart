@@ -2,13 +2,17 @@ import 'package:sba_web/pages/components/constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+<<<<<<< HEAD
 import 'package:sba_web/pages/login/service/authetification/helper-function.dart';
 
+=======
+>>>>>>> cbdc6eae68129c1d1f59b9b12208cfe16dc0cf07
 class AuthMethods {
 
 
   Future login(String benutzerNummer, String kennwort) async {
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('$benutzerNummer:$kennwort'));
+<<<<<<< HEAD
     try {
       http.Response response  = await http.post(
           Uri.encodeFull(loginPath),
@@ -52,6 +56,25 @@ class AuthMethods {
     } catch(e) {
       print('---- Error response -------');
       print(e);
+=======
+    print('basicAuth: ' + basicAuth);
+    print('urlPath: ' + loginPath);
+    try {
+      http.Response response  = await http.post(
+          Uri.encodeFull(loginPath),
+          headers: <String, String>{'authorization': basicAuth});
+      print('---------- Body response ----------------------------------------');
+      print('Status code: ' + response.statusCode.toString());
+      print(response.body);
+      print('---------- response ----------------------------------------');
+//      FirebaseUser firebaseUser = result.user;
+//      return _userFromFirebaseUser(firebaseUser);
+    } catch(e) {
+      print('---------- Error response ----------------------------------------');
+      print(e);
+
+      print('---------- response ----------------------------------------');
+>>>>>>> cbdc6eae68129c1d1f59b9b12208cfe16dc0cf07
     }
   }
 

@@ -35,12 +35,17 @@ dependencies:
   qr_flutter: ^3.2.0
   validators: ^2.0.0
   share: ^0.6.2+3
+<<<<<<< HEAD
   font_awesome_flutter: ^8.8.1
   path_provider: 1.6.1
   intl: ^0.16.1
   string_validator: ^0.1.4
   http: ^0.12.2
   shared_preferences: ^0.5.10
+=======
+  string_validator: ^0.1.4
+  http: ^0.12.2
+>>>>>>> cbdc6eae68129c1d1f59b9b12208cfe16dc0cf07
 
 dev_dependencies:
   flutter_test:
