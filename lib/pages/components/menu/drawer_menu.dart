@@ -115,7 +115,7 @@ openMyDialog(context) {
                               children: <Widget>[
                                 Align(
                                   alignment: Alignment.topCenter,
-                                  child: Text("Adolphe S. Ngalamo",
+                                  child: Text("A. Steve Ngalamo",
                                     style: TextStyle(color: Colors.white),),
                                 ),
                                 Align(
