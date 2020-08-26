@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:sba_web/models/favory.dart';
 import 'package:sba_web/models/reservierung.dart';
+import 'package:sba_web/models/mahnung.dart';
 
 import 'ausleihe.dart';
 import 'buch.dart';
@@ -47,8 +48,15 @@ final favoriten = [
       [buecher[0], buecher[1], buecher[2], buecher[3], buecher[4], buecher[5]]
   )
 ];
-
-
+final mahnungen = [
+  Mahnung(
+      new Random().nextInt(10).toString(),
+      [buecher[0], buecher[1], buecher[2], buecher[3], buecher[4], buecher[5]],
+      0.15,
+      new DateTime.now(),
+      new DateTime(2020, new DateTime.now().month, new DateTime.now().day + 3)
+  )
+];
 
 // about Bücher:................................................................
 
