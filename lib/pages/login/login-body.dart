@@ -122,9 +122,8 @@ class _LoginBodyState extends State<LoginBody> {
         setState(() {
           isLoading = true;
         });
-//        authMethods.signInWithBenutzerNummerAndKennwort(benutzerNummer, kennwort)
-//          .then((value) => print(value));
-        authMethods.login(benutzerNummer, kennwort);
+
+        authMethods.login(benutzerNummer, kennwort).then((value) => print(value));
 
         Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context) => NavBarFooter(HistoryPage()),

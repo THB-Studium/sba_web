@@ -2,13 +2,13 @@ import 'package:sba_web/pages/components/constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:sba_web/pages/login/service/authetification/helper-function.dart';
+
 class AuthMethods {
 
 
   Future login(String benutzerNummer, String kennwort) async {
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('$benutzerNummer:$kennwort'));
-    print('basicAuth: ' + basicAuth);
-    print('urlPath: ' + loginPath);
     try {
       http.Response response  = await http.post(
           Uri.encodeFull(loginPath),
@@ -17,18 +17,41 @@ class AuthMethods {
             'Accept': 'application/json'
           });
 
+      print('----- Body response --------');
+      if (response.statusCode.toString() == '200') {
+          print('Status code: ' + response.statusCode.toString());
+          print(response.body);
 
-      print('---------- Body response ----------------------------------------');
-      print('Status code: ' + response.statusCode.toString());
-      print(response.body);
-      print('---------- response ----------------------------------------');
-//      FirebaseUser firebaseUser = result.user;
-//      return _userFromFirebaseUser(firebaseUser);
+          HelperFunktions.saveBenutzernummer(benutzerNummer);
+//          HelperFunktions.saveThoken(response.body.['access_token']);
+//          HelperFunktions.saveCurrentUserId(response.body.['id']);
+      }
     } catch(e) {
-      print('---------- Error response ----------------------------------------');
+      print('---- Error response -------');
       print(e);
+    }
+  }
 
-      print('---------- response ----------------------------------------');
+  Future logout() async {
+    try {
+      http.Response response  = await http.delete(
+          Uri.encodeFull(loginPath + '/${HelperFunktions.getThoken()}'),
+          headers: <String, String>{
+            'Authorization': HelperFunktions.getThoken().toString(),
+            'Accept': 'application/json'
+          });
+
+      print('----- Body response --------');
+      if (response.statusCode.toString() == '200') {
+        print('Status code: ' + response.statusCode.toString());
+        print(response.body);
+
+//        HelperFunktions.saveBenutzernummer(benutzerNummer);
+//          HelperFunktions.saveThoken(response.body['Token']);
+      }
+    } catch(e) {
+      print('---- Error response -------');
+      print(e);
     }
   }
 
