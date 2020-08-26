@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sba_web/pages/components/constants.dart';
 import 'package:sba_web/pages/login/login-page.dart';
-<<<<<<< HEAD
-import 'package:sba_web/pages/search-book/search-widgets.dart';
-=======
 import 'package:url_launcher/url_launcher.dart';
->>>>>>> bb3f94b... done
 
 Widget sbaDrawer(BuildContext context) {
   return Container(
@@ -72,7 +68,6 @@ Widget sbaDrawer(BuildContext context) {
   );
 }
 
-<<<<<<< HEAD
 openMyDialog(context) {
   showDialog(context: context,
       barrierDismissible: true,
@@ -250,7 +245,6 @@ openMyDialog(context) {
   );
 }
 
-=======
 void _showDialog(context) {
   // flutter defined function
   showDialog(
@@ -281,4 +275,3 @@ void _showDialog(context) {
     },
   );
 }
->>>>>>> bb3f94b... done
