@@ -16,7 +16,6 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
         drawer: Drawer(child: sbaDrawer(context)),
         appBar: AppBar(
           title: Text('History'),
@@ -25,16 +24,6 @@ class _HistoryPageState extends State<HistoryPage> {
             newWeiterleitung(context)
           ],
         ),
-=======
-      drawer: Drawer(child: sbaDrawer(context)),
-      appBar: AppBar(
-        title: Text('History'),
-        actions: <Widget>[
-          actionButton(AdvancedSearch(), Icons.search, context),
-          IconButton( icon: Icon(Icons.more_vert), onPressed: () {  },),
-        ],
-      ),
->>>>>>> f3085ce... fertig
 
         body: HistoriesBody()
     );
