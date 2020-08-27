@@ -1,6 +1,6 @@
 # sba_web
 
-A new Flutter project.
+A new Flutter project for the Search book app of the THB (Mux-Prject).
 
 ## Getting Started
 
